@@ -470,6 +470,45 @@ body{
 .turn-zh{font-size:13px;color:var(--ink-soft);margin-bottom:8px}
 .turn-tip{font-size:12px;background:#FFF9E6;border-left:3px solid var(--gold);padding:6px 10px;border-radius:6px;color:var(--ink);line-height:1.5}
 
+/* 角色扮演模式：隱藏狀態 */
+.turn-card.t-hidden{
+  background:linear-gradient(135deg,#FFF6E5,#FFE5CC);
+  border:2px dashed var(--coral);
+  position:relative;
+}
+.turn-card.t-hidden .turn-en,
+.turn-card.t-hidden .turn-tip,
+.turn-card.t-hidden .turn-play-row{display:none}
+.turn-card.t-hidden .turn-zh{
+  font-size:18px;font-weight:800;color:var(--ink);
+  margin:8px 0 12px 0;line-height:1.5;
+}
+.turn-hint{
+  font-size:13px;color:var(--coral);font-weight:700;
+  margin-bottom:8px;display:flex;align-items:center;gap:6px;
+}
+.reveal-btn{
+  width:100%;background:var(--coral);color:white;border:2px solid var(--ink);
+  border-radius:10px;padding:12px;font-size:15px;font-weight:800;cursor:pointer;
+  box-shadow:2px 2px 0 var(--ink);margin-top:8px;
+}
+.reveal-btn:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+
+.roleplay-hint-box{
+  background:linear-gradient(135deg,var(--rose),#E875A8);color:white;
+  border:2px solid var(--ink);border-radius:12px;padding:12px 14px;
+  margin-bottom:14px;box-shadow:3px 3px 0 var(--ink);font-size:13px;line-height:1.5;
+}
+
+.dialogue-complete{
+  background:linear-gradient(135deg,var(--mint),#5BAE82);color:white;
+  border:2px solid var(--ink);border-radius:14px;padding:20px;
+  margin-top:14px;box-shadow:3px 3px 0 var(--ink);text-align:center;
+}
+.dialogue-complete .dc-emoji{font-size:48px;margin-bottom:8px}
+.dialogue-complete .dc-text{font-size:18px;font-weight:800;margin-bottom:6px}
+.dialogue-complete .dc-stars{font-size:14px}
+
 /* 菜單辨識 */
 .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .menu-card{
@@ -519,6 +558,56 @@ body{
 .number-listen{
   background:var(--mint);color:white;border:2px solid var(--ink);border-radius:8px;
   padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;
+}
+
+
+/* 情景問答介面 */
+.ctx-scene{
+  background:linear-gradient(135deg,#FFF6E5,#FFE5CC);
+  border-left:4px solid var(--gold);
+  padding:8px 12px;border-radius:8px;
+  font-size:13px;color:var(--ink);font-weight:600;
+  margin:8px 0 12px 0;line-height:1.5;
+}
+.ctx-ask{
+  background:#FFF9E6;
+  border:2px solid var(--gold);border-radius:10px;
+  padding:10px 12px;margin-bottom:14px;
+}
+.ctx-ask-label{
+  font-size:11px;font-weight:800;letter-spacing:1px;
+  background:var(--gold);color:white;display:inline-block;
+  padding:3px 10px;border-radius:6px;margin-bottom:6px;
+}
+.ctx-ask-en{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.4}
+.ctx-ask-zh{font-size:13px;color:var(--ink-soft);margin-bottom:8px}
+.ctx-ask-play{background:var(--gold);color:var(--ink);font-size:12px;padding:6px 12px}
+.ctx-you-label{
+  font-size:13px;font-weight:800;color:var(--coral);
+  margin-bottom:6px;
+}
+.ctx-you-zh{
+  font-size:18px;font-weight:800;color:var(--ink);
+  background:#FFE5E5;border:2px dashed var(--coral);
+  padding:10px 14px;border-radius:10px;
+  margin-bottom:10px;line-height:1.5;
+}
+.ctx-reveal-btn{
+  width:100%;background:var(--coral);color:white;border:2px solid var(--ink);
+  border-radius:10px;padding:12px;font-size:15px;font-weight:800;cursor:pointer;
+  box-shadow:2px 2px 0 var(--ink);
+}
+.ctx-reveal-btn:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+.ctx-en-reveal{
+  background:#E8F5E9;border:2px solid var(--mint);
+  padding:12px;border-radius:10px;margin-top:8px;
+}
+.ctx-en-reveal .phrase-en{
+  font-size:18px;font-weight:800;color:var(--ink);margin-bottom:6px;
+}
+.ctx-en-reveal .phrase-tip{
+  font-size:12px;background:transparent;padding:0;margin:6px 0;
+  color:var(--ink-soft);
 }
 
 </style>
@@ -690,13 +779,19 @@ body{
   <button class="back-btn" onclick="showView('viewDialogues')">← 回到對話列表</button>
   <div class="scene-title" id="dialogueTitle"></div>
   <div class="scene-desc" id="dialogueMeta"></div>
+  <div class="mode-bar" id="dialogueModeBar">
+    <button class="mode-btn active" data-mode="listen">📖 全部聽</button>
+    <button class="mode-btn" data-mode="roleplay">🎭 角色扮演</button>
+  </div>
   <div class="speed-control">
     <span class="speed-label">語速：</span>
     <button class="speed-btn" data-rate="0.7">慢</button>
     <button class="speed-btn active" data-rate="0.85">標準</button>
     <button class="speed-btn" data-rate="1.0">快</button>
   </div>
+  <div id="dialogueRoleplayHint"></div>
   <div id="dialogueContent"></div>
+  <div id="dialogueComplete"></div>
 </div>
 
 <!-- 菜單辨識 -->
@@ -2058,6 +2153,1336 @@ const PRICE_QUIZ=[
 ];
 
 
+/* ========== Day 1 情景擴充資料 ========== */
+const D1_CONTEXT = {
+  // ========== 飛機上 ==========
+  "d1-flight-0": {
+    type: "initiate",
+    context: "空服員推餐車經過，你想要水"
+  },
+  "d1-flight-1": {
+    type: "reply",
+    ask_en: "Chicken or fish?",
+    ask_zh: "雞肉還是魚？",
+    context: "空服員推餐車到你身邊，問你選哪一種主餐"
+  },
+  "d1-flight-2": {
+    type: "initiate",
+    context: "你覺得冷，想跟空服員拿毯子"
+  },
+  "d1-flight-3": {
+    type: "initiate",
+    context: "你想去廁所但不確定方向"
+  },
+  "d1-flight-4": {
+    type: "initiate",
+    context: "你座位上的螢幕沒反應，要找空服員"
+  },
+  "d1-flight-5": {
+    type: "initiate",
+    context: "餐盒、果汁封膜打不開，請空服員幫忙"
+  },
+  "d1-flight-6": {
+    type: "reply",
+    ask_en: "Are you OK? You look uncomfortable.",
+    ask_zh: "你還好嗎？看起來不舒服。",
+    context: "空服員看你抓著耳朵問你怎麼了（飛機起降耳壓不適）"
+  },
+  "d1-flight-7": {
+    type: "initiate",
+    context: "餐點吃完還想再要一份（例如多一個麵包）"
+  },
+  "d1-flight-8": {
+    type: "initiate",
+    context: "亂流警示燈亮，但你不會繫安全帶"
+  },
+  "d1-flight-9": {
+    type: "initiate",
+    context: "覺得想吐，緊急叫空服員"
+  },
+  "d1-flight-10": {
+    type: "initiate",
+    context: "找不到嘔吐袋，向空服員要一個"
+  },
+  "d1-flight-11": {
+    type: "initiate",
+    context: "好奇還要多久才到，問空服員"
+  },
+  "d1-flight-12": {
+    type: "initiate",
+    context: "覺得冷氣太強，請空服員調整"
+  },
+  "d1-flight-13": {
+    type: "initiate",
+    context: "用餐時叉子掉到地上，需要新的"
+  },
+
+  // ========== 成田機場海關 ==========
+  "d1-customs-0": {
+    type: "reply",
+    ask_en: "What's the purpose of your visit?",
+    ask_zh: "你來日本的目的是什麼？",
+    context: "海關官員看著你的護照問來日本做什麼"
+  },
+  "d1-customs-1": {
+    type: "reply",
+    ask_en: "How long will you stay?",
+    ask_zh: "你要待多久？",
+    context: "海關官員問停留天數"
+  },
+  "d1-customs-2": {
+    type: "reply",
+    ask_en: "Where will you stay?",
+    ask_zh: "你住在哪裡？",
+    context: "海關官員問住宿地點"
+  },
+  "d1-customs-3": {
+    type: "reply",
+    ask_en: "Have you been to Japan before?",
+    ask_zh: "你以前來過日本嗎？",
+    context: "海關官員閒聊式詢問"
+  },
+  "d1-customs-4": {
+    type: "reply",
+    ask_en: "Passport, please.",
+    ask_zh: "請出示護照。",
+    context: "輪到你時海關官員伸手要證件"
+  },
+  "d1-customs-5": {
+    type: "reply",
+    ask_en: "Are you traveling alone?",
+    ask_zh: "你是一個人來嗎？",
+    context: "海關官員看你是小孩，問是不是獨自旅行"
+  },
+  "d1-customs-6": {
+    type: "reply",
+    ask_en: "Anything to declare?",
+    ask_zh: "有東西要申報嗎？",
+    context: "在申報關口被問是否帶了要申報的物品"
+  },
+  "d1-customs-7": {
+    type: "reply",
+    ask_en: "Where is your declaration form?",
+    ask_zh: "你的申報單呢？",
+    context: "海關問你拿不出申報單時"
+  },
+  "d1-customs-8": {
+    type: "initiate",
+    context: "聽不太清楚海關說什麼，請對方放慢"
+  },
+  "d1-customs-9": {
+    type: "initiate",
+    context: "整句沒聽懂，請對方再說一次"
+  },
+  "d1-customs-10": {
+    type: "initiate",
+    context: "完全聽不懂，誠實說出來"
+  },
+  "d1-customs-11": {
+    type: "initiate",
+    context: "你跟爸媽走散，想叫海關等一下"
+  },
+  "d1-customs-12": {
+    type: "initiate",
+    context: "想要紀念用的入境章（可請海關蓋章）"
+  },
+
+  // ========== Skyliner & 日暮里站 ==========
+  "d1-skyliner-0": {
+    type: "reply",
+    ask_en: "How can I help you?",
+    ask_zh: "需要什麼服務？",
+    context: "在 Skyliner 售票口跟櫃台買票"
+  },
+  "d1-skyliner-1": {
+    type: "initiate",
+    context: "已經在網路上買好票，告訴櫃台你有電子票"
+  },
+  "d1-skyliner-2": {
+    type: "initiate",
+    context: "拿到票後要找搭車的月台"
+  },
+  "d1-skyliner-3": {
+    type: "reply",
+    ask_en: "Where are you going?",
+    ask_zh: "你要去哪？",
+    context: "上車前跟車長確認車別"
+  },
+  "d1-skyliner-4": {
+    type: "initiate",
+    context: "上車後想確認自己的座位"
+  },
+  "d1-skyliner-5": {
+    type: "initiate",
+    context: "對方坐到你的位子上，禮貌請對方移開"
+  },
+  "d1-skyliner-6": {
+    type: "initiate",
+    context: "拖著大行李上車，想知道行李放置區"
+  },
+  "d1-skyliner-7": {
+    type: "reply",
+    ask_en: "First time on the Skyliner?",
+    ask_zh: "第一次搭 Skyliner？",
+    context: "車長或鄰座旅客閒聊問你車程"
+  },
+  "d1-skyliner-8": {
+    type: "initiate",
+    context: "下車後在日暮里站不確定哪個出口去飯店"
+  },
+  "d1-skyliner-9": {
+    type: "initiate",
+    context: "看到指標但找不到西口的位置"
+  },
+  "d1-skyliner-10": {
+    type: "initiate",
+    context: "拖著行李不想走樓梯"
+  },
+  "d1-skyliner-11": {
+    type: "initiate",
+    context: "行李太重，請站務員或路人幫忙"
+  },
+
+  // ========== MYSTAYS 日暮里 Check-in ==========
+  "d1-hotel-0": {
+    type: "reply",
+    ask_en: "Welcome. Do you have a reservation?",
+    ask_zh: "歡迎光臨，請問有訂房嗎？",
+    context: "走進飯店大廳，櫃台跟你打招呼"
+  },
+  "d1-hotel-1": {
+    type: "reply",
+    ask_en: "May I see your passports, please?",
+    ask_zh: "可以看一下護照嗎？",
+    context: "櫃台辦理入住時要核對護照"
+  },
+  "d1-hotel-2": {
+    type: "initiate",
+    context: "辦完入住想確認明天早餐時段"
+  },
+  "d1-hotel-3": {
+    type: "initiate",
+    context: "知道幾點開始後想知道在哪一層樓"
+  },
+  "d1-hotel-4": {
+    type: "initiate",
+    context: "毛巾不夠，想跟櫃台多要兩條"
+  },
+  "d1-hotel-5": {
+    type: "initiate",
+    context: "晚上覺得冷，跟櫃台多要一條毯子"
+  },
+  "d1-hotel-6": {
+    type: "initiate",
+    context: "進房間想連 Wi-Fi"
+  },
+  "d1-hotel-7": {
+    type: "initiate",
+    context: "想洗衣服找洗衣間"
+  },
+  "d1-hotel-8": {
+    type: "reply",
+    ask_en: "Have you used a Japanese washing machine before?",
+    ask_zh: "你有用過日本的洗衣機嗎？",
+    context: "走到洗衣間，工作人員看你在研究機器"
+  },
+  "d1-hotel-9": {
+    type: "initiate",
+    context: "洗衣機要投幣，但你只有紙鈔"
+  },
+  "d1-hotel-10": {
+    type: "initiate",
+    context: "預先確認最後一天退房時間"
+  },
+  "d1-hotel-11": {
+    type: "initiate",
+    context: "退房後還要去玩，想把行李寄放在飯店"
+  },
+  "d1-hotel-12": {
+    type: "initiate",
+    context: "晚上想買宵夜或日用品"
+  },
+  "d1-hotel-13": {
+    type: "initiate",
+    context: "明天要去機場，想請飯店幫忙叫計程車"
+  },
+
+  // ========== 馬賊拉麵晚餐 ==========
+  "d1-ramen-0": {
+    type: "reply",
+    ask_en: "How many people?",
+    ask_zh: "幾位？",
+    context: "走到拉麵店門口，店員迎面問人數前你也想知道排隊時間"
+  },
+  "d1-ramen-1": {
+    type: "reply",
+    ask_en: "How many people?",
+    ask_zh: "幾位？",
+    context: "店員問你們有幾個人要用餐"
+  },
+  "d1-ramen-2": {
+    type: "initiate",
+    context: "店員可能要分開座位，你想全家坐一起"
+  },
+  "d1-ramen-3": {
+    type: "initiate",
+    context: "入座後想要看菜單"
+  },
+  "d1-ramen-4": {
+    type: "initiate",
+    context: "拿到日文菜單看不懂，想看英文版"
+  },
+  "d1-ramen-5": {
+    type: "initiate",
+    context: "不知道點什麼好，問店員推薦"
+  },
+  "d1-ramen-6": {
+    type: "reply",
+    ask_en: "Are you ready to order?",
+    ask_zh: "可以點餐了嗎？",
+    context: "決定好之後店員過來收單"
+  },
+  "d1-ramen-7": {
+    type: "reply",
+    ask_en: "Would you like it spicy?",
+    ask_zh: "要做辣的嗎？",
+    context: "點完餐後店員確認辣度"
+  },
+  "d1-ramen-8": {
+    type: "reply",
+    ask_en: "Anything you don't eat?",
+    ask_zh: "有什麼忌口嗎？",
+    context: "店員確認有無忌口食材"
+  },
+  "d1-ramen-9": {
+    type: "initiate",
+    context: "覺得拉麵湯口味偏鹹，想請店員調整"
+  },
+  "d1-ramen-10": {
+    type: "initiate",
+    context: "桌上沒水，想跟店員要"
+  },
+  "d1-ramen-11": {
+    type: "initiate",
+    context: "想跟小孩分一碗，需要多一個碗"
+  },
+  "d1-ramen-12": {
+    type: "reply",
+    ask_en: "Is this for one person or to share?",
+    ask_zh: "這是一個人吃還是要分？",
+    context: "店員看你份量點少，確認是不是要一起吃"
+  },
+  "d1-ramen-13": {
+    type: "initiate",
+    context: "吃完離開前跟店員稱讚並道謝"
+  },
+  "d1-ramen-14": {
+    type: "initiate",
+    context: "吃完想結帳"
+  }
+};
+
+/* ========== Day 2 情景擴充資料 ========== */
+const D2_CONTEXT = {
+  // ========== 上野動物園 ==========
+  "d2-zoo-0": {
+    type: "reply",
+    ask_en: "How many tickets?",
+    ask_zh: "幾張票？",
+    context: "走到動物園售票口，櫃台問你買幾張"
+  },
+  "d2-zoo-1": {
+    type: "initiate",
+    context: "事先在 KKday 買好票，告訴櫃台你有電子票"
+  },
+  "d2-zoo-2": {
+    type: "initiate",
+    context: "進園後最想看熊貓，問工作人員方向"
+  },
+  "d2-zoo-3": {
+    type: "initiate",
+    context: "想去看北極熊，找工作人員問路"
+  },
+  "d2-zoo-4": {
+    type: "initiate",
+    context: "聽說動物園有鯨頭鸛（鞋之鳥），問工作人員在哪"
+  },
+  "d2-zoo-5": {
+    type: "initiate",
+    context: "小孩想看企鵝，問工作人員方向"
+  },
+  "d2-zoo-6": {
+    type: "initiate",
+    context: "想看上野動物園的兔猻明星，問工作人員"
+  },
+  "d2-zoo-7": {
+    type: "initiate",
+    context: "聽說企鵝有餵食秀，想知道時間"
+  },
+  "d2-zoo-8": {
+    type: "initiate",
+    context: "走到熊貓館前面想拍全家福，請路人幫拍"
+  },
+  "d2-zoo-9": {
+    type: "initiate",
+    context: "對方拍完一張你想要再拍一張"
+  },
+  "d2-zoo-10": {
+    type: "initiate",
+    context: "想買熊貓紀念品，找紀念品店"
+  },
+  "d2-zoo-11": {
+    type: "initiate",
+    context: "小孩說要上廁所，找工作人員問位置"
+  },
+  "d2-zoo-12": {
+    type: "initiate",
+    context: "中午想休息吃飯，問工作人員餐廳位置"
+  },
+
+  // ========== 阿美橫町午餐+殺價 ==========
+  "d2-ameyoko-0": {
+    type: "initiate",
+    context: "走進居酒屋，告訴店員人數"
+  },
+  "d2-ameyoko-1": {
+    type: "initiate",
+    context: "看到店裡客滿，想知道排隊時間"
+  },
+  "d2-ameyoko-2": {
+    type: "initiate",
+    context: "看不懂菜單，問店員推薦"
+  },
+  "d2-ameyoko-3": {
+    type: "initiate",
+    context: "想點熱門菜，問店員什麼最受歡迎"
+  },
+  "d2-ameyoko-4": {
+    type: "reply",
+    ask_en: "Are you ready to order?",
+    ask_zh: "可以點餐了嗎？",
+    context: "看好菜單後店員過來收單"
+  },
+  "d2-ameyoko-5": {
+    type: "initiate",
+    context: "看到生海鮮丼但不確定是不是生的"
+  },
+  "d2-ameyoko-6": {
+    type: "initiate",
+    context: "覺得日本料理偏鹹，想請店員調整"
+  },
+  "d2-ameyoko-7": {
+    type: "initiate",
+    context: "幫小孩點兒童餐"
+  },
+  "d2-ameyoko-8": {
+    type: "initiate",
+    context: "在阿美橫町攤位看到水果，想知道價錢"
+  },
+  "d2-ameyoko-9": {
+    type: "initiate",
+    context: "覺得攤位水果價錢偏高，試著殺價"
+  },
+  "d2-ameyoko-10": {
+    type: "initiate",
+    context: "出價試試看 1000 日圓"
+  },
+  "d2-ameyoko-11": {
+    type: "initiate",
+    context: "用買多換折扣的方式殺價"
+  },
+  "d2-ameyoko-12": {
+    type: "initiate",
+    context: "決定購買，問可不可以刷卡"
+  },
+  "d2-ameyoko-13": {
+    type: "reply",
+    ask_en: "Do you need a bag?",
+    ask_zh: "需要袋子嗎？",
+    context: "結帳時店員問要不要袋子（日本店家會主動問）"
+  },
+
+  // ========== 淺草寺 + 三社祭 ==========
+  "d2-asakusa-0": {
+    type: "initiate",
+    context: "三社祭人潮太多，跟爸媽走散了"
+  },
+  "d2-asakusa-1": {
+    type: "initiate",
+    context: "找到工作人員或警察，請對方幫忙"
+  },
+  "d2-asakusa-2": {
+    type: "initiate",
+    context: "警察問你資料，告知姓名並請對方打電話"
+  },
+  "d2-asakusa-3": {
+    type: "initiate",
+    context: "在雷門前想跟全家拍照，請路人幫忙"
+  },
+  "d2-asakusa-4": {
+    type: "initiate",
+    context: "請對方拍照時，特別交代要拍到地標"
+  },
+  "d2-asakusa-5": {
+    type: "initiate",
+    context: "祭典人多，提醒家人小心扒手"
+  },
+  "d2-asakusa-6": {
+    type: "initiate",
+    context: "穿越人潮時禮貌請別人讓路"
+  },
+  "d2-asakusa-7": {
+    type: "initiate",
+    context: "想體驗日本籤詩文化，問工作人員怎麼抽"
+  },
+  "d2-asakusa-8": {
+    type: "reply",
+    ask_en: "Would you like me to read your fortune?",
+    ask_zh: "需要我幫你看籤詩嗎？",
+    context: "抽到籤後看不懂日文，工作人員主動問你需不需要翻譯"
+  },
+  "d2-asakusa-9": {
+    type: "reply",
+    ask_en: "Would you like to tie it here?",
+    ask_zh: "要把它綁在這裡嗎？",
+    context: "抽到凶籤，工作人員引導你綁在指定位置"
+  },
+  "d2-asakusa-10": {
+    type: "initiate",
+    context: "想買御守當紀念，問價錢"
+  },
+  "d2-asakusa-11": {
+    type: "initiate",
+    context: "祭典結束後找電車站"
+  },
+  "d2-asakusa-12": {
+    type: "initiate",
+    context: "想去晴空塔，問哪一條線可以到"
+  },
+
+  // ========== 藥妝店買藥 ==========
+  "d2-pharmacy-0": {
+    type: "reply",
+    ask_en: "How can I help you?",
+    ask_zh: "需要什麼？",
+    context: "走進藥妝店，店員過來詢問"
+  },
+  "d2-pharmacy-1": {
+    type: "initiate",
+    context: "找不到兒童藥的位置，問店員"
+  },
+  "d2-pharmacy-2": {
+    type: "initiate",
+    context: "小孩在飯店突然肚子不舒服"
+  },
+  "d2-pharmacy-3": {
+    type: "initiate",
+    context: "肚子痛伴隨腹瀉，問店員"
+  },
+  "d2-pharmacy-4": {
+    type: "initiate",
+    context: "小孩感冒咳嗽，問店員"
+  },
+  "d2-pharmacy-5": {
+    type: "initiate",
+    context: "小孩跌倒擦傷，要買 OK 繃"
+  },
+  "d2-pharmacy-6": {
+    type: "initiate",
+    context: "夏天蚊子多，想買防蚊液"
+  },
+  "d2-pharmacy-7": {
+    type: "initiate",
+    context: "戶外行程多，想買兒童專用防曬"
+  },
+  "d2-pharmacy-8": {
+    type: "reply",
+    ask_en: "Take this twice a day after meals.",
+    ask_zh: "一天兩次，飯後吃。",
+    context: "店員拿藥給你後說明用法，你想再確認一次"
+  },
+  "d2-pharmacy-9": {
+    type: "initiate",
+    context: "想再次確認用藥次數"
+  },
+  "d2-pharmacy-10": {
+    type: "reply",
+    ask_en: "How old is your child?",
+    ask_zh: "小孩幾歲？",
+    context: "店員需要確認年齡才能推薦合適的藥"
+  },
+  "d2-pharmacy-11": {
+    type: "initiate",
+    context: "拿到藥還是不確定能不能吃，再次確認"
+  },
+  "d2-pharmacy-12": {
+    type: "initiate",
+    context: "結帳時，購物金額超過免稅門檻，要辦免稅"
+  },
+
+  // ========== 晴空塔展望台 ==========
+  "d2-skytree-0": {
+    type: "reply",
+    ask_en: "How many tickets?",
+    ask_zh: "幾張票？",
+    context: "晴空塔售票口，櫃台問人數"
+  },
+  "d2-skytree-1": {
+    type: "initiate",
+    context: "在 KKday 買的電子票，告訴櫃台"
+  },
+  "d2-skytree-2": {
+    type: "initiate",
+    context: "拿票後找上樓的電梯"
+  },
+  "d2-skytree-3": {
+    type: "initiate",
+    context: "電梯出來後不確定觀景台方向"
+  },
+  "d2-skytree-4": {
+    type: "initiate",
+    context: "好奇電梯多快、要多久到頂"
+  },
+  "d2-skytree-5": {
+    type: "initiate",
+    context: "在觀景台上想全家拍合照，請路人幫忙"
+  },
+  "d2-skytree-6": {
+    type: "initiate",
+    context: "聽說天氣好可以看到富士山，問工作人員方向"
+  },
+  "d2-skytree-7": {
+    type: "reply",
+    ask_en: "You'd need a separate ticket for that.",
+    ask_zh: "那需要另外買票。",
+    context: "想去最高的 450 樓 Tembo Galleria，但你的票只有 350 樓"
+  },
+  "d2-skytree-8": {
+    type: "initiate",
+    context: "看完景準備下樓"
+  },
+  "d2-skytree-9": {
+    type: "initiate",
+    context: "下樓前想買紀念品"
+  },
+  "d2-skytree-10": {
+    type: "initiate",
+    context: "想買晴空塔造型明信片寄回家"
+  },
+
+  // ========== Solamachi 晚餐 ==========
+  "d2-solamachi-0": {
+    type: "initiate",
+    context: "在 Solamachi 商場找美食街"
+  },
+  "d2-solamachi-1": {
+    type: "initiate",
+    context: "想吃鼎泰豐小籠包，問商場位置"
+  },
+  "d2-solamachi-2": {
+    type: "initiate",
+    context: "鼎泰豐前面排隊長龍，想知道時間"
+  },
+  "d2-solamachi-3": {
+    type: "initiate",
+    context: "決定排隊，要登記候位"
+  },
+  "d2-solamachi-4": {
+    type: "reply",
+    ask_en: "How many people in your party?",
+    ask_zh: "幾位用餐？",
+    context: "輪到你進場，店員問人數"
+  },
+  "d2-solamachi-5": {
+    type: "initiate",
+    context: "想幫小孩點適合的餐"
+  },
+  "d2-solamachi-6": {
+    type: "initiate",
+    context: "點了一些菜想分食，請店員多給盤子"
+  },
+  "d2-solamachi-7": {
+    type: "initiate",
+    context: "用餐結束跟店員稱讚"
+  },
+  "d2-solamachi-8": {
+    type: "initiate",
+    context: "吃完想結帳"
+  },
+  "d2-solamachi-9": {
+    type: "initiate",
+    context: "晚餐後要搭電車回飯店，找電梯下樓"
+  }
+};
+
+/* ========== Day 3 情景擴充資料 ========== */
+const D3_CONTEXT = {
+  // ========== 高速巴士到龍宮城 ==========
+  "d3-bus-0": {
+    type: "initiate",
+    context: "從東京站走到八重洲口巴士總站，但找不到月台"
+  },
+  "d3-bus-1": {
+    type: "initiate",
+    context: "找到月台但不確定是不是對的車"
+  },
+  "d3-bus-2": {
+    type: "reply",
+    ask_en: "How many people?",
+    ask_zh: "幾位？",
+    context: "上車前司機或售票員問人數"
+  },
+  "d3-bus-3": {
+    type: "initiate",
+    context: "不確定是上車刷卡還是先買票"
+  },
+  "d3-bus-4": {
+    type: "initiate",
+    context: "拖著行李上車，問司機行李放哪"
+  },
+  "d3-bus-5": {
+    type: "initiate",
+    context: "上車後想知道車程，預估抵達時間"
+  },
+  "d3-bus-6": {
+    type: "initiate",
+    context: "怕睡過站，請司機到了提醒"
+  },
+  "d3-bus-7": {
+    type: "initiate",
+    context: "上車前先問有沒有洗手間（小孩怕憋）"
+  },
+  "d3-bus-8": {
+    type: "reply",
+    ask_en: "We'll arrive at Maihama in 15 minutes.",
+    ask_zh: "我們 15 分鐘後到舞濱。",
+    context: "車上廣播但你沒聽清楚，問鄰座或司機下一站"
+  },
+  "d3-bus-9": {
+    type: "initiate",
+    context: "覺得車內悶熱，想開窗"
+  },
+
+  // ========== 龍宮城入館 ==========
+  "d3-onsen-checkin-0": {
+    type: "reply",
+    ask_en: "Welcome to Ryugujo. Do you have a reservation?",
+    ask_zh: "歡迎光臨龍宮城，有訂房嗎？",
+    context: "走進飯店大廳，櫃台迎接"
+  },
+  "d3-onsen-checkin-1": {
+    type: "reply",
+    ask_en: "May I see your passports?",
+    ask_zh: "可以看一下護照嗎？",
+    context: "辦入住時櫃台要核對證件"
+  },
+  "d3-onsen-checkin-2": {
+    type: "initiate",
+    context: "中午抵達但房間還沒準備好"
+  },
+  "d3-onsen-checkin-3": {
+    type: "initiate",
+    context: "房間還沒好但想先去吃飯，要寄物"
+  },
+  "d3-onsen-checkin-4": {
+    type: "initiate",
+    context: "要去泡湯，問更衣室位置"
+  },
+  "d3-onsen-checkin-5": {
+    type: "initiate",
+    context: "看到投幣式寄物櫃但不知怎麼用"
+  },
+  "d3-onsen-checkin-6": {
+    type: "initiate",
+    context: "看到大家穿浴衣，想知道哪裡領"
+  },
+  "d3-onsen-checkin-7": {
+    type: "reply",
+    ask_en: "What size do you need?",
+    ask_zh: "您需要什麼尺寸？",
+    context: "領浴衣時工作人員問尺寸"
+  },
+  "d3-onsen-checkin-8": {
+    type: "initiate",
+    context: "看到大眾湯但不確定小孩可不可以進去"
+  },
+  "d3-onsen-checkin-9": {
+    type: "initiate",
+    context: "想找全家可一起泡的家庭湯"
+  },
+  "d3-onsen-checkin-10": {
+    type: "initiate",
+    context: "聽說日本溫泉禁止刺青，先問清楚"
+  },
+  "d3-onsen-checkin-11": {
+    type: "initiate",
+    context: "晚上想再來泡湯，先問營業時間"
+  },
+
+  // ========== 戲水區/泳池 ==========
+  "d3-pool-0": {
+    type: "initiate",
+    context: "小孩看到網路圖片，吵著要去泳池"
+  },
+  "d3-pool-1": {
+    type: "reply",
+    ask_en: "Did you bring your swimsuits?",
+    ask_zh: "您有帶泳衣嗎？",
+    context: "到泳池入口，工作人員確認"
+  },
+  "d3-pool-2": {
+    type: "initiate",
+    context: "沒帶泳衣，問可不可以租"
+  },
+  "d3-pool-3": {
+    type: "initiate",
+    context: "拿到泳衣後找更衣室"
+  },
+  "d3-pool-4": {
+    type: "initiate",
+    context: "想帶小孩的浮具下水，問規定"
+  },
+  "d3-pool-5": {
+    type: "initiate",
+    context: "看到滑水道，先確認小孩能不能玩"
+  },
+  "d3-pool-6": {
+    type: "reply",
+    ask_en: "There's a height limit for the slide.",
+    ask_zh: "滑水道有身高限制。",
+    context: "工作人員說有身高限制，你要再確認限制是多少"
+  },
+  "d3-pool-7": {
+    type: "initiate",
+    context: "玩完水想擦乾，但忘了帶毛巾"
+  },
+
+  // ========== 蟹腳自助晚餐 ==========
+  "d3-buffet-0": {
+    type: "initiate",
+    context: "晚餐前先問餐廳開放時間"
+  },
+  "d3-buffet-1": {
+    type: "reply",
+    ask_en: "What time is your dinner reservation?",
+    ask_zh: "您訂的晚餐是幾點？",
+    context: "晚餐前到餐廳，工作人員確認你的時段"
+  },
+  "d3-buffet-2": {
+    type: "initiate",
+    context: "蟹腳吃完一輪還想要再拿"
+  },
+  "d3-buffet-3": {
+    type: "initiate",
+    context: "盤子用過了，想換新的"
+  },
+  "d3-buffet-4": {
+    type: "initiate",
+    context: "不確定是吃到飽還是限量"
+  },
+  "d3-buffet-5": {
+    type: "initiate",
+    context: "想知道用餐時間限制"
+  },
+  "d3-buffet-6": {
+    type: "initiate",
+    context: "要追加飲料，問工作人員"
+  },
+  "d3-buffet-7": {
+    type: "initiate",
+    context: "看到對面好像是甜點區，先問清楚"
+  },
+  "d3-buffet-8": {
+    type: "initiate",
+    context: "想幫小孩拿小份量"
+  },
+  "d3-buffet-9": {
+    type: "initiate",
+    context: "看到生魚片但不確定，先問"
+  },
+  "d3-buffet-10": {
+    type: "initiate",
+    context: "吃不完想打包帶回房間"
+  },
+  "d3-buffet-11": {
+    type: "initiate",
+    context: "覺得某道菜很好吃，想問做法"
+  },
+  "d3-buffet-12": {
+    type: "initiate",
+    context: "離開餐廳前跟工作人員稱讚"
+  },
+
+  // ========== 客房 + 夜溫泉 ==========
+  "d3-room-0": {
+    type: "initiate",
+    context: "晚上回房間後，先問早餐時間"
+  },
+  "d3-room-1": {
+    type: "initiate",
+    context: "怕隔天睡過頭，請櫃台早上 7 點叫醒"
+  },
+  "d3-room-2": {
+    type: "initiate",
+    context: "房間電視按了沒反應，要找客服"
+  },
+  "d3-room-3": {
+    type: "initiate",
+    context: "枕頭不夠，跟櫃台多要"
+  },
+  "d3-room-4": {
+    type: "initiate",
+    context: "晚上想再去泡湯，先問關門時間"
+  },
+  "d3-room-5": {
+    type: "initiate",
+    context: "聽說龍宮城有頂樓觀景台，問晚上開不開"
+  },
+  "d3-room-6": {
+    type: "initiate",
+    context: "和室棉被不夠，跟櫃台多要"
+  },
+  "d3-room-7": {
+    type: "initiate",
+    context: "晚上想喝飲料，找販賣機"
+  }
+};
+
+/* ========== Day 4 情景擴充資料 ========== */
+const D4_CONTEXT = {
+  // ========== 丸之內 + KITTE ==========
+  "d4-marunouchi-0": {
+    type: "initiate",
+    context: "東京車站很大，從月台找紅磚站體出口"
+  },
+  "d4-marunouchi-1": {
+    type: "initiate",
+    context: "出站後想走去 KITTE 商場，問路"
+  },
+  "d4-marunouchi-2": {
+    type: "initiate",
+    context: "進到 KITTE 找最有名的屋頂花園"
+  },
+  "d4-marunouchi-3": {
+    type: "initiate",
+    context: "聽說屋頂花園很美，先確認免不免費"
+  },
+  "d4-marunouchi-4": {
+    type: "initiate",
+    context: "在 KITTE 屋頂俯瞰東京車站，請路人合照"
+  },
+  "d4-marunouchi-5": {
+    type: "initiate",
+    context: "看完夜景前先確認屋頂關閉時間"
+  },
+  "d4-marunouchi-6": {
+    type: "initiate",
+    context: "想看東京車站經典的圓頂內裝（南北口）"
+  },
+  "d4-marunouchi-7": {
+    type: "initiate",
+    context: "對郵便博物館有興趣，問位置"
+  },
+  "d4-marunouchi-8": {
+    type: "initiate",
+    context: "想把行李寄放，問哪裡有寄物櫃"
+  },
+  "d4-marunouchi-9": {
+    type: "initiate",
+    context: "結束 KITTE 行程準備去谷中銀座，問路"
+  },
+
+  // ========== 谷中銀座 ==========
+  "d4-yanaka-0": {
+    type: "initiate",
+    context: "谷中銀座小吃攤前看到沒標價的東西"
+  },
+  "d4-yanaka-1": {
+    type: "initiate",
+    context: "決定買，跟攤位老闆下單"
+  },
+  "d4-yanaka-2": {
+    type: "reply",
+    ask_en: "For here or to go?",
+    ask_zh: "內用還是外帶？",
+    context: "點完餐店員問你要不要外帶"
+  },
+  "d4-yanaka-3": {
+    type: "reply",
+    ask_en: "Please don't eat while walking.",
+    ask_zh: "請不要邊走邊吃。",
+    context: "在日本邊走邊吃常被勸阻，先問清楚規定"
+  },
+  "d4-yanaka-4": {
+    type: "initiate",
+    context: "想找地方坐下喝杯飲料，跟咖啡廳店員點冰咖啡"
+  },
+  "d4-yanaka-5": {
+    type: "initiate",
+    context: "進咖啡廳挑位置，希望坐窗邊"
+  },
+  "d4-yanaka-6": {
+    type: "initiate",
+    context: "看到店裡有「本日特餐」標示但沒寫內容"
+  },
+  "d4-yanaka-7": {
+    type: "initiate",
+    context: "聽說谷中銀座有有名的煎餅店，問路"
+  },
+  "d4-yanaka-8": {
+    type: "initiate",
+    context: "買禮物給朋友，請店家包裝"
+  },
+  "d4-yanaka-9": {
+    type: "initiate",
+    context: "谷中是貓咪聖地，要找招財貓專賣店"
+  },
+  "d4-yanaka-10": {
+    type: "initiate",
+    context: "進招財貓店看上一隻，問價錢"
+  },
+  "d4-yanaka-11": {
+    type: "initiate",
+    context: "覺得展示的太大，問有沒有小一點的"
+  },
+  "d4-yanaka-12": {
+    type: "initiate",
+    context: "怕行李帶不回去，問可不可以宅配海外"
+  },
+
+  // ========== teamLab Borderless ==========
+  "d4-teamlab-0": {
+    type: "reply",
+    ask_en: "Welcome. Do you have a reservation?",
+    ask_zh: "歡迎光臨，請問有預約嗎？",
+    context: "走到 teamLab 入口，工作人員確認你的預約場次"
+  },
+  "d4-teamlab-1": {
+    type: "initiate",
+    context: "在手機上開好 KKday 電子票，準備掃 QR"
+  },
+  "d4-teamlab-2": {
+    type: "initiate",
+    context: "拿完手環不確定從哪扇門進館"
+  },
+  "d4-teamlab-3": {
+    type: "initiate",
+    context: "館內昏暗想空手逛，問哪裡可以放包包"
+  },
+  "d4-teamlab-4": {
+    type: "initiate",
+    context: "聽說有寄物櫃，找位置"
+  },
+  "d4-teamlab-5": {
+    type: "initiate",
+    context: "看到一個夢幻空間想拍照，先確認規定"
+  },
+  "d4-teamlab-6": {
+    type: "initiate",
+    context: "想用閃光拍但怕影響展品，先問"
+  },
+  "d4-teamlab-7": {
+    type: "initiate",
+    context: "想預估逛展時間，安排接下來行程"
+  },
+  "d4-teamlab-8": {
+    type: "initiate",
+    context: "館內昏暗很容易迷路，找地圖"
+  },
+  "d4-teamlab-9": {
+    type: "initiate",
+    context: "逛了很久找不到出口"
+  },
+  "d4-teamlab-10": {
+    type: "initiate",
+    context: "暗黑的展區小孩開始哭鬧，請工作人員協助"
+  },
+  "d4-teamlab-11": {
+    type: "initiate",
+    context: "走累了想找地方坐"
+  },
+  "d4-teamlab-12": {
+    type: "initiate",
+    context: "出館前想買 teamLab 限定商品"
+  },
+
+  // ========== OVERTURE 咖啡廳 + 觀景台 ==========
+  "d4-cafe-0": {
+    type: "initiate",
+    context: "走進咖啡廳告知人數"
+  },
+  "d4-cafe-1": {
+    type: "reply",
+    ask_en: "There's a 20-minute wait.",
+    ask_zh: "需要等 20 分鐘。",
+    context: "店員告知排隊時間，你想再次確認"
+  },
+  "d4-cafe-2": {
+    type: "initiate",
+    context: "入座後跟服務生要菜單"
+  },
+  "d4-cafe-3": {
+    type: "initiate",
+    context: "看到菜單上有冰巧克力，跟服務生點"
+  },
+  "d4-cafe-4": {
+    type: "initiate",
+    context: "想吃甜點但菜單沒列清楚"
+  },
+  "d4-cafe-5": {
+    type: "initiate",
+    context: "點甜點時希望全家分食"
+  },
+  "d4-cafe-6": {
+    type: "initiate",
+    context: "聽說麻布台 33 樓有免費觀景台，問怎麼上去"
+  },
+  "d4-cafe-7": {
+    type: "initiate",
+    context: "知道有觀景台但不確定要不要錢"
+  },
+  "d4-cafe-8": {
+    type: "initiate",
+    context: "上了觀景台想找東京鐵塔的方向"
+  },
+  "d4-cafe-9": {
+    type: "initiate",
+    context: "看到漂亮夜景，想請路人幫拍合照"
+  },
+
+  // ========== 麻布台 6F 美食街 ==========
+  "d4-foodcourt-0": {
+    type: "initiate",
+    context: "晚餐時間，找麻布台 6 樓美食街"
+  },
+  "d4-foodcourt-1": {
+    type: "initiate",
+    context: "美食街選擇多，先問有什麼料理"
+  },
+  "d4-foodcourt-2": {
+    type: "initiate",
+    context: "看到熱門餐廳排隊，問需不需要預約"
+  },
+  "d4-foodcourt-3": {
+    type: "initiate",
+    context: "選好餐廳，先確認有沒有等位"
+  },
+  "d4-foodcourt-4": {
+    type: "initiate",
+    context: "晚餐時間晚，先問餐廳幾點關門"
+  },
+  "d4-foodcourt-5": {
+    type: "initiate",
+    context: "選好餐廳跟店員告知人數"
+  },
+  "d4-foodcourt-6": {
+    type: "initiate",
+    context: "為小孩問有沒有兒童餐"
+  },
+  "d4-foodcourt-7": {
+    type: "initiate",
+    context: "看到一道菜寫「辛口」，先問辣度"
+  }
+};
+
+/* ========== Day 5 情景擴充資料 ========== */
+const D5_CONTEXT = {
+  // ========== 新宿高速巴士 ==========
+  "d5-bus-0": {
+    type: "reply",
+    ask_en: "May I have your name, please?",
+    ask_zh: "請告知您的大名？",
+    context: "BUSTA 新宿櫃台辦理登記"
+  },
+  "d5-bus-1": {
+    type: "initiate",
+    context: "櫃台找不到你的名字，主動秀手機訂單"
+  },
+  "d5-bus-2": {
+    type: "initiate",
+    context: "拿到票後找搭車閘口"
+  },
+  "d5-bus-3": {
+    type: "initiate",
+    context: "怕錯過班次，先確認發車時間"
+  },
+  "d5-bus-4": {
+    type: "initiate",
+    context: "想預估抵達時間，問司機車程"
+  },
+  "d5-bus-5": {
+    type: "initiate",
+    context: "上車前確認車上有無洗手間（小孩怕憋）"
+  },
+  "d5-bus-6": {
+    type: "initiate",
+    context: "高速巴士會中停休息站，問什麼時候到"
+  },
+  "d5-bus-7": {
+    type: "initiate",
+    context: "到休息站想下車買吃的"
+  },
+  "d5-bus-8": {
+    type: "initiate",
+    context: "車程中問司機抵達時間"
+  },
+  "d5-bus-9": {
+    type: "initiate",
+    context: "怕睡過站，請司機快到時提醒"
+  },
+
+  // ========== 富士芝櫻祭會場 ==========
+  "d5-shibazakura-0": {
+    type: "reply",
+    ask_en: "How many tickets?",
+    ask_zh: "幾張票？",
+    context: "芝櫻祭入口售票，櫃台問人數"
+  },
+  "d5-shibazakura-1": {
+    type: "initiate",
+    context: "事先在 KKday 買好票，告訴櫃台"
+  },
+  "d5-shibazakura-2": {
+    type: "initiate",
+    context: "進場後想看富士山，問工作人員方向"
+  },
+  "d5-shibazakura-3": {
+    type: "initiate",
+    context: "想拍最美的芝櫻+富士山合影，問熱門點"
+  },
+  "d5-shibazakura-4": {
+    type: "initiate",
+    context: "找到拍照點，請其他遊客幫忙拍"
+  },
+  "d5-shibazakura-5": {
+    type: "initiate",
+    context: "請對方拍照時，特別交代要拍到富士山"
+  },
+  "d5-shibazakura-6": {
+    type: "initiate",
+    context: "聽說有富士山造型飯糰，找美食區"
+  },
+  "d5-shibazakura-7": {
+    type: "initiate",
+    context: "看到攤位賣一道沒看過的料理"
+  },
+  "d5-shibazakura-8": {
+    type: "initiate",
+    context: "決定點，跟店員告知份數"
+  },
+  "d5-shibazakura-9": {
+    type: "initiate",
+    context: "拿到食物想找位子坐"
+  },
+  "d5-shibazakura-10": {
+    type: "initiate",
+    context: "吃完想買紀念品"
+  },
+  "d5-shibazakura-11": {
+    type: "initiate",
+    context: "想買富士山造型紀念磁鐵"
+  },
+  "d5-shibazakura-12": {
+    type: "initiate",
+    context: "祭典結束要去河口湖，先確認接駁車時間"
+  },
+  "d5-shibazakura-13": {
+    type: "initiate",
+    context: "知道時間後找接駁車站位置"
+  },
+
+  // ========== 河口湖觀光船 ==========
+  "d5-boat-0": {
+    type: "reply",
+    ask_en: "How many tickets?",
+    ask_zh: "幾張票？",
+    context: "Ensoleille 觀光船售票口"
+  },
+  "d5-boat-1": {
+    type: "initiate",
+    context: "已買周遊券，告訴櫃台可以優惠"
+  },
+  "d5-boat-2": {
+    type: "initiate",
+    context: "拿到票後問下一班船時間"
+  },
+  "d5-boat-3": {
+    type: "initiate",
+    context: "上船前想預估遊湖時間"
+  },
+  "d5-boat-4": {
+    type: "initiate",
+    context: "上船後想找看富士山最佳座位"
+  },
+  "d5-boat-5": {
+    type: "initiate",
+    context: "看到上甲板開放，想帶小孩上去"
+  },
+  "d5-boat-6": {
+    type: "initiate",
+    context: "上甲板有風，先確認小孩安不安全"
+  },
+  "d5-boat-7": {
+    type: "initiate",
+    context: "在船上看到富士山絕景，請船員幫拍"
+  },
+  "d5-boat-8": {
+    type: "initiate",
+    context: "船程中段，想知道下船地點"
+  },
+  "d5-boat-9": {
+    type: "reply",
+    ask_en: "We're returning to the dock now.",
+    ask_zh: "我們要返回碼頭了。",
+    context: "意猶未盡，問船員可不可以再坐一圈"
+  },
+
+  // ========== MYSTAYS 富士山展望 Check-in ==========
+  "d5-hotel-0": {
+    type: "reply",
+    ask_en: "Welcome. Do you have a reservation?",
+    ask_zh: "歡迎光臨，請問有訂房嗎？",
+    context: "傍晚抵達飯店辦入住"
+  },
+  "d5-hotel-1": {
+    type: "initiate",
+    context: "下午到飯店但不確定能不能直接入住"
+  },
+  "d5-hotel-2": {
+    type: "initiate",
+    context: "這間飯店重點是富士山景，看可不可以指定房型"
+  },
+  "d5-hotel-3": {
+    type: "initiate",
+    context: "想去飯店附設溫泉放鬆"
+  },
+  "d5-hotel-4": {
+    type: "initiate",
+    context: "確認晚餐時段（如果有訂含晚餐方案）"
+  },
+  "d5-hotel-5": {
+    type: "initiate",
+    context: "明天要早起拍富士山，先問早餐時間"
+  },
+  "d5-hotel-6": {
+    type: "initiate",
+    context: "想看夕陽與富士山，問飯店內最佳觀景點"
+  },
+  "d5-hotel-7": {
+    type: "initiate",
+    context: "明天要早起，請櫃台 6 點叫醒"
+  },
+  "d5-hotel-8": {
+    type: "initiate",
+    context: "擔心明天天氣不好（富士山要看天氣），問氣象"
+  },
+  "d5-hotel-9": {
+    type: "initiate",
+    context: "晚上想買零食宵夜，問附近便利商店"
+  }
+};
+
+
 /* ========== 狀態 ========== */
 let state={
   currentDay:null,
@@ -2203,27 +3628,92 @@ function getCurrentSubscene(){
   return d.subscenes.find(x=>x.id===state.currentSubscene);
 }
 
+/* 多 day 情景查詢：根據 subscene id 自動找對應 D?_CONTEXT */
+function getPhraseContext(ctxKey){
+  if(typeof D1_CONTEXT!=="undefined"&&D1_CONTEXT[ctxKey])return D1_CONTEXT[ctxKey];
+  if(typeof D2_CONTEXT!=="undefined"&&D2_CONTEXT[ctxKey])return D2_CONTEXT[ctxKey];
+  if(typeof D3_CONTEXT!=="undefined"&&D3_CONTEXT[ctxKey])return D3_CONTEXT[ctxKey];
+  if(typeof D4_CONTEXT!=="undefined"&&D4_CONTEXT[ctxKey])return D4_CONTEXT[ctxKey];
+  if(typeof D5_CONTEXT!=="undefined"&&D5_CONTEXT[ctxKey])return D5_CONTEXT[ctxKey];
+  if(typeof D6_CONTEXT!=="undefined"&&D6_CONTEXT[ctxKey])return D6_CONTEXT[ctxKey];
+  if(typeof D7_CONTEXT!=="undefined"&&D7_CONTEXT[ctxKey])return D7_CONTEXT[ctxKey];
+  if(typeof D8_CONTEXT!=="undefined"&&D8_CONTEXT[ctxKey])return D8_CONTEXT[ctxKey];
+  if(typeof D9_CONTEXT!=="undefined"&&D9_CONTEXT[ctxKey])return D9_CONTEXT[ctxKey];
+  return null;
+}
+
+let learnRevealed={}; // {sid+i: true} 揭曉狀態，按 subscene+句序 記憶
 function renderLearn(){
   const s=getCurrentSubscene();
   const c=document.getElementById("learnContent");
   c.innerHTML="";
   s.phrases.forEach((p,i)=>{
+    const ctxKey=`${s.id}-${i}`;
+    const ctx=getPhraseContext(ctxKey);
     const card=document.createElement("div");
     card.className="phrase-card";
-    card.innerHTML=`
-      <div class="phrase-tag">#${i+1}</div>
-      <div class="phrase-en">${p.en}</div>
-      <div class="phrase-zh">${p.zh}</div>
-      <div class="phrase-tip">💡 ${p.tip}</div>
-      <div class="phrase-actions">
-        <button class="play-btn slow">🐢 慢慢念</button>
-        <button class="play-btn fast">▶ 正常念</button>
-      </div>`;
-    const [slow,fast]=card.querySelectorAll(".play-btn");
-    slow.onclick=()=>{speak(p.en,0.65);markProgress(s.id,i)};
-    fast.onclick=()=>{speak(p.en,0.95);markProgress(s.id,i)};
+    if(ctx){
+      // 有情景資料：用情景問答介面
+      const revealKey=`${s.id}-${i}`;
+      const revealed=learnRevealed[revealKey];
+      const enEsc=p.en.replace(/'/g,"\\'").replace(/"/g,"&quot;");
+      let inner=`<div class="phrase-tag">#${i+1} · ${ctx.type==="reply"?"💬 回應型":"🎤 主動型"}</div>`;
+      // 情境描述
+      inner+=`<div class="ctx-scene">📍 ${ctx.context}</div>`;
+      if(ctx.type==="reply"&&ctx.ask_en){
+        // 對方先說的話
+        const askEsc=ctx.ask_en.replace(/'/g,"\\'").replace(/"/g,"&quot;");
+        inner+=`
+          <div class="ctx-ask">
+            <div class="ctx-ask-label">👤 對方說：</div>
+            <div class="ctx-ask-en">${ctx.ask_en}</div>
+            <div class="ctx-ask-zh">${ctx.ask_zh}</div>
+            <button class="play-btn ctx-ask-play" onclick="speak('${askEsc}',0.85)">🔊 聽對方</button>
+          </div>`;
+      }
+      // 你的中文提示
+      inner+=`<div class="ctx-you-label">✏️ 換你說（中文提示）：</div>`;
+      inner+=`<div class="ctx-you-zh">${p.zh}</div>`;
+      if(!revealed){
+        inner+=`<button class="ctx-reveal-btn" onclick="revealLearn('${revealKey}','${s.id}',${i})">💭 我想好了，看英文 →</button>`;
+      } else {
+        inner+=`<div class="ctx-en-reveal">
+          <div class="phrase-en">${p.en}</div>
+          <div class="phrase-tip">💡 ${p.tip}</div>
+          <div class="phrase-actions">
+            <button class="play-btn" onclick="speak('${enEsc}',0.65)">🐢 慢慢念</button>
+            <button class="play-btn" onclick="speak('${enEsc}',0.95)">▶ 正常念</button>
+          </div>
+        </div>`;
+      }
+      card.innerHTML=inner;
+    } else {
+      // 沒有情景資料（Day 2-9）：原樣顯示
+      card.innerHTML=`
+        <div class="phrase-tag">#${i+1}</div>
+        <div class="phrase-en">${p.en}</div>
+        <div class="phrase-zh">${p.zh}</div>
+        <div class="phrase-tip">💡 ${p.tip}</div>
+        <div class="phrase-actions">
+          <button class="play-btn slow">🐢 慢慢念</button>
+          <button class="play-btn fast">▶ 正常念</button>
+        </div>`;
+      const [slow,fast]=card.querySelectorAll(".play-btn");
+      slow.onclick=()=>{speak(p.en,0.65);markProgress(s.id,i)};
+      fast.onclick=()=>{speak(p.en,0.95);markProgress(s.id,i)};
+    }
     c.appendChild(card);
   });
+}
+
+function revealLearn(key,sid,idx){
+  learnRevealed[key]=true;
+  const s=getCurrentSubscene();
+  const p=s.phrases[idx];
+  // 揭曉後自動播放 + 計入進度
+  setTimeout(()=>speak(p.en,0.85),100);
+  markProgress(sid,idx);
+  renderLearn();
 }
 
 function markProgress(sid,idx){
@@ -2539,30 +4029,106 @@ function openDialogues(){
     list.appendChild(card);
   });
 }
+let currentDialogueIdx=null;
+let currentDialogueMode="listen"; // "listen" or "roleplay"
+let revealedTurns={}; // {turnIdx: true}
+
 function openDialogueDetail(idx){
   showView("viewDialogueDetail");
+  currentDialogueIdx=idx;
+  revealedTurns={};
+  // 預設模式繼承上次（同一段對話切回去保持）
   const d=DIALOGUES[idx];
   document.getElementById("dialogueTitle").textContent=`${d.emoji||"💬"} ${d.title}`;
-  document.getElementById("dialogueMeta").textContent=`Day ${d.day||"?"} · 共 ${d.turns.length} 個回合 · 點 🔊 聽英文發音`;
+  document.getElementById("dialogueMeta").textContent=`Day ${d.day||"?"} · 共 ${d.turns.length} 個回合`;
+  // 綁定 mode-bar
+  document.querySelectorAll("#dialogueModeBar .mode-btn").forEach(b=>{
+    b.classList.toggle("active",b.dataset.mode===currentDialogueMode);
+    b.onclick=()=>{
+      currentDialogueMode=b.dataset.mode;
+      revealedTurns={};
+      renderDialogue();
+    };
+  });
+  renderDialogue();
+}
+
+function renderDialogue(){
+  const d=DIALOGUES[currentDialogueIdx];
   const c=document.getElementById("dialogueContent");
+  const hintBox=document.getElementById("dialogueRoleplayHint");
+  const completeBox=document.getElementById("dialogueComplete");
+  completeBox.innerHTML="";
+  if(currentDialogueMode==="roleplay"){
+    hintBox.innerHTML=`<div class="roleplay-hint-box">🎭 <strong>角色扮演模式</strong>：店員的話會直接顯示。換你講時，會看到中文提示——先在心裡（或大聲）說英文，再點按鈕看正確答案對照。</div>`;
+  } else {
+    hintBox.innerHTML="";
+  }
   c.innerHTML="";
   d.turns.forEach((t,i)=>{
     const card=document.createElement("div");
     const isYou=t.speaker==="you"||t.speaker==="me";
-    card.className=`turn-card ${isYou?"t-you":"t-other"}`;
     const roleLabel=isYou?"你 YOU":(t.label||t.speaker||"OTHER");
-    card.innerHTML=`
-      <div class="turn-role">${roleLabel}</div>
-      <div class="turn-en">${t.en}</div>
-      <div class="turn-zh">${t.zh}</div>
-      ${t.tip?`<div class="turn-tip">💡 ${t.tip}</div>`:""}
-      <div style="margin-top:10px;display:flex;gap:8px">
-        <button class="play-btn" onclick="speak('${t.en.replace(/'/g,"\\'")}',0.7)">🔊 慢</button>
-        <button class="play-btn" onclick="speak('${t.en.replace(/'/g,"\\'")}',0.95)">🔊 正常</button>
-      </div>
-    `;
+    const enEsc=t.en.replace(/'/g,"\\'").replace(/"/g,"&quot;");
+    // 角色扮演模式：你的 turn 預設隱藏，除非已 reveal
+    const hidden=(currentDialogueMode==="roleplay"&&isYou&&!revealedTurns[i]);
+    let cls=`turn-card ${isYou?"t-you":"t-other"}`;
+    if(hidden)cls+=" t-hidden";
+    if(hidden){
+      card.className=cls;
+      card.innerHTML=`
+        <div class="turn-role">${roleLabel}</div>
+        <div class="turn-hint">🎭 換你說！中文提示如下：</div>
+        <div class="turn-zh">${t.zh}</div>
+        <button class="reveal-btn" onclick="revealTurn(${i})">✅ 我說了，看英文答案 →</button>
+      `;
+    } else {
+      card.className=cls;
+      card.innerHTML=`
+        <div class="turn-role">${roleLabel}</div>
+        <div class="turn-en">${t.en}</div>
+        <div class="turn-zh">${t.zh}</div>
+        ${t.tip?`<div class="turn-tip">💡 ${t.tip}</div>`:""}
+        <div class="turn-play-row" style="margin-top:10px;display:flex;gap:8px">
+          <button class="play-btn" onclick="speak('${enEsc}',0.7)">🔊 慢</button>
+          <button class="play-btn" onclick="speak('${enEsc}',0.95)">🔊 正常</button>
+        </div>
+      `;
+    }
     c.appendChild(card);
   });
+  // 角色扮演模式：全部揭曉後顯示完成獎勵
+  if(currentDialogueMode==="roleplay"){
+    const youTurns=d.turns.map((t,i)=>({t,i})).filter(x=>x.t.speaker==="you"||x.t.speaker==="me");
+    const allRevealed=youTurns.length>0&&youTurns.every(x=>revealedTurns[x.i]);
+    if(allRevealed){
+      completeBox.innerHTML=`
+        <div class="dialogue-complete">
+          <div class="dc-emoji">🏆</div>
+          <div class="dc-text">完成這段角色扮演！</div>
+          <div class="dc-stars">+2 顆星 ⭐⭐</div>
+        </div>
+      `;
+    }
+  }
+}
+
+function revealTurn(i){
+  if(revealedTurns[i])return;
+  revealedTurns[i]=true;
+  const d=DIALOGUES[currentDialogueIdx];
+  const t=d.turns[i];
+  // 揭曉後自動播放英文
+  setTimeout(()=>speak(t.en,0.85),100);
+  // 檢查是不是最後一個 you turn 才剛完成 → 加星
+  const youTurns=d.turns.map((tt,ii)=>({tt,ii})).filter(x=>x.tt.speaker==="you"||x.tt.speaker==="me");
+  const allRevealed=youTurns.length>0&&youTurns.every(x=>revealedTurns[x.ii]);
+  if(allRevealed){
+    state.stars=(state.stars||0)+2;
+    saveState();
+    updateStars();
+  }
+  renderDialogue();
 }
 
 /* ========== v3 新增：日文菜單辨識 ========== */
