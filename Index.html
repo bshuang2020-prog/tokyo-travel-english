@@ -1,0 +1,2658 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="東京旅行英文">
+<meta name="theme-color" content="#FF8B5A">
+<title>✈️ 東京 9 天旅行英文小護照</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗼</text></svg>">
+<style>
+:root{
+  --sky:#7DB9E8;--sky-deep:#4A90C2;
+  --sunset:#FF8B5A;--sunset-deep:#E85A4F;
+  --cream:#FFF8E7;--cream-deep:#F5E9C9;
+  --ink:#2C3E50;--ink-soft:#5D6D7E;
+  --paper:#FDFCF7;--gold:#F4B860;
+  --mint:#7FC9A0;--coral:#FF6B6B;
+  --plum:#9B5DE5;--rose:#FF99C8;
+  --shadow:rgba(44,62,80,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden}
+body{
+  font-family:"Helvetica Neue","PingFang TC","Noto Sans TC",sans-serif;
+  background:var(--cream);color:var(--ink);min-height:100vh;
+  padding-bottom:env(safe-area-inset-bottom);
+  background-image:
+    radial-gradient(circle at 10% 20%,rgba(125,185,232,0.08) 0%,transparent 40%),
+    radial-gradient(circle at 90% 80%,rgba(255,139,90,0.08) 0%,transparent 40%),
+    repeating-linear-gradient(45deg,transparent 0 20px,rgba(244,184,96,0.02) 20px 21px);
+}
+
+/* 護照標頭 */
+.passport-header{
+  background:linear-gradient(135deg,var(--sunset) 0%,var(--sunset-deep) 100%);
+  color:white;padding:calc(env(safe-area-inset-top) + 16px) 20px 20px;
+  position:relative;overflow:hidden;box-shadow:0 4px 20px var(--shadow);
+}
+.passport-header::before{
+  content:"";position:absolute;top:-30px;right:-30px;
+  width:140px;height:140px;border:3px dashed rgba(255,255,255,0.25);border-radius:50%;
+}
+.passport-header::after{
+  content:"TOKYO · 東京 · 2026 · 5月 · MAY · ";
+  position:absolute;bottom:4px;left:0;right:0;
+  font-size:9px;letter-spacing:3px;color:rgba(255,255,255,0.35);
+  white-space:nowrap;font-weight:700;
+}
+.header-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.header-title{font-size:21px;font-weight:900;letter-spacing:-0.5px;display:flex;align-items:center;gap:8px}
+.header-stamp{
+  font-size:10px;border:2px solid rgba(255,255,255,0.5);
+  padding:3px 8px;border-radius:4px;font-weight:700;letter-spacing:1px;
+  transform:rotate(-3deg);background:rgba(255,255,255,0.1);text-align:center;line-height:1.3;
+}
+.header-sub{font-size:12px;opacity:0.9;font-weight:500}
+.streak{margin-top:12px;display:flex;align-items:center;gap:6px;font-size:13px}
+.stars{display:flex;gap:2px}
+.star{font-size:14px;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.2))}
+
+/* View 切換 */
+.view{display:none;padding:18px 16px 40px;animation:fadeIn 0.4s ease}
+.view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+.section-label{
+  font-size:11px;letter-spacing:3px;color:var(--ink-soft);font-weight:800;
+  margin:18px 0 12px;text-transform:uppercase;display:flex;align-items:center;gap:8px;
+}
+.section-label::after{content:"";flex:1;height:1px;background:var(--ink-soft);opacity:0.2}
+.section-label:first-child{margin-top:0}
+
+/* Day 卡片 */
+.day-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+.day-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:16px;
+  padding:14px 12px;cursor:pointer;position:relative;overflow:hidden;
+  box-shadow:3px 3px 0 var(--ink);min-height:110px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.day-card:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.day-card .day-num{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--ink-soft);
+}
+.day-card .day-emoji{font-size:32px;margin:4px 0}
+.day-card .day-title{font-size:13px;font-weight:900;line-height:1.3}
+.day-card .day-date{font-size:10px;color:var(--ink-soft);font-weight:600;margin-top:4px}
+.day-card .progress-mini{
+  position:absolute;top:8px;right:8px;font-size:9px;
+  background:var(--gold);color:var(--ink);padding:2px 6px;
+  border-radius:8px;font-weight:800;border:1.5px solid var(--ink);
+}
+.day-card.d1{background:linear-gradient(135deg,#FFF8E7,#FFE5C8)}
+.day-card.d2{background:linear-gradient(135deg,#FDE8E8,#F5C8C8)}
+.day-card.d3{background:linear-gradient(135deg,#E8F4FD,#C8E2F5)}
+.day-card.d4{background:linear-gradient(135deg,#F0E8FD,#DCC8F5)}
+.day-card.d5{background:linear-gradient(135deg,#FDE8F4,#F5C8E2)}
+.day-card.d6{background:linear-gradient(135deg,#E8FDE8,#C8F5D2)}
+.day-card.d7{background:linear-gradient(135deg,#FDFAE8,#F5EFC8)}
+.day-card.d8{background:linear-gradient(135deg,#E8FDFA,#C8F0E8)}
+.day-card.d9{background:linear-gradient(135deg,#FFE8DC,#FFC8B0)}
+
+/* 特色卡片：廣播解碼、緊急卡 */
+.feature-card{
+  border-radius:18px;padding:16px;margin-bottom:10px;
+  cursor:pointer;position:relative;overflow:hidden;
+  border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);
+  display:flex;align-items:center;gap:14px;
+}
+.feature-card:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.feature-card .fc-emoji{font-size:36px}
+.feature-card .fc-text{flex:1}
+.feature-card .fc-en{font-size:11px;font-weight:800;letter-spacing:1px;opacity:0.7}
+.feature-card .fc-zh{font-size:16px;font-weight:900;margin-top:2px}
+.feature-card .fc-desc{font-size:11px;opacity:0.75;margin-top:3px;line-height:1.4}
+.feature-radio{
+  background:linear-gradient(135deg,var(--ink),#34495E);color:white;
+}
+.feature-radio::before{content:"📡";position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.1}
+.feature-emergency{
+  background:linear-gradient(135deg,var(--coral),#E85A4F);color:white;
+  border-color:var(--ink);
+}
+.feature-emergency::before{content:"🆘";position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.15}
+.feature-vocab{
+  background:linear-gradient(135deg,var(--mint),#5BAE82);color:white;
+}
+.feature-vocab::before{content:"📚";position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.15}
+.feature-japanese{
+  background:linear-gradient(135deg,var(--plum),#7340B8);color:white;
+}
+.feature-japanese::before{content:"🇯🇵";position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.2}
+
+/* Mode bar */
+.mode-bar{
+  display:flex;background:var(--paper);border:2px solid var(--ink);
+  border-radius:14px;padding:4px;margin-bottom:14px;box-shadow:3px 3px 0 var(--ink);
+}
+.mode-btn{
+  flex:1;padding:9px 6px;background:transparent;border:none;border-radius:10px;
+  font-weight:800;font-size:12px;color:var(--ink-soft);cursor:pointer;
+  font-family:inherit;transition:all 0.2s;
+}
+.mode-btn.active{background:var(--ink);color:white}
+
+/* 返回按鈕 */
+.back-btn{
+  background:none;border:none;font-size:14px;font-weight:700;color:var(--ink);
+  margin-bottom:10px;cursor:pointer;padding:6px 0;font-family:inherit;
+  display:flex;align-items:center;gap:4px;
+}
+.scene-title{font-size:22px;font-weight:900;margin-bottom:4px;line-height:1.2}
+.scene-desc{font-size:12px;color:var(--ink-soft);margin-bottom:14px;line-height:1.5}
+
+/* Day 內子情境列表 */
+.subscene-list{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.subscene-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:14px;
+  padding:14px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);
+  display:flex;align-items:center;gap:12px;
+}
+.subscene-card:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.subscene-emoji{font-size:32px;flex-shrink:0}
+.subscene-info{flex:1;min-width:0}
+.subscene-name{font-size:15px;font-weight:900;margin-bottom:2px}
+.subscene-meta{font-size:11px;color:var(--ink-soft)}
+.subscene-arrow{font-size:20px;color:var(--ink-soft)}
+.subscene-progress{
+  font-size:10px;background:var(--gold);color:var(--ink);
+  padding:2px 6px;border-radius:8px;font-weight:800;
+  border:1.5px solid var(--ink);margin-left:6px;
+}
+
+/* 句卡 */
+.phrase-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:18px;
+  padding:18px 16px 16px;margin-bottom:12px;box-shadow:3px 3px 0 var(--ink);
+  position:relative;
+}
+.phrase-tag{
+  position:absolute;top:-9px;left:14px;background:var(--gold);color:var(--ink);
+  font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;
+  letter-spacing:1px;border:2px solid var(--ink);
+}
+.phrase-en{font-size:18px;font-weight:700;line-height:1.35;margin-bottom:6px;color:var(--ink);letter-spacing:-0.2px}
+.phrase-zh{font-size:13px;color:var(--ink-soft);margin-bottom:10px;font-weight:500}
+.phrase-tip{
+  font-size:11.5px;background:var(--cream-deep);padding:8px 10px;border-radius:8px;
+  color:var(--ink);margin-bottom:10px;border-left:3px solid var(--gold);line-height:1.5;
+}
+.phrase-tip strong{color:var(--sunset-deep)}
+.phrase-actions{display:flex;gap:6px}
+.play-btn{
+  flex:1;padding:10px 8px;border:2px solid var(--ink);border-radius:10px;
+  background:var(--cream);font-weight:800;font-size:12px;cursor:pointer;
+  font-family:inherit;display:flex;align-items:center;justify-content:center;gap:4px;
+  box-shadow:2px 2px 0 var(--ink);
+}
+.play-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+.play-btn.fast{background:var(--sunset);color:white}
+.play-btn.slow{background:var(--sky);color:white}
+
+/* 聽力測驗 */
+.quiz-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:18px;
+  padding:20px;margin-bottom:14px;box-shadow:3px 3px 0 var(--ink);text-align:center;
+}
+.quiz-prompt{font-size:13px;color:var(--ink-soft);margin-bottom:14px;font-weight:600}
+.quiz-bigplay{
+  width:80px;height:80px;border-radius:50%;background:var(--sunset);
+  border:3px solid var(--ink);color:white;font-size:34px;cursor:pointer;
+  margin-bottom:6px;box-shadow:0 4px 0 var(--ink);
+}
+.quiz-bigplay:active{transform:translateY(2px);box-shadow:0 2px 0 var(--ink)}
+.quiz-replay{
+  background:none;border:none;font-size:11px;color:var(--ink-soft);
+  text-decoration:underline;font-family:inherit;cursor:pointer;margin-bottom:14px;
+}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{
+  padding:12px 14px;border:2px solid var(--ink);border-radius:12px;
+  background:var(--paper);font-weight:700;font-size:14px;cursor:pointer;
+  font-family:inherit;text-align:left;box-shadow:2px 2px 0 var(--ink);
+}
+.quiz-option:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+.quiz-option.correct{background:var(--mint);color:white}
+.quiz-option.wrong{background:var(--coral);color:white}
+.quiz-feedback{
+  margin-top:12px;padding:12px;border-radius:10px;font-weight:700;
+  font-size:13px;text-align:center;display:none;
+}
+.quiz-feedback.show{display:block}
+.quiz-feedback.right{background:#E0F5E8;color:#1A6B3D;border:2px dashed var(--mint)}
+.quiz-feedback.miss{background:#FDE8E8;color:#A02828;border:2px dashed var(--coral)}
+.quiz-progress{
+  text-align:center;font-size:11px;letter-spacing:2px;color:var(--ink-soft);
+  font-weight:800;margin-bottom:12px;
+}
+
+/* 廣播 */
+.radio-card{
+  background:linear-gradient(135deg,#1A2333,#2C3E50);color:white;
+  border:2px solid var(--gold);border-radius:18px;padding:18px 14px;
+  margin-bottom:12px;box-shadow:3px 3px 0 var(--gold),3px 3px 0 3px var(--ink);
+  position:relative;
+}
+.radio-led{
+  position:absolute;top:14px;right:14px;width:10px;height:10px;
+  border-radius:50%;background:var(--coral);animation:blink 1.5s infinite;
+}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0.3}}
+.radio-label{font-size:10px;letter-spacing:3px;color:var(--gold);font-weight:800;margin-bottom:8px}
+.radio-q{font-size:13px;margin-bottom:12px;font-weight:600}
+.radio-keywords{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.kw-chip{
+  padding:7px 12px;border:2px solid var(--gold);border-radius:18px;
+  background:transparent;color:white;font-weight:700;font-size:12px;
+  cursor:pointer;font-family:inherit;
+}
+.kw-chip.picked{background:var(--gold);color:var(--ink)}
+.kw-chip.kw-correct{background:var(--mint);color:white;border-color:var(--mint)}
+.kw-chip.kw-wrong{background:var(--coral);color:white;border-color:var(--coral)}
+.radio-actions{display:flex;gap:6px;flex-wrap:wrap}
+.radio-actions button{
+  flex:1;min-width:0;padding:10px 8px;border:2px solid var(--gold);
+  border-radius:10px;background:transparent;color:white;font-weight:800;
+  font-size:12px;cursor:pointer;font-family:inherit;
+}
+.radio-actions button.primary{background:var(--gold);color:var(--ink)}
+.radio-script{
+  font-size:13px;line-height:1.6;font-family:"Courier New",monospace;
+  background:rgba(0,0,0,0.3);padding:12px;border-radius:8px;margin-top:10px;
+  border-left:3px solid var(--gold);display:none;
+}
+.radio-script.shown{display:block}
+.radio-script .keyword{background:var(--gold);color:var(--ink);padding:1px 5px;border-radius:4px;font-weight:800}
+.radio-zh{
+  margin-top:10px;font-size:11.5px;padding:9px;background:rgba(244,184,96,0.1);
+  border-radius:8px;color:rgba(255,255,255,0.85);display:none;line-height:1.5;
+}
+.radio-zh.shown{display:block}
+
+/* 緊急卡 */
+.emergency-section{
+  background:white;border:3px solid var(--coral);border-radius:18px;
+  padding:18px;margin-bottom:14px;box-shadow:0 6px 20px rgba(255,107,107,0.25);
+}
+.emergency-section h3{
+  font-size:16px;font-weight:900;color:var(--coral);
+  margin-bottom:10px;display:flex;align-items:center;gap:6px;
+}
+.emergency-card-display{
+  background:linear-gradient(135deg,#fff,#FFF5F5);
+  border:2px dashed var(--coral);border-radius:14px;padding:18px;
+  margin-bottom:12px;
+}
+.ec-row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px dotted #ccc;gap:10px}
+.ec-row:last-child{border-bottom:none}
+.ec-label{font-size:11px;color:var(--ink-soft);font-weight:700;flex-shrink:0;min-width:80px}
+.ec-val{font-size:14px;font-weight:700;text-align:right;word-break:break-word}
+.ec-val.big{font-size:18px;font-weight:900;color:var(--coral)}
+.emergency-input{
+  width:100%;padding:10px 12px;border:2px solid var(--ink);border-radius:10px;
+  font-size:14px;font-family:inherit;margin-bottom:8px;background:var(--paper);
+}
+.emergency-input:focus{outline:none;border-color:var(--coral)}
+.emergency-edit-btn{
+  background:var(--ink);color:white;padding:10px;border:none;border-radius:10px;
+  font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;width:100%;
+  margin-top:6px;
+}
+.emergency-show-btn{
+  background:var(--coral);color:white;padding:14px;border:none;border-radius:12px;
+  font-weight:900;font-size:15px;cursor:pointer;font-family:inherit;width:100%;
+  border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);
+}
+.emergency-show-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.emergency-fullscreen{
+  position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:9999;
+  padding:env(safe-area-inset-top) 20px 20px;display:none;flex-direction:column;
+  overflow-y:auto;
+}
+.emergency-fullscreen.shown{display:flex}
+.emergency-fullscreen .ef-close{
+  position:absolute;top:calc(env(safe-area-inset-top) + 10px);right:14px;
+  background:var(--ink);color:white;border:none;width:40px;height:40px;
+  border-radius:50%;font-size:20px;cursor:pointer;z-index:10;
+}
+.ef-stamp{
+  background:var(--coral);color:white;text-align:center;padding:10px;
+  border-radius:10px;font-size:14px;font-weight:900;letter-spacing:2px;margin:50px 0 16px;
+}
+.ef-name{font-size:32px;font-weight:900;text-align:center;margin-bottom:4px;line-height:1.2}
+.ef-name-en{font-size:14px;text-align:center;color:var(--ink-soft);margin-bottom:18px;font-weight:600}
+.ef-section{
+  background:var(--cream);border-radius:12px;padding:14px;margin-bottom:10px;
+  border:2px solid var(--ink);
+}
+.ef-section h4{font-size:11px;letter-spacing:2px;color:var(--ink-soft);margin-bottom:6px;font-weight:800}
+.ef-section .ef-content{font-size:18px;font-weight:800;line-height:1.4}
+.ef-section .ef-content.phone{font-size:24px;color:var(--coral);font-family:"Courier New",monospace}
+.ef-msg{
+  background:var(--ink);color:white;border-radius:12px;padding:14px;
+  font-size:13px;line-height:1.7;margin-top:10px;
+}
+.ef-msg .en{font-size:15px;font-weight:700;margin-bottom:6px}
+
+/* 詞彙閃卡 */
+.vocab-card{
+  background:linear-gradient(135deg,var(--paper),var(--cream));
+  border:2px solid var(--ink);border-radius:18px;padding:30px 20px;
+  margin-bottom:14px;box-shadow:3px 3px 0 var(--ink);text-align:center;
+  min-height:240px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+}
+.vocab-emoji{font-size:64px;margin-bottom:10px}
+.vocab-en{font-size:32px;font-weight:900;letter-spacing:-1px;margin-bottom:6px}
+.vocab-zh{font-size:18px;color:var(--ink-soft);font-weight:700;margin-bottom:10px}
+.vocab-context{
+  font-size:11px;background:var(--cream-deep);padding:8px 12px;border-radius:8px;
+  color:var(--ink);max-width:300px;line-height:1.5;
+}
+.vocab-actions{display:flex;gap:8px;margin-bottom:10px}
+.vocab-actions button{
+  flex:1;padding:12px;border:2px solid var(--ink);border-radius:12px;
+  background:var(--paper);font-weight:800;font-size:13px;cursor:pointer;
+  font-family:inherit;box-shadow:2px 2px 0 var(--ink);
+}
+.vocab-actions button:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+.vocab-actions .vbtn-play{background:var(--sunset);color:white}
+.vocab-counter{
+  text-align:center;font-size:11px;letter-spacing:2px;color:var(--ink-soft);
+  font-weight:800;margin-bottom:12px;
+}
+
+/* 日文情境 */
+.jp-card{
+  background:linear-gradient(135deg,#FFF,#FCF5FF);
+  border:2px solid var(--plum);border-radius:18px;padding:18px;
+  margin-bottom:12px;box-shadow:3px 3px 0 var(--plum);position:relative;
+}
+.jp-tag{
+  position:absolute;top:-9px;left:14px;background:var(--plum);color:white;
+  font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;
+  letter-spacing:1px;border:2px solid white;
+}
+.jp-scenario{font-size:12px;color:var(--plum);font-weight:800;margin-bottom:6px}
+.jp-jp{font-size:20px;font-weight:700;margin-bottom:4px;color:var(--ink)}
+.jp-romaji{font-size:11px;color:var(--ink-soft);font-style:italic;margin-bottom:6px}
+.jp-zh{font-size:13px;font-weight:600;margin-bottom:8px}
+.jp-action{font-size:11px;background:#FCF5FF;padding:8px 10px;border-radius:8px;border-left:3px solid var(--plum);line-height:1.5}
+.jp-action strong{color:var(--plum)}
+
+/* 通用 nav */
+.nav-bottom{display:flex;gap:8px;margin-top:14px}
+.nav-bottom button{
+  flex:1;padding:12px;border:2px solid var(--ink);border-radius:12px;
+  background:var(--paper);font-weight:800;font-size:13px;cursor:pointer;
+  font-family:inherit;box-shadow:2px 2px 0 var(--ink);
+}
+.nav-bottom button:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+.nav-bottom button.primary{background:var(--sunset);color:white}
+.nav-bottom button:disabled{opacity:0.4;cursor:not-allowed}
+
+.deco-cloud{position:fixed;font-size:60px;opacity:0.06;pointer-events:none;z-index:-1}
+.deco-cloud.c1{top:200px;left:-10px}
+.deco-cloud.c2{top:500px;right:-10px}
+
+.install-hint{
+  background:var(--sky);color:white;padding:9px 12px;border-radius:10px;
+  font-size:11.5px;margin-bottom:12px;font-weight:600;border:2px solid var(--ink);
+  display:none;
+}
+.install-hint.show{display:block}
+
+.speed-control{
+  display:flex;align-items:center;gap:10px;background:var(--paper);
+  border:2px solid var(--ink);border-radius:12px;padding:7px 12px;
+  margin-bottom:12px;box-shadow:2px 2px 0 var(--ink);
+}
+.speed-control label{font-size:11px;font-weight:800;color:var(--ink-soft)}
+.speed-control input{flex:1}
+.speed-val{font-size:11px;font-weight:800;color:var(--sunset-deep);min-width:30px;text-align:right}
+
+/* v3 新增：對話劇場、菜單辨識、價錢聽力、數字大字盤 */
+.feature-dialogue{
+  background:linear-gradient(135deg,var(--rose),#E875A8);color:white;
+}
+.feature-dialogue::before{content:"💬";position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.18}
+.feature-menu{
+  background:linear-gradient(135deg,var(--gold),#D89A3F);color:white;
+}
+.feature-menu::before{content:"🍱";position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.18}
+.feature-price{
+  background:linear-gradient(135deg,#5DADE2,#2E86C1);color:white;
+}
+.feature-price::before{content:"💴";position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.18}
+.feature-number{
+  background:linear-gradient(135deg,#7F8C8D,#34495E);color:white;
+}
+.feature-number::before{content:"🔢";position:absolute;right:-10px;top:-10px;font-size:80px;opacity:0.18}
+
+/* 對話劇場 */
+.dialogue-list{display:flex;flex-direction:column;gap:12px}
+.dialogue-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:14px;
+  padding:14px;box-shadow:3px 3px 0 var(--ink);cursor:pointer;
+  transition:transform .15s;
+}
+.dialogue-card:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.dialogue-card .dc-title{font-size:16px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.dialogue-card .dc-meta{font-size:12px;color:var(--ink-soft)}
+.dialogue-card .dc-emoji{font-size:24px;float:right;margin-left:8px}
+
+.turn-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:14px;
+  padding:14px;margin-bottom:10px;box-shadow:3px 3px 0 var(--ink);
+}
+.turn-card.t-other{background:#FFF6E5;border-color:#D89A3F}
+.turn-card.t-you{background:#E8F5E9;border-color:#5BAE82}
+.turn-role{
+  display:inline-block;font-size:11px;font-weight:800;letter-spacing:1px;
+  background:var(--ink);color:white;padding:3px 10px;border-radius:8px;margin-bottom:8px;
+}
+.turn-card.t-you .turn-role{background:var(--mint)}
+.turn-card.t-other .turn-role{background:var(--gold)}
+.turn-en{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.4}
+.turn-zh{font-size:13px;color:var(--ink-soft);margin-bottom:8px}
+.turn-tip{font-size:12px;background:#FFF9E6;border-left:3px solid var(--gold);padding:6px 10px;border-radius:6px;color:var(--ink);line-height:1.5}
+
+/* 菜單辨識 */
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.menu-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:12px;
+  padding:12px 10px;box-shadow:2px 2px 0 var(--ink);text-align:center;
+}
+.menu-jp{font-size:22px;font-weight:800;color:var(--ink);margin-bottom:4px}
+.menu-romaji{font-size:11px;color:var(--ink-soft);margin-bottom:6px;font-style:italic}
+.menu-zh{font-size:13px;font-weight:700;color:var(--coral)}
+.menu-eg{font-size:10px;color:var(--ink-soft);margin-top:4px;line-height:1.3}
+
+/* 價錢聽力 */
+.price-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:14px;
+  padding:16px;box-shadow:3px 3px 0 var(--ink);margin-bottom:12px;
+}
+.price-listen-btn{
+  width:100%;background:var(--gold);color:var(--ink);border:2px solid var(--ink);
+  border-radius:10px;padding:12px;font-size:16px;font-weight:800;cursor:pointer;
+  box-shadow:2px 2px 0 var(--ink);margin-bottom:12px;
+}
+.price-listen-btn:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+.price-options{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.price-opt{
+  background:var(--paper);border:2px solid var(--ink);border-radius:10px;
+  padding:14px 8px;font-size:18px;font-weight:800;cursor:pointer;
+  box-shadow:2px 2px 0 var(--ink);
+}
+.price-opt:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+.price-opt.correct{background:var(--mint);color:white}
+.price-opt.wrong{background:var(--coral);color:white;opacity:0.7}
+
+/* 數字大字盤 */
+.number-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.number-card{
+  background:var(--paper);border:2px solid var(--ink);border-radius:14px;
+  padding:14px;box-shadow:2px 2px 0 var(--ink);
+  display:flex;align-items:center;gap:14px;
+}
+.number-big{
+  font-size:36px;font-weight:900;color:var(--coral);min-width:80px;text-align:center;
+  font-family:Georgia,serif;
+}
+.number-info{flex:1}
+.number-jp{font-size:16px;font-weight:700;color:var(--ink)}
+.number-romaji{font-size:12px;color:var(--ink-soft);font-style:italic}
+.number-listen{
+  background:var(--mint);color:white;border:2px solid var(--ink);border-radius:8px;
+  padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;
+}
+
+</style>
+</head>
+<body>
+
+<div class="deco-cloud c1">☁️</div>
+<div class="deco-cloud c2">🗼</div>
+
+<div class="passport-header">
+  <div class="header-top">
+    <div class="header-title">🗼 東京旅行英文小護照</div>
+    <div class="header-stamp">5/16<br>5/24</div>
+  </div>
+  <div class="header-sub">Tokyo Family Trip · 9 Days · Lin Family</div>
+  <div class="streak">
+    <span>累積星星</span>
+    <div class="stars" id="starDisplay"></div>
+    <span id="starCount" style="font-weight:800">0</span>
+  </div>
+</div>
+
+<!-- 首頁 -->
+<div class="view active" id="viewHome">
+  <div class="install-hint" id="installHint">💡 點瀏覽器選單「加到主畫面」即可離線使用</div>
+
+  <div class="section-label">🆘 隨身工具</div>
+  <div class="feature-card feature-emergency" onclick="openEmergency()">
+    <div class="fc-emoji">🆘</div>
+    <div class="fc-text">
+      <div class="fc-en">EMERGENCY ID CARD</div>
+      <div class="fc-zh">緊急身分卡</div>
+      <div class="fc-desc">走失或緊急時，按一下出示給警察看</div>
+    </div>
+  </div>
+
+  <div class="section-label">📅 9 天行程情境</div>
+  <div class="day-grid" id="dayGrid"></div>
+
+  <div class="section-label">🎯 進階訓練</div>
+  <div class="feature-card feature-radio" onclick="openRadio()">
+    <div class="fc-emoji">📡</div>
+    <div class="fc-text">
+      <div class="fc-en">RADIO DECODER · 進階</div>
+      <div class="fc-zh">廣播解碼站</div>
+      <div class="fc-desc">機場、機艙、電車廣播聽關鍵字</div>
+    </div>
+  </div>
+  <div class="feature-card feature-vocab" onclick="openVocab()">
+    <div class="fc-emoji">📚</div>
+    <div class="fc-text">
+      <div class="fc-en">VOCAB FLASHCARDS</div>
+      <div class="fc-zh">關鍵字閃卡</div>
+      <div class="fc-desc">行程裡會用到的核心單字</div>
+    </div>
+  </div>
+  <div class="feature-card feature-japanese" onclick="openJapanese()">
+    <div class="fc-emoji">🇯🇵</div>
+    <div class="fc-text">
+      <div class="fc-en">JAPANESE SURVIVAL</div>
+      <div class="fc-zh">聽懂日文店員</div>
+      <div class="fc-desc">店員常講的日文（袋、お会計⋯⋯）</div>
+    </div>
+  </div>
+  <div class="feature-card feature-dialogue" onclick="openDialogues()">
+    <div class="fc-emoji">💬</div>
+    <div class="fc-text">
+      <div class="fc-en">DIALOGUE THEATER</div>
+      <div class="fc-zh">對話劇場</div>
+      <div class="fc-desc">12 段完整對話，模擬真實互動</div>
+    </div>
+  </div>
+  <div class="feature-card feature-menu" onclick="openMenu()">
+    <div class="fc-emoji">🍱</div>
+    <div class="fc-text">
+      <div class="fc-en">MENU READER</div>
+      <div class="fc-zh">日文菜單辨識</div>
+      <div class="fc-desc">焼き、揚げ、丼⋯ 看懂菜單關鍵字</div>
+    </div>
+  </div>
+  <div class="feature-card feature-price" onclick="openPrice()">
+    <div class="fc-emoji">💴</div>
+    <div class="fc-text">
+      <div class="fc-en">PRICE LISTENING</div>
+      <div class="fc-zh">價錢聽力測驗</div>
+      <div class="fc-desc">300 円還是 3000 円？聽懂日文金額</div>
+    </div>
+  </div>
+  <div class="feature-card feature-number" onclick="openNumber()">
+    <div class="fc-emoji">🔢</div>
+    <div class="fc-text">
+      <div class="fc-en">NUMBER PANEL</div>
+      <div class="fc-zh">數字大字盤</div>
+      <div class="fc-desc">緊急時用手指比給對方看</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 子情境列表 -->
+<div class="view" id="viewDay">
+  <button class="back-btn" onclick="goHome()">← 回到首頁</button>
+  <div class="scene-title" id="dayTitle"></div>
+  <div class="scene-desc" id="dayDesc"></div>
+  <div class="subscene-list" id="subsceneList"></div>
+</div>
+
+<!-- 子情境學習頁 -->
+<div class="view" id="viewLearn">
+  <button class="back-btn" id="learnBack">← 回到 Day</button>
+  <div class="scene-title" id="learnTitle"></div>
+  <div class="scene-desc" id="learnDesc"></div>
+  <div class="mode-bar">
+    <button class="mode-btn active" data-mode="learn" onclick="setMode('learn')">📖 學句子</button>
+    <button class="mode-btn" data-mode="quiz" onclick="setMode('quiz')">🎧 聽力測驗</button>
+  </div>
+  <div class="speed-control">
+    <label>🐢 語速</label>
+    <input type="range" id="speedSlider" min="0.6" max="1.0" step="0.05" value="0.85">
+    <span class="speed-val" id="speedVal">0.85x</span>
+  </div>
+  <div id="learnContent"></div>
+</div>
+
+<!-- 廣播解碼 -->
+<div class="view" id="viewRadio">
+  <button class="back-btn" onclick="goHome()">← 回到首頁</button>
+  <div class="scene-title">📡 廣播解碼站</div>
+  <div class="scene-desc">聽機場/機艙/電車廣播，找出關鍵字</div>
+  <div class="quiz-progress" id="radioProgress">第 1 / 8 題</div>
+  <div id="radioContent"></div>
+  <div class="nav-bottom">
+    <button onclick="prevRadio()" id="radioPrev">← 上一題</button>
+    <button onclick="nextRadio()" id="radioNext" class="primary">下一題 →</button>
+  </div>
+</div>
+
+<!-- 詞彙閃卡 -->
+<div class="view" id="viewVocab">
+  <button class="back-btn" onclick="goHome()">← 回到首頁</button>
+  <div class="scene-title">📚 關鍵字閃卡</div>
+  <div class="scene-desc">行程中會用到的重點單字，左右滑或按按鈕切換</div>
+  <div class="vocab-counter" id="vocabCounter"></div>
+  <div id="vocabContent"></div>
+  <div class="vocab-actions">
+    <button onclick="prevVocab()">← 上一個</button>
+    <button class="vbtn-play" onclick="playVocab()">🔊 再聽一次</button>
+    <button onclick="nextVocab()">下一個 →</button>
+  </div>
+</div>
+
+<!-- 日文情境 -->
+<div class="view" id="viewJapanese">
+  <button class="back-btn" onclick="goHome()">← 回到首頁</button>
+  <div class="scene-title">🇯🇵 聽懂日文店員</div>
+  <div class="scene-desc">店員常講的日文，聽懂就會應對</div>
+  <div id="japaneseContent"></div>
+</div>
+
+<!-- 對話劇場列表 -->
+<div class="view" id="viewDialogues">
+  <button class="back-btn" onclick="goHome()">← 回到首頁</button>
+  <div class="scene-title">💬 對話劇場</div>
+  <div class="scene-desc">12 段完整對話，每段 8-15 回合，模擬真實互動</div>
+  <div class="dialogue-list" id="dialogueList"></div>
+</div>
+
+<!-- 對話劇場單段播放 -->
+<div class="view" id="viewDialogueDetail">
+  <button class="back-btn" onclick="showView('viewDialogues')">← 回到對話列表</button>
+  <div class="scene-title" id="dialogueTitle"></div>
+  <div class="scene-desc" id="dialogueMeta"></div>
+  <div class="speed-control">
+    <span class="speed-label">語速：</span>
+    <button class="speed-btn" data-rate="0.7">慢</button>
+    <button class="speed-btn active" data-rate="0.85">標準</button>
+    <button class="speed-btn" data-rate="1.0">快</button>
+  </div>
+  <div id="dialogueContent"></div>
+</div>
+
+<!-- 菜單辨識 -->
+<div class="view" id="viewMenu">
+  <button class="back-btn" onclick="goHome()">← 回到首頁</button>
+  <div class="scene-title">🍱 日文菜單辨識</div>
+  <div class="scene-desc">看到日文菜單就懂——焼き是烤、揚げ是炸、丼是蓋飯</div>
+  <div class="menu-grid" id="menuContent"></div>
+</div>
+
+<!-- 價錢聽力 -->
+<div class="view" id="viewPrice">
+  <button class="back-btn" onclick="goHome()">← 回到首頁</button>
+  <div class="scene-title">💴 價錢聽力測驗</div>
+  <div class="scene-desc">店員講的日文金額，按播放後選對的數字</div>
+  <div class="quiz-progress" id="priceProgress">第 1 / 10 題</div>
+  <div id="priceContent"></div>
+  <div class="nav-bottom">
+    <button class="nav-btn" id="pricePrev" onclick="priceNav(-1)">← 上一題</button>
+    <button class="nav-btn" id="priceNext" onclick="priceNav(1)">下一題 →</button>
+  </div>
+</div>
+
+<!-- 數字大字盤 -->
+<div class="view" id="viewNumber">
+  <button class="back-btn" onclick="goHome()">← 回到首頁</button>
+  <div class="scene-title">🔢 數字大字盤</div>
+  <div class="scene-desc">緊急時手指放大顯示給對方看（人數、年齡、價錢、時間）</div>
+  <div class="number-grid" id="numberContent"></div>
+</div>
+
+<!-- 緊急身分卡 -->
+<div class="view" id="viewEmergency">
+  <button class="back-btn" onclick="goHome()">← 回到首頁</button>
+  <div class="scene-title">🆘 緊急身分卡</div>
+  <div class="scene-desc">爸媽先填好資訊，緊急時小孩按一下「出示卡片」給警察看</div>
+  <div class="emergency-section">
+    <h3>👤 我的資訊（請爸媽填寫）</h3>
+    <div id="emergencyForm"></div>
+    <button class="emergency-edit-btn" onclick="saveEmergency()">💾 儲存</button>
+  </div>
+  <button class="emergency-show-btn" onclick="showEmergencyCard()">🚨 出示卡片給警察看</button>
+</div>
+
+<!-- 全螢幕緊急卡 -->
+<div class="emergency-fullscreen" id="emergencyFullscreen">
+  <button class="ef-close" onclick="hideEmergencyCard()">✕</button>
+  <div class="ef-stamp">EMERGENCY · 緊急</div>
+  <div class="ef-name" id="efName">—</div>
+  <div class="ef-name-en" id="efNameEn" style="display:none"></div>
+
+  <div class="ef-section">
+    <h4>📞 PARENTS PHONE · 爸媽電話</h4>
+    <div class="ef-content phone" id="efPhone1">—</div>
+    <div class="ef-content phone" id="efPhone2" style="font-size:18px;margin-top:4px"></div>
+  </div>
+
+  <div class="ef-section">
+    <h4>🏨 HOTEL · 今晚住宿</h4>
+    <div class="ef-content" id="efHotel" style="font-size:14px">—</div>
+  </div>
+
+  <div class="ef-section">
+    <h4>🇹🇼 NATIONALITY · 國籍</h4>
+    <div class="ef-content">Taiwan / 台灣</div>
+  </div>
+
+  <div class="ef-msg">
+    <div class="en">Please call my parents. I'm lost. Thank you.</div>
+    <div>請打電話給我爸媽，我迷路了。謝謝您。</div>
+  </div>
+  <div class="ef-msg" style="background:var(--coral);margin-top:8px">
+    <div class="en">私は迷子です。両親に電話してください。</div>
+    <div style="opacity:0.9">我迷路了，請打電話給我爸媽。（日文版）</div>
+  </div>
+</div>
+
+<script>
+/* ========== 行程客製化資料 ========== */
+const DAYS=[
+  /* ====================== Day 1 ====================== */
+  {id:1,date:"5/16(六)",emoji:"✈️",title:"抵達日",cls:"d1",
+    desc:"桃園 → 成田 → 日暮里。重點：飛機上、海關入境、Skyliner、Check-in、馬賊拉麵",
+    subscenes:[
+      {id:"d1-flight",emoji:"✈️",name:"飛機上 (JL8664)",meta:"日航空服員、餐點、不舒服",
+        phrases:[
+          {en:"Could I have some water, please?",zh:"可以給我一些水嗎？",tip:"日航空服員會講英文。要果汁就換成 apple juice 或 orange juice。"},
+          {en:"I'd like the chicken, please.",zh:"我要雞肉餐，謝謝。",tip:"空服員會問 Chicken or fish? 用這句回答（JL8664 經濟艙含餐點）。"},
+          {en:"Could I have a blanket?",zh:"可以給我一條毯子嗎？",tip:"飛機上冷時用。pillow = 枕頭。"},
+          {en:"Excuse me, where is the bathroom?",zh:"不好意思，洗手間在哪？",tip:"也可以說 lavatory（飛機上常見的字）。"},
+          {en:"My screen isn't working.",zh:"我的螢幕壞掉了。",tip:"看不了卡通的時候用這句叫空服員。"},
+          {en:"Could you help me open this?",zh:"可以幫我打開這個嗎？",tip:"餐點包裝、餅乾袋打不開時用。"},
+          {en:"My ears hurt.",zh:"我耳朵痛。",tip:"起飛降落時耳朵痛要說，空服員會給你糖果咬。"},
+          {en:"Could I have another one?",zh:"可以再給我一份嗎？",tip:"飲料、餅乾想再要一份時用。"},
+          {en:"Excuse me, could you fasten my seatbelt?",zh:"不好意思，可以幫我繫安全帶嗎？",tip:"小孩搆不到時用。fasten = 扣緊。"},
+          {en:"I'm not feeling well. I want to throw up.",zh:"我不舒服，想吐。",tip:"throw up = 想吐。空服員會給嘔吐袋。"},
+          {en:"Could I have a barf bag?",zh:"可以給我嘔吐袋嗎？",tip:"barf bag = 嘔吐袋（座位前面通常有，沒有就要）。"},
+          {en:"What time will we land?",zh:"幾點降落？",tip:"land = 降落。JL8664 預計 17:15 抵達 NRT。"},
+          {en:"Could you turn down the air conditioning?",zh:"可以把冷氣調小嗎？",tip:"頭上有調整風口，但太冷可請空服員幫忙。"},
+          {en:"I dropped my fork.",zh:"我的叉子掉了。",tip:"用餐時餐具掉地上，叫空服員換。fork 叉子、spoon 湯匙、knife 刀子。"}
+        ]},
+      {id:"d1-customs",emoji:"🛂",name:"成田機場海關",meta:"入境問答完整版",
+        phrases:[
+          {en:"I'm here on vacation with my family.",zh:"我是和家人來度假的。",tip:"<strong>必問題 1</strong>：What's the purpose of your visit? 用這句回答。"},
+          {en:"We're staying for nine days.",zh:"我們會待九天。",tip:"<strong>必問題 2</strong>：How long will you stay? 我們是 5/16-5/24。"},
+          {en:"We're staying at a hotel in Tokyo.",zh:"我們住東京的飯店。",tip:"<strong>必問題 3</strong>：Where are you staying? 第一晚 MYSTAYS Nippori。"},
+          {en:"This is my first time in Japan.",zh:"這是我第一次來日本。",tip:"first time = 第一次。海關官員可能會問。"},
+          {en:"Here is my passport.",zh:"這是我的護照。",tip:"海關官員伸手就遞給他。"},
+          {en:"This is my mom and dad.",zh:"這是我爸爸和媽媽。",tip:"如果分開過海關（不會發生但以防萬一），可指他們說。"},
+          {en:"I don't have anything to declare.",zh:"我沒有東西要申報。",tip:"declare = 申報。零食、玩具不用申報。"},
+          {en:"My parents have everything.",zh:"我的東西都在爸媽那裡。",tip:"小孩沒有自己的行李時用。"},
+          {en:"Could you speak slowly, please?",zh:"可以講慢一點嗎？",tip:"<strong>聽不懂第一個用這句</strong>，比假裝聽懂好。"},
+          {en:"Could you say that again?",zh:"可以再說一次嗎？",tip:"沒聽清楚時用。"},
+          {en:"I don't understand.",zh:"我聽不懂。",tip:"完全聽不懂時誠實說，他會找翻譯或幫忙。"},
+          {en:"Could you wait? My mom is coming.",zh:"可以等一下嗎？我媽媽馬上來。",tip:"和爸媽走散時用。"},
+          {en:"Could you stamp my passport, please?",zh:"請蓋章，謝謝。",tip:"stamp = 章。蓋完海關章是入境完成的證明。"}
+        ]},
+      {id:"d1-skyliner",emoji:"🚄",name:"Skyliner & 日暮里站",meta:"買票、找月台、轉乘",
+        phrases:[
+          {en:"Two adults and two children to Nippori, please.",zh:"兩大兩小到日暮里，謝謝。",tip:"Skyliner 兒童票半價。Nippori 念「逆-波-哩」。"},
+          {en:"I have an e-ticket on my phone.",zh:"我手機上有電子票。",tip:"事前 KKday 買省 200 日圓，現場出示 QR code。"},
+          {en:"Which platform for the Skyliner?",zh:"Skyliner 在哪一個月台？",tip:"platform = 月台。T2 地下 1 樓京成電鐵。"},
+          {en:"Is this the Skyliner to Nippori?",zh:"這是去日暮里的 Skyliner 嗎？",tip:"上車前再確認一次最保險。"},
+          {en:"Is this seat 5A?",zh:"這是 5A 座位嗎？",tip:"Skyliner 全車對號入座，先確認再坐。"},
+          {en:"Excuse me, you're in my seat.",zh:"不好意思，您坐到我的位子了。",tip:"禮貌請對方移位。"},
+          {en:"Where can I put my luggage?",zh:"行李放哪裡？",tip:"Skyliner 車門邊有行李架。"},
+          {en:"How long is the ride?",zh:"車程多久？",tip:"Skyliner 到日暮里約 40 分鐘。"},
+          {en:"Excuse me, which exit for MYSTAYS Hotel?",zh:"不好意思，去 MYSTAYS 飯店要走哪個出口？",tip:"日暮里站<strong>西口</strong>出，步行 5 分鐘。"},
+          {en:"Where is the West Exit?",zh:"西口在哪？",tip:"West Exit = 西口、East Exit = 東口、South Exit = 南口。"},
+          {en:"Is there an elevator?",zh:"有電梯嗎？",tip:"拖大行李時找電梯比較輕鬆。"},
+          {en:"Could you help me with my luggage?",zh:"可以幫我搬行李嗎？",tip:"日本人很願意幫忙，禮貌問就好。"}
+        ]},
+      {id:"d1-hotel",emoji:"🏨",name:"MYSTAYS 日暮里 Check-in",meta:"報到、要東西、設施",
+        phrases:[
+          {en:"We have a reservation under the name Lin.",zh:"我們有以林姓登記的訂房。",tip:"櫃台會請看護照，記得拿出來。"},
+          {en:"Here are our passports.",zh:"這是我們的護照。",tip:"四個人的一起遞。日本飯店一定要看。"},
+          {en:"What time is breakfast?",zh:"早餐幾點？",tip:"Day 2 早起去上野動物園，先知道時間。"},
+          {en:"Where is the breakfast served?",zh:"早餐在哪裡吃？",tip:"通常在 1F 餐廳或地下室。"},
+          {en:"Could we have two more towels?",zh:"可以再給我們兩條毛巾嗎？",tip:"四人房只給兩條毛巾的話，再要兩條。"},
+          {en:"Could we have an extra blanket?",zh:"可以再給我們一條毯子嗎？",tip:"小孩怕冷時用。"},
+          {en:"What's the Wi-Fi password?",zh:"Wi-Fi 密碼是什麼？",tip:"通常 Check-in 會給卡片，看不到就問。"},
+          {en:"Where is the laundry room?",zh:"洗衣間在哪？",tip:"<strong>MYSTAYS 日暮里有投幣式洗衣機</strong>（300 日圓/次）。"},
+          {en:"How does the washing machine work?",zh:"洗衣機怎麼用？",tip:"日本洗衣機按鈕都是日文，可請櫃台說明。"},
+          {en:"Where can I get change?",zh:"哪裡可以換零錢？",tip:"投幣式洗衣機要 100 日圓硬幣。"},
+          {en:"What time is check-out?",zh:"幾點退房？",tip:"通常 10:00 或 11:00。"},
+          {en:"Could we leave our bags here tomorrow?",zh:"明天可以把行李寄放在這裡嗎？",tip:"D3 去龍宮城時大行李寄放這裡。"},
+          {en:"Is there a convenience store nearby?",zh:"附近有便利商店嗎？",tip:"日暮里站旁就有 7-11、Family Mart。"},
+          {en:"Could you call us for a taxi tomorrow morning?",zh:"明天早上可以幫我們叫計程車嗎？",tip:"預訂計程車比現場叫保險。"}
+        ]},
+      {id:"d1-ramen",emoji:"🍜",name:"馬賊拉麵晚餐",meta:"排隊、點餐、結帳完整流程",
+        phrases:[
+          {en:"How long is the wait?",zh:"要等多久？",tip:"<strong>馬賊週末 19:00-21:00 排隊高峰</strong>，建議 20:30 後較順。"},
+          {en:"Four people, please.",zh:"四個人，謝謝。",tip:"門口告訴店員人數。"},
+          {en:"Could we sit together?",zh:"我們可以坐一起嗎？",tip:"拉麵店常分散坐，先問。"},
+          {en:"Could we see the menu, please?",zh:"可以給我們看菜單嗎？",tip:"日本拉麵店通常有圖片菜單，指圖片最快。"},
+          {en:"Do you have an English menu?",zh:"有英文菜單嗎？",tip:"問問看。沒有就指圖片。"},
+          {en:"What do you recommend for kids?",zh:"小孩推薦什麼？",tip:"問店員小孩適合什麼。馬賊有半熟蛋叉燒麵小孩愛。"},
+          {en:"I'll have this one, please.",zh:"我要這個，謝謝。",tip:"<strong>萬用句</strong>，指著圖片講就對了。"},
+          {en:"No spicy, please.",zh:"請不要辣。",tip:"小孩不能吃辣很重要，先講。"},
+          {en:"No green onions, please.",zh:"請不要蔥。",tip:"挑食的小孩可用。green onion / scallion = 蔥。"},
+          {en:"Could you make it less salty?",zh:"可以做得少鹽一點嗎？",tip:"日式料理偏鹹，小孩不適應可以問。"},
+          {en:"Could we have some water?",zh:"可以給我們一些水嗎？",tip:"日本餐廳通常自己倒冰水。"},
+          {en:"Could we have an extra bowl?",zh:"可以再給我們一個碗嗎？",tip:"分小孩吃時用。"},
+          {en:"Could we share this?",zh:"我們可以共用嗎？",tip:"小孩吃不完一份時，問可不可以分。"},
+          {en:"It was delicious, thank you!",zh:"很好吃，謝謝！",tip:"店員會很開心。"},
+          {en:"Could we have the bill, please?",zh:"麻煩買單。",tip:"日本拉麵店多在門口櫃台結帳，不是桌邊。"}
+        ]}
+    ]
+  },
+
+  /* ====================== Day 2 ====================== */
+  {id:2,date:"5/17(日)",emoji:"🏮",title:"下町日 + 三社祭",cls:"d2",
+    desc:"上野動物園 → 阿美橫町 → 淺草寺三社祭 → 晴空塔。重點：購票、走失、人潮密集、藥妝、殺價",
+    subscenes:[
+      {id:"d2-zoo",emoji:"🐧",name:"上野動物園",meta:"買票、問動物、拍照",
+        phrases:[
+          {en:"Two adults and two children, please.",zh:"兩大兩小，謝謝。",tip:"上野動物園兒童 600 日圓。建議事前線上購票免排隊。"},
+          {en:"I have e-tickets on my phone.",zh:"我手機上有電子票。",tip:"事前購票出示 QR code 直接掃。"},
+          {en:"Where can I see the giant panda?",zh:"熊貓在哪裡？",tip:"<strong>2026 年熊貓可能已歸還中國</strong>，可改問北極熊或鯨頭鸛。"},
+          {en:"Where is the polar bear?",zh:"北極熊在哪？",tip:"<strong>東園</strong>，9:35-9:55 最活躍。台灣沒有！"},
+          {en:"Where can I find the shoebill?",zh:"鯨頭鸛在哪？",tip:"shoebill 念「咻-比-喔」。<strong>西園</strong>，全世界僅 40-50 隻。"},
+          {en:"Where is the penguin house?",zh:"企鵝館在哪？",tip:"西園鯨頭鸛旁邊。"},
+          {en:"Where is the Pallas's cat?",zh:"兔猻在哪？",tip:"<strong>小獸館</strong>，網紅必拍。"},
+          {en:"What time is the feeding?",zh:"餵食秀幾點？",tip:"feeding = 餵食。動物園入口會貼時間表。"},
+          {en:"Could you take a photo for us?",zh:"可以幫我們拍張照嗎？",tip:"請別人拍照用這句，禮貌又清楚。"},
+          {en:"Could you take one more, please?",zh:"可以再拍一張嗎？",tip:"第一張沒拍好時用。"},
+          {en:"Where is the gift shop?",zh:"紀念品店在哪？",tip:"上野動物園有熊貓周邊。"},
+          {en:"Where are the restrooms?",zh:"洗手間在哪？",tip:"園內有多個。"},
+          {en:"Where can we have lunch?",zh:"哪裡可以吃午餐？",tip:"園內有餐廳，但建議到阿美橫町吃比較好。"}
+        ]},
+      {id:"d2-ameyoko",emoji:"🍱",name:"阿美橫町午餐+殺價",meta:"點餐、海鮮、殺價",
+        phrases:[
+          {en:"Could we have a table for four?",zh:"可以給我們四人桌嗎？",tip:"Negishi 牛舌或三浦三崎港都會用到。"},
+          {en:"How long is the wait?",zh:"要等多久？",tip:"11:30 前抵達較不用排隊。"},
+          {en:"What do you recommend?",zh:"你推薦什麼？",tip:"不知道吃什麼就問店員。"},
+          {en:"What's the most popular dish?",zh:"什麼最多人點？",tip:"popular = 受歡迎。可以問店員推薦。"},
+          {en:"I'll have this one, please.",zh:"我要這個。",tip:"指著圖或櫥窗最清楚。"},
+          {en:"Is this raw or cooked?",zh:"這是生的還是熟的？",tip:"raw = 生的，cooked = 熟的。小孩不敢吃生魚要問清楚。"},
+          {en:"Could you make it less salty?",zh:"可以少鹽一點嗎？",tip:"日式料理偏鹹，小孩不適應可問。"},
+          {en:"Two children's meals, please.",zh:"兩份兒童餐，謝謝。",tip:"children's meal = 兒童餐。"},
+          {en:"How much for this?",zh:"這個多少錢？",tip:"阿美橫町乾貨、零食指著問。"},
+          {en:"Can you give me a discount?",zh:"可以便宜一點嗎？",tip:"<strong>阿美橫町可以小殺價</strong>，買多時用。"},
+          {en:"How about 1000 yen?",zh:"1000 日圓可以嗎？",tip:"出個你覺得 OK 的價格。如果店員笑著搖頭就再加一點。"},
+          {en:"I'll take two if you give me a discount.",zh:"如果便宜點我買兩個。",tip:"<strong>數量換折扣</strong>，店家最容易接受。"},
+          {en:"Do you take credit cards?",zh:"可以刷卡嗎？",tip:"<strong>阿美橫町很多攤只收現金</strong>，先問。"},
+          {en:"Could I have a bag, please?",zh:"可以給我袋子嗎？",tip:"買乾貨時要袋子裝。"}
+        ]},
+      {id:"d2-asakusa",emoji:"⛩️",name:"淺草寺 + 三社祭",meta:"人潮、走失、拍照、求籤",
+        phrases:[
+          {en:"Excuse me, I'm lost.",zh:"不好意思，我迷路了。",tip:"<strong>5/17 預估 60-80 萬人</strong>！記住<strong>雷門前</strong>是約定的走失集合點。"},
+          {en:"Could you help me? I can't find my parents.",zh:"可以幫我嗎？我找不到爸媽。",tip:"找穿制服的警察或店員。"},
+          {en:"My name is Lin Xiao Ming. Could you call my parents?",zh:"我叫林小明，可以幫我打電話給爸媽嗎？",tip:"<strong>把名字換成自己的</strong>。爸媽手機要記熟。"},
+          {en:"Could you take a photo for us?",zh:"可以幫我們拍張照嗎？",tip:"神輿+晴空塔同框是經典構圖。"},
+          {en:"With Kaminarimon behind us, please.",zh:"請拍到後面的雷門。",tip:"Kaminarimon 念「卡-米-那-哩-蒙」= 雷門。"},
+          {en:"Watch out for your bag!",zh:"小心你的包包！",tip:"<strong>慎防扒手</strong>，貴重物品放胸前包。"},
+          {en:"Excuse me, please let me through.",zh:"不好意思，請借過。",tip:"人潮中要過時用。也可說 Excuse me 一句。"},
+          {en:"How do I draw an omikuji?",zh:"怎麼抽籤？",tip:"<strong>淺草寺求籤</strong>：100 日圓投幣 → 搖筒 → 抽籤條 → 對應抽屜拿籤。"},
+          {en:"Could you tell me what this fortune means?",zh:"可以告訴我這個籤是什麼意思嗎？",tip:"抽到看不懂時問廟方人員。籤分大吉、吉、凶等。"},
+          {en:"Where can I tie a bad fortune?",zh:"凶籤要綁在哪？",tip:"<strong>抽到凶要綁在繩子上</strong>，留在寺裡別帶走。"},
+          {en:"How much is this charm?",zh:"這個御守多少錢？",tip:"charm / amulet = 御守。淺草寺御守 500-1000 日圓。"},
+          {en:"Where is the train station?",zh:"電車站在哪？",tip:"淺草站有銀座線、淺草線、東武線，問清楚是哪一條。"},
+          {en:"Which line goes to Tokyo Skytree?",zh:"哪一條線去晴空塔？",tip:"<strong>用走的</strong>沿吾妻橋過去 20 分鐘最美，或銀座線→押上線。"}
+        ]},
+      {id:"d2-pharmacy",emoji:"💊",name:"藥妝店買藥",meta:"小孩生病、買藥",
+        phrases:[
+          {en:"My child has a fever.",zh:"我小孩發燒。",tip:"<strong>fever = 發燒</strong>。藥妝店店員會推薦小孩退燒藥。"},
+          {en:"Do you have children's medicine?",zh:"有兒童藥嗎？",tip:"<strong>children's = 兒童的</strong>。"},
+          {en:"My child has a stomachache.",zh:"我小孩肚子痛。",tip:"stomach 念「斯達麼-客」。"},
+          {en:"Do you have something for diarrhea?",zh:"有腹瀉藥嗎？",tip:"diarrhea 念「代-噢-瑞-亞」= 腹瀉。"},
+          {en:"My child is coughing.",zh:"我小孩在咳嗽。",tip:"cough 念「咳-夫」。"},
+          {en:"Do you have band-aids?",zh:"有 OK 繃嗎？",tip:"band-aid 是 OK 繃。日本叫「絆創膏」。"},
+          {en:"Do you have insect repellent?",zh:"有防蚊液嗎？",tip:"insect repellent = 防蚊液。河口湖有蚊子。"},
+          {en:"Do you have sunscreen for kids?",zh:"有兒童防曬乳嗎？",tip:"芝櫻祭、上野動物園戶外要擦。"},
+          {en:"How do I take this medicine?",zh:"這個藥怎麼吃？",tip:"問用法用量。"},
+          {en:"How many times a day?",zh:"一天幾次？",tip:"問服藥次數。"},
+          {en:"My child is 5 years old.",zh:"我小孩 5 歲。",tip:"<strong>把年齡換成你小孩的</strong>。店員會推薦對應劑量。"},
+          {en:"Is this safe for children?",zh:"這個小孩可以吃嗎？",tip:"確認小孩劑量。"},
+          {en:"I'd like to claim tax-free, please.",zh:"我要辦免稅。",tip:"藥妝買滿 5,500 日圓可退 10%，記得帶<strong>護照</strong>。"}
+        ]},
+      {id:"d2-skytree",emoji:"🗼",name:"晴空塔展望台",meta:"購票、搭電梯、觀景",
+        phrases:[
+          {en:"Two adults and two children for the combo ticket, please.",zh:"兩大兩小套票，謝謝。",tip:"<strong>350F+450F 套票</strong>，事前 KKday 買省 200-300 日圓。"},
+          {en:"I have e-tickets.",zh:"我有電子票。",tip:"出示手機 QR code。"},
+          {en:"Where is the elevator?",zh:"電梯在哪？",tip:"晴空塔有專用高速電梯。"},
+          {en:"Which way to the observation deck?",zh:"觀景台往哪走？",tip:"observation deck = 觀景台。"},
+          {en:"How long does the elevator take?",zh:"電梯要多久？",tip:"晴空塔電梯約 50 秒到 350F。"},
+          {en:"Could you take our photo with Tokyo behind us?",zh:"可以幫我們拍照，後面是東京嗎？",tip:"日落 18:40，黃昏入場最美。"},
+          {en:"Where can I see Mt. Fuji?",zh:"哪裡可以看到富士山？",tip:"晴空塔西側可看到，但要視天氣。"},
+          {en:"Can we go up to the 450th floor?",zh:"我們可以上 450 樓嗎？",tip:"套票才能上 450F。"},
+          {en:"How do we get back down?",zh:"怎麼下樓？",tip:"另一邊有下樓電梯。"},
+          {en:"Where is the gift shop?",zh:"紀念品店在哪？",tip:"塔內 5F 有大型紀念品店。"},
+          {en:"Could I get a postcard?",zh:"可以給我一張明信片嗎？",tip:"晴空塔限定明信片很有紀念價值。"}
+        ]},
+      {id:"d2-solamachi",emoji:"🍱",name:"Solamachi 晚餐",meta:"美食街、找餐廳",
+        phrases:[
+          {en:"Excuse me, where is the food court?",zh:"不好意思，美食街在哪？",tip:"food court = 美食街。Solamachi 6F。"},
+          {en:"Where is Din Tai Fung?",zh:"鼎泰豐在哪？",tip:"Din Tai Fung 是台灣品牌，店員聽得懂。"},
+          {en:"How long is the wait?",zh:"要等多久？",tip:"鼎泰豐熱門時段排隊。"},
+          {en:"Could we put our name on the waiting list?",zh:"可以登記候位嗎？",tip:"waiting list = 候位名單。"},
+          {en:"Could we get a table for four?",zh:"可以給我們四人桌嗎？",tip:"進到餐廳告訴店員人數。"},
+          {en:"Is there a kids' menu?",zh:"有兒童餐嗎？",tip:"連鎖餐廳常有，問問看。"},
+          {en:"Could we have two extra plates?",zh:"可以給我們兩個分食盤嗎？",tip:"分小孩吃時用。"},
+          {en:"It was delicious, thank you!",zh:"很好吃，謝謝！",tip:"離開前說一句。"},
+          {en:"Could we have the bill, please?",zh:"麻煩買單。",tip:"日本連鎖餐廳通常桌邊結帳或櫃台結帳。"},
+          {en:"Where is the elevator to the train station?",zh:"去電車站的電梯在哪？",tip:"Solamachi 連通押上站。"}
+        ]}
+    ]
+  },
+
+  /* ====================== Day 3 ====================== */
+  {id:3,date:"5/18(一)",emoji:"♨️",title:"龍宮城溫泉",cls:"d3",
+    desc:"高速巴士直達 → 黃金風呂、蟹腳吃到飽。重點：高速巴士、溫泉規則、自助餐",
+    subscenes:[
+      {id:"d3-bus",emoji:"🚌",name:"高速巴士到龍宮城",meta:"東京八重洲 BT → 龍宮城",
+        phrases:[
+          {en:"Excuse me, where is the highway bus terminal?",zh:"不好意思，高速巴士站在哪？",tip:"<strong>東京八重洲 BT</strong> 在東京站地下，找「東京-木更津」標示。"},
+          {en:"Excuse me, is this the bus to Ryugujo?",zh:"不好意思，這是去龍宮城的巴士嗎？",tip:"車頭可能寫「木更津駅」，先問司機確認。Ryugujo 念「Lyu-gu-jo」。"},
+          {en:"Two adults and two children, please.",zh:"兩大兩小，謝謝。",tip:"單程 1,400 日圓，<strong>下車刷 Suica/PASMO</strong>。"},
+          {en:"Where do I pay?",zh:"在哪裡付錢？",tip:"高速巴士通常下車刷卡。"},
+          {en:"Where can I put my luggage?",zh:"行李放哪裡？",tip:"巴士司機會幫忙開行李艙。"},
+          {en:"How long is the ride?",zh:"車程多久？",tip:"東京→龍宮城約 55 分鐘。"},
+          {en:"Could you tell me when we arrive?",zh:"到的時候可以告訴我嗎？",tip:"不確定哪一站下車時用。"},
+          {en:"Are there bathrooms on the bus?",zh:"巴士上有洗手間嗎？",tip:"高速巴士通常有。"},
+          {en:"Excuse me, when is the next stop?",zh:"不好意思，下一站是哪裡？",tip:"想確認位置時用。"},
+          {en:"Can I open the window?",zh:"可以開窗嗎？",tip:"巴士窗戶通常不能開（冷氣）。"}
+        ]},
+      {id:"d3-onsen-checkin",emoji:"🏨",name:"龍宮城入館",meta:"報到、寄物、規則",
+        phrases:[
+          {en:"We have a reservation for tonight.",zh:"我們有今晚的訂房。",tip:"reservation = 訂房。Check-in 用爸媽的名字。"},
+          {en:"Here are our passports.",zh:"這是我們的護照。",tip:"日本溫泉旅館一定要看護照。"},
+          {en:"What time can we check in?",zh:"我們幾點可以入住？",tip:"<strong>15:00 才能正式 check-in</strong>。"},
+          {en:"Where can I leave my bag?",zh:"我可以把包包放哪？",tip:"11:00 才能進溫泉，要先寄物。"},
+          {en:"Where is the locker room?",zh:"更衣室在哪？",tip:"locker = 寄物櫃。男女分開，看標誌。"},
+          {en:"How does the locker work?",zh:"寄物櫃怎麼用？",tip:"日本寄物櫃常用 100 日圓硬幣，現在很多免費。"},
+          {en:"Where can I get a yukata?",zh:"哪裡可以拿浴衣？",tip:"yukata = 浴衣。飯店通常房間就有。"},
+          {en:"What size for kids?",zh:"小孩穿什麼尺寸？",tip:"小孩浴衣有特別尺寸。"},
+          {en:"Are children allowed in this bath?",zh:"小孩可以泡這個湯嗎？",tip:"黃金風呂、純プラチナ風呂可能有限制。"},
+          {en:"Do you have a family bath?",zh:"有家庭湯嗎？",tip:"family bath = 家庭風呂，可全家一起泡。"},
+          {en:"Is there a tattoo restriction?",zh:"有刺青限制嗎？",tip:"日本溫泉常禁止刺青入浴。"},
+          {en:"What time does the onsen close?",zh:"溫泉幾點關？",tip:"確認最後入浴時間。"}
+        ]},
+      {id:"d3-pool",emoji:"🏊",name:"戲水區/泳池",meta:"小孩玩水、規則",
+        phrases:[
+          {en:"Where is the swimming pool?",zh:"泳池在哪？",tip:"龍宮城有戲水區+旋轉滑水道。"},
+          {en:"Do we need swimsuits?",zh:"需要泳衣嗎？",tip:"戲水區要穿泳衣。"},
+          {en:"Can we rent swimsuits?",zh:"可以租泳衣嗎？",tip:"飯店常有租借服務。"},
+          {en:"Where is the changing room?",zh:"更衣室在哪？",tip:"changing room = 更衣室。"},
+          {en:"Are floats allowed?",zh:"可以帶浮具嗎？",tip:"float = 浮具/泳圈。問清楚規則。"},
+          {en:"Is the slide safe for kids?",zh:"滑水道小孩可以玩嗎？",tip:"<strong>旋轉滑水道</strong>有身高限制。"},
+          {en:"What's the height limit?",zh:"身高限制多少？",tip:"問身高限制。"},
+          {en:"Could we have a towel?",zh:"可以給我們毛巾嗎？",tip:"飯店泳池通常提供。"}
+        ]},
+      {id:"d3-buffet",emoji:"🦀",name:"蟹腳自助晚餐",meta:"招牌晚餐、規則、追加",
+        phrases:[
+          {en:"What time does dinner start?",zh:"晚餐幾點開始？",tip:"通常 18:00 開始，<strong>90 分鐘吃到飽</strong>。"},
+          {en:"We have dinner at 6 PM.",zh:"我們是 6 點晚餐。",tip:"報到時告訴服務員時段。"},
+          {en:"Could I have more crab legs, please?",zh:"可以再給我蟹腳嗎？",tip:"crab legs = 蟹腳。<strong>招牌！</strong>"},
+          {en:"Where can I get a fresh plate?",zh:"哪裡可以拿乾淨的盤子？",tip:"自助餐通常要自己換盤子。"},
+          {en:"Is this all-you-can-eat?",zh:"這是吃到飽嗎？",tip:"all-you-can-eat = 吃到飽。"},
+          {en:"How much time do we have?",zh:"我們有多少時間？",tip:"確認 90 分鐘怎麼算。"},
+          {en:"Could we get more drinks?",zh:"可以再給我們飲料嗎？",tip:"飲料通常無限續杯。"},
+          {en:"Is the dessert area over there?",zh:"甜點區在那邊嗎？",tip:"dessert = 甜點。"},
+          {en:"Could I get a children's portion?",zh:"可以給我兒童份量嗎？",tip:"children's portion = 兒童份量。"},
+          {en:"Is the fish raw?",zh:"魚是生的嗎？",tip:"小孩不敢吃生魚要問。"},
+          {en:"Can we take this back to our room?",zh:"我們可以帶回房間嗎？",tip:"通常自助餐<strong>不能外帶</strong>，問清楚。"},
+          {en:"Could I have the recipe?",zh:"可以告訴我食譜嗎？",tip:"如果有特別好吃的菜可以問廚師。"},
+          {en:"Thank you, it was delicious!",zh:"謝謝，很好吃！",tip:"離開前對廚師或服務員說。"}
+        ]},
+      {id:"d3-room",emoji:"🛏️",name:"客房 + 夜溫泉",meta:"房間問題、夜泡湯",
+        phrases:[
+          {en:"What time is breakfast tomorrow?",zh:"明天早餐幾點？",tip:"通常 7:00-10:00。"},
+          {en:"Could we have a wake-up call at 7?",zh:"可以 7 點叫我們起床嗎？",tip:"wake-up call = 叫醒服務。"},
+          {en:"The TV doesn't work.",zh:"電視壞了。",tip:"房間設備壞了打電話到櫃台（front）。"},
+          {en:"Could we have more pillows?",zh:"可以再給我們枕頭嗎？",tip:"四人房常只給 2 個枕頭。"},
+          {en:"What time does the night onsen close?",zh:"夜溫泉幾點關？",tip:"通常 23:00 或 24:00 關閉。"},
+          {en:"Is the rooftop view open at night?",zh:"晚上頂樓觀景台開嗎？",tip:"確認夜景時段。"},
+          {en:"Could we have an extra futon?",zh:"可以再給我們一個被子嗎？",tip:"futon 在日本是棉被。"},
+          {en:"Where is the vending machine?",zh:"自動販賣機在哪？",tip:"vending machine = 販賣機，每層樓通常都有。"}
+        ]}
+    ]
+  },
+
+  /* ====================== Day 4 ====================== */
+  {id:4,date:"5/19(二)",emoji:"🏘",title:"東京三面相",cls:"d4",
+    desc:"丸之內 → 谷中銀座 → 麻布台之丘 + teamLab。重點：teamLab 入場、咖啡廳、地鐵轉乘、紀念品",
+    subscenes:[
+      {id:"d4-marunouchi",emoji:"🏛️",name:"丸之內 + KITTE",meta:"問路、拍照、屋頂花園",
+        phrases:[
+          {en:"Excuse me, which exit for the red brick station?",zh:"不好意思，紅磚站體要走哪個出口？",tip:"<strong>丸之內口（Marunouchi Exit）</strong>，1914 年辰野金吾設計。"},
+          {en:"How do I get to KITTE?",zh:"KITTE 怎麼走？",tip:"KITTE 念「key-tay」，舊郵便局改建。"},
+          {en:"Where is the rooftop garden?",zh:"屋頂花園在哪？",tip:"<strong>KITTE 6F GARDEN</strong>免費，看東京站全景最佳。"},
+          {en:"Is the rooftop free?",zh:"屋頂花園免費嗎？",tip:"完全免費，不用預約。"},
+          {en:"Could you take a photo of us with the station?",zh:"可以幫我們拍照，背景是車站嗎？",tip:"丸之內紅磚站體+南北圓頂內裝必拍。"},
+          {en:"What time does the rooftop close?",zh:"屋頂幾點關？",tip:"<strong>23:00 後關閉</strong>。"},
+          {en:"Where is the dome ceiling?",zh:"圓頂內裝在哪？",tip:"南口、北口圓頂內裝。dome 念「都-麼」。"},
+          {en:"Where is the post office museum?",zh:"郵便博物館在哪？",tip:"KITTE 1F 有舊郵便局長室展示。"},
+          {en:"Are there lockers here?",zh:"這裡有寄物櫃嗎？",tip:"東京站有大型寄物櫃。"},
+          {en:"How do we get to Yanaka Ginza?",zh:"怎麼去谷中銀座？",tip:"東京站搭山手線到日暮里再走 5 分。"}
+        ]},
+      {id:"d4-yanaka",emoji:"🐈",name:"谷中銀座",meta:"咖啡廳、邊走邊吃、招財貓",
+        phrases:[
+          {en:"How much is this?",zh:"這個多少錢？",tip:"<strong>肉のすずき炸肉餅 200 日圓、菊見せんべい煎餅 500 日圓</strong>。"},
+          {en:"Could I have one of these?",zh:"我要一個這個。",tip:"指著食物說最快。"},
+          {en:"Is this for eating here or to take away?",zh:"這要內用還是外帶？",tip:"to take away（英）/ to go（美）= 外帶。"},
+          {en:"Can I eat this while walking?",zh:"我可以邊走邊吃嗎？",tip:"<strong>谷中銀座允許邊走邊吃</strong>，但其他地方通常不行。"},
+          {en:"Could I have an iced coffee, please?",zh:"我要一杯冰咖啡。",tip:"<strong>Kayaba Coffee</strong> 1938 年老店，雞蛋三明治+蛋糕套餐 1,200 日圓。"},
+          {en:"Could we sit by the window?",zh:"可以坐窗邊嗎？",tip:"老咖啡廳氣氛佳。"},
+          {en:"What's the special today?",zh:"今天的特餐是什麼？",tip:"老咖啡廳常有日替特餐。"},
+          {en:"Is there a senbei shop nearby?",zh:"附近有煎餅店嗎？",tip:"<strong>菊見せんべい</strong>1875 年老店。senbei = 煎餅。"},
+          {en:"Could you wrap this as a gift?",zh:"可以幫我包成禮物嗎？",tip:"買伴手禮時用。日本店家很會包。"},
+          {en:"Where is the cat shop?",zh:"招財貓店在哪？",tip:"<strong>谷中堂</strong>是日本唯一手繪招財貓專門店。"},
+          {en:"How much for the lucky cat?",zh:"招財貓多少錢？",tip:"lucky cat = 招財貓。1000 日圓起。"},
+          {en:"Can I see the smaller one?",zh:"我可以看小一點的嗎？",tip:"商品要看就直接問。"},
+          {en:"Do you ship overseas?",zh:"你們有寄海外嗎？",tip:"買大件紀念品時可問。"}
+        ]},
+      {id:"d4-teamlab",emoji:"🎨",name:"teamLab Borderless",meta:"入場、規則、找出口",
+        phrases:[
+          {en:"I have a reservation for 2:30 PM.",zh:"我預約了下午 2:30 場。",tip:"<strong>事前 KKday 預約 14:30 場</strong>。出示 QR code。"},
+          {en:"I have e-tickets for four.",zh:"我有四張電子票。",tip:"出示手機 QR code。"},
+          {en:"Where do we enter?",zh:"從哪裡進去？",tip:"<strong>麻布台之丘地下 1 樓</strong>。"},
+          {en:"Where can I leave my bag?",zh:"我可以把包包放哪？",tip:"teamLab 內部要走動，建議寄物。"},
+          {en:"Where is the locker?",zh:"寄物櫃在哪？",tip:"入口處有寄物櫃。"},
+          {en:"Is photography allowed?",zh:"可以拍照嗎？",tip:"teamLab 大部分區域可以，但有些不行，看標示。"},
+          {en:"Can I use flash?",zh:"可以開閃光燈嗎？",tip:"<strong>通常不行</strong>，會影響投影。"},
+          {en:"How long does it usually take?",zh:"通常要逛多久？",tip:"建議停留 2 小時。"},
+          {en:"Is there a map?",zh:"有地圖嗎？",tip:"沉浸式空間容易迷路，先拿地圖。"},
+          {en:"Where is the exit?",zh:"出口在哪？",tip:"找 EXIT 標示。"},
+          {en:"My child is scared.",zh:"我小孩害怕。",tip:"暗的空間有些小孩會怕。可請工作人員引導出口。"},
+          {en:"Are there benches to sit?",zh:"有椅子可以坐嗎？",tip:"逛累時找休息區。"},
+          {en:"Is there a gift shop?",zh:"有紀念品店嗎？",tip:"出口處通常有。"}
+        ]},
+      {id:"d4-cafe",emoji:"☕",name:"OVERTURE 咖啡廳 + 觀景台",meta:"下午茶、33F 觀景",
+        phrases:[
+          {en:"A table for four, please.",zh:"四人桌，謝謝。",tip:"<strong>麻布台話題打卡點</strong>。"},
+          {en:"How long is the wait?",zh:"要等多久？",tip:"熱門時段排隊。"},
+          {en:"Could I see the menu?",zh:"可以看一下菜單嗎？",tip:"下午茶 1,000-1,500 日圓。"},
+          {en:"I'd like an iced chocolate, please.",zh:"我要冰巧克力。",tip:"hot chocolate 熱巧克力、iced chocolate 冰巧克力。"},
+          {en:"What desserts do you have?",zh:"有什麼甜點？",tip:"dessert = 甜點。"},
+          {en:"Could we have one cake to share?",zh:"可以一個蛋糕分著吃嗎？",tip:"小孩吃不完一份時用。"},
+          {en:"How do we get to the observation deck?",zh:"觀景台怎麼走？",tip:"森 JP 塔 33F 觀景台<strong>免費</strong>。"},
+          {en:"Is the observation deck free?",zh:"觀景台免費嗎？",tip:"確認再上去。"},
+          {en:"Can we see Tokyo Tower from here?",zh:"這裡看得到東京鐵塔嗎？",tip:"<strong>33F 看東京鐵塔+晴空塔同框</strong>，黃昏 16:30-18:00 最美。"},
+          {en:"Could you take our photo?",zh:"可以幫我們拍照嗎？",tip:"33F 全景必拍。"}
+        ]},
+      {id:"d4-foodcourt",emoji:"🍱",name:"麻布台 6F 美食街",meta:"晚餐、選餐廳",
+        phrases:[
+          {en:"Where is the food court?",zh:"美食街在哪？",tip:"<strong>麻布台 6F</strong>。"},
+          {en:"What kind of food do you have?",zh:"有什麼料理？",tip:"問餐廳種類。日料、義料、中華都有。"},
+          {en:"Do we need a reservation?",zh:"需要預約嗎？",tip:"<strong>不用預約、選擇多</strong>。"},
+          {en:"Is there a wait?",zh:"要等位嗎？",tip:"晚餐尖峰可能要排隊。"},
+          {en:"What time do you close?",zh:"幾點打烊？",tip:"通常 22:00 或 23:00。"},
+          {en:"Could we have a table for four?",zh:"四人桌，謝謝。",tip:"進餐廳告訴店員。"},
+          {en:"Do you have a kids' menu?",zh:"有兒童餐嗎？",tip:"連鎖餐廳常有。"},
+          {en:"How spicy is this?",zh:"這個有多辣？",tip:"小孩怕辣先問。"}
+        ]}
+    ]
+  },
+
+  /* ====================== Day 5 ====================== */
+  {id:5,date:"5/20(三)",emoji:"🌸",title:"芝櫻祭 + 河口湖",cls:"d5",
+    desc:"新宿巴士 → 富士芝櫻祭 → 河口湖觀光船。重點：高速巴士預約、入園、觀光船、紀念品",
+    subscenes:[
+      {id:"d5-bus",emoji:"🚌",name:"新宿高速巴士",meta:"BUSTA 新宿 → 芝櫻祭",
+        phrases:[
+          {en:"I have a reservation. The name is Lin.",zh:"我有預約，姓林。",tip:"<strong>必須事前預約</strong>。在 BUSTA 新宿 4F 出示。"},
+          {en:"Could I show you my booking on my phone?",zh:"我手機上有訂位，可以給你看嗎？",tip:"出示 KKday 或官網訂位 QR code。"},
+          {en:"Which gate is the bus to Shibazakura?",zh:"去芝櫻祭的巴士在哪一個閘口？",tip:"BUSTA 新宿閘口很多，先問清楚。Shibazakura 念「shi-ba-za-ku-ra」。"},
+          {en:"What time does the bus leave?",zh:"巴士幾點開？",tip:"<strong>08:45 出發</strong>。"},
+          {en:"How long is the ride?",zh:"車程多久？",tip:"新宿→富士本栖湖渡假村約 1 小時 45 分。"},
+          {en:"Is there a bathroom on the bus?",zh:"巴士上有洗手間嗎？",tip:"高速巴士通常有，但中途會有休息站。"},
+          {en:"When is the rest stop?",zh:"什麼時候到休息站？",tip:"通常中途會停 15 分鐘。"},
+          {en:"Where can we eat at the rest stop?",zh:"休息站哪裡可以吃東西？",tip:"日本 SA 服務區美食很有名。"},
+          {en:"What time will we arrive?",zh:"幾點會到？",tip:"預計 10:30 抵達會場。"},
+          {en:"Could you tell me when we're close?",zh:"快到時可以告訴我嗎？",tip:"擔心睡過頭可請司機提醒。"}
+        ]},
+      {id:"d5-shibazakura",emoji:"🌸",name:"富士芝櫻祭會場",meta:"購票、拍照、午餐、紀念品",
+        phrases:[
+          {en:"Two adults and two children, please.",zh:"兩大兩小，謝謝。",tip:"門票成人約 1,000 日圓，事前購票省 200。"},
+          {en:"I have e-tickets.",zh:"我有電子票。",tip:"出示 QR code。"},
+          {en:"Where can I see Mt. Fuji?",zh:"哪裡可以看到富士山？",tip:"Mt. Fuji 念「Mount Fuji」。最佳機位看現場指示。"},
+          {en:"Where is the best photo spot?",zh:"最佳拍照點在哪？",tip:"<strong>50 萬株芝櫻+富士山</strong>經典構圖。"},
+          {en:"Could you take our photo?",zh:"可以幫我們拍照嗎？",tip:"芝櫻+富士山經典構圖。"},
+          {en:"Could you take one with the mountain?",zh:"可以拍到富士山嗎？",tip:"請對方確認構圖。"},
+          {en:"Where can I buy the Mt. Fuji rice ball?",zh:"哪裡可以買富士山飯糰？",tip:"<strong>會場限定</strong>！rice ball = 飯糰。"},
+          {en:"What is this dish?",zh:"這是什麼料理？",tip:"看到限定美食可以問。"},
+          {en:"Two of these, please.",zh:"兩份這個，謝謝。",tip:"指著食物說。"},
+          {en:"Is there a place to sit?",zh:"有地方坐嗎？",tip:"會場有座位區。"},
+          {en:"Where is the gift shop?",zh:"紀念品店在哪？",tip:"芝櫻祭限定紀念品很特別。"},
+          {en:"Is there a Mt. Fuji magnet?",zh:"有富士山磁鐵嗎？",tip:"magnet = 磁鐵。冰箱貼好帶又有意義。"},
+          {en:"What time is the shuttle to Kawaguchiko?",zh:"去河口湖的接駁車幾點？",tip:"<strong>13:00 接駁→河口湖站</strong>，1,500 日圓。"},
+          {en:"Where do we catch the shuttle?",zh:"接駁車在哪搭？",tip:"看會場指示牌。"}
+        ]},
+      {id:"d5-boat",emoji:"🚢",name:"河口湖觀光船 Ensoleille",meta:"買票、上船、座位",
+        phrases:[
+          {en:"Two adults and two children, please.",zh:"兩大兩小，謝謝。",tip:"<strong>成人 1,000、兒童 500 日圓</strong>。持周遊券 9 折。"},
+          {en:"I have the Mt. Fuji 5 Lakes Pass.",zh:"我有富士五湖周遊券。",tip:"出示周遊券享 9 折。"},
+          {en:"What time does the next boat leave?",zh:"下一班船幾點？",tip:"每 30 分鐘一班，<strong>最後一班約 16:30</strong>。"},
+          {en:"How long is the ride?",zh:"船程多久？",tip:"<strong>30 分鐘繞湖</strong>。"},
+          {en:"Where is the best seat?",zh:"哪裡的座位最好？",tip:"<strong>上甲板正面富士山</strong>最美。"},
+          {en:"Can we go up to the upper deck?",zh:"我們可以上上甲板嗎？",tip:"upper deck = 上甲板。"},
+          {en:"Is it safe for kids on the upper deck?",zh:"小孩在上甲板安全嗎？",tip:"風大、注意小孩。"},
+          {en:"Could you take our photo with Mt. Fuji?",zh:"可以幫我們拍富士山合照嗎？",tip:"船上跟其他遊客互相幫忙。"},
+          {en:"Where do we get off?",zh:"在哪裡下船？",tip:"觀光船是繞一圈回原點。"},
+          {en:"Can we stay on for another round?",zh:"可以再坐一圈嗎？",tip:"通常一張票一趟。"}
+        ]},
+      {id:"d5-hotel",emoji:"🏨",name:"MYSTAYS 富士山展望 Check-in",meta:"報到、溫泉、晚餐",
+        phrases:[
+          {en:"We have a reservation under Lin.",zh:"我們有以林姓登記的訂房。",tip:"<strong>距富士急ハイランド站徒步 5 分</strong>。"},
+          {en:"What time can we check in?",zh:"幾點可以入住？",tip:"15:00 之後。"},
+          {en:"Could we get a room with Mt. Fuji view?",zh:"可以給我們看富士山的房間嗎？",tip:"訂房時 view 很重要。"},
+          {en:"What time is the onsen open?",zh:"溫泉幾點開？",tip:"<strong>7F 展望溫泉</strong>看富士山。"},
+          {en:"What time is dinner?",zh:"晚餐幾點？",tip:"<strong>Chef's Recipe 自助餐</strong>，山梨食材。"},
+          {en:"What time is breakfast tomorrow?",zh:"明天早餐幾點？",tip:"<strong>7F 看富士山早餐</strong>。"},
+          {en:"Where is the best view of Mt. Fuji?",zh:"哪裡看富士山最好？",tip:"7F 觀景溫泉、餐廳、房間都可看。"},
+          {en:"Could you give us a wake-up call at 6?",zh:"可以 6 點叫我們起床嗎？",tip:"<strong>逆富士最佳時段 6-8 點</strong>。"},
+          {en:"What's the weather forecast?",zh:"天氣預報如何？",tip:"<strong>富士山雲量是關鍵</strong>，前一晚請教櫃台。"},
+          {en:"Is there a convenience store nearby?",zh:"附近有便利商店嗎？",tip:"飯店附近有 7-11。"}
+        ]}
+    ]
+  },
+
+  /* ====================== Day 6 ====================== */
+  {id:6,date:"5/21(四)",emoji:"⛰",title:"河口湖深度",cls:"d6",
+    desc:"大石公園 → 音樂盒之森 → 天上山纜車。重點：周遊巴士、纜車、音樂演奏、午餐",
+    subscenes:[
+      {id:"d6-bus",emoji:"🚌",name:"周遊巴士紅線",meta:"問路、買票、找站",
+        phrases:[
+          {en:"Is this the red line bus to Oishi Park?",zh:"這是去大石公園的紅線巴士嗎？",tip:"Oishi Park 念「oh-ee-shi park」。<strong>紅線間隔 15-30 分</strong>。"},
+          {en:"I have the 2-day pass.",zh:"我有 2 日券。",tip:"<strong>富士山富士五湖周遊券 3,500 日圓</strong>，上車出示。"},
+          {en:"Where can I buy the pass?",zh:"哪裡可以買周遊券？",tip:"河口湖站、富士急ハイランド站都有售。"},
+          {en:"Could you tell me when we arrive at Music Box Forest?",zh:"到音樂盒之森時可以告訴我嗎？",tip:"Music Box Forest = 音樂盒之森。"},
+          {en:"How many stops to Oishi Park?",zh:"到大石公園還有幾站？",tip:"確認下車時間。"},
+          {en:"Excuse me, did we pass Oishi Park?",zh:"不好意思，大石公園過了嗎？",tip:"擔心坐過站時問。"},
+          {en:"Is this the right bus?",zh:"這是對的巴士嗎？",tip:"上車前再確認。"},
+          {en:"How often does the bus come?",zh:"巴士多久一班？",tip:"紅線 15-30 分鐘一班。"},
+          {en:"Where is the bus stop?",zh:"巴士站在哪？",tip:"河口湖站前廣場。"},
+          {en:"Where can we get a bus map?",zh:"哪裡可以拿巴士路線圖？",tip:"車站服務台或網路下載 PDF。"}
+        ]},
+      {id:"d6-park",emoji:"🌹",name:"大石公園 + 音樂盒之森",meta:"問路、看花、音樂演奏",
+        phrases:[
+          {en:"What flowers are blooming now?",zh:"現在開什麼花？",tip:"<strong>5 月粉蝶花尾聲、玫瑰開始</strong>。bloom = 開花。"},
+          {en:"Where is the best Mt. Fuji view?",zh:"哪裡看富士山最好？",tip:"大石公園湖畔。"},
+          {en:"Could you take a photo for us?",zh:"可以幫我們拍張照嗎？",tip:"<strong>富士山+花海+河口湖</strong>三元素。"},
+          {en:"Are there any cafes here?",zh:"這裡有咖啡廳嗎？",tip:"自然生活館有。"},
+          {en:"Is there a souvenir shop?",zh:"有紀念品店嗎？",tip:"大石公園有當地特產。"},
+          {en:"What is this fruit?",zh:"這是什麼水果？",tip:"當地藍莓很有名。"},
+          {en:"How much for a kilo?",zh:"一公斤多少錢？",tip:"買水果問。kilo = 公斤。"},
+          {en:"When is the next music performance?",zh:"下一場音樂演奏幾點？",tip:"<strong>每 30 分鐘一次</strong>。music box = 音樂盒。"},
+          {en:"Where is the music box museum?",zh:"音樂盒博物館在哪？",tip:"音樂盒之森的主館。"},
+          {en:"How long is the performance?",zh:"演奏多久？",tip:"通常 15-20 分鐘。"},
+          {en:"Where can we have lunch?",zh:"哪裡可以吃午餐？",tip:"<strong>音樂盒之森館內咖啡廳</strong>方便、不用回河口湖站。"},
+          {en:"Do you have an English menu?",zh:"有英文菜單嗎？",tip:"觀光區大多有。"},
+          {en:"Two children's meals, please.",zh:"兩份兒童餐。",tip:"連鎖點心餐廳常有。"},
+          {en:"Could we take photos in the rose garden?",zh:"我們可以在玫瑰園拍照嗎？",tip:"rose garden = 玫瑰園。<strong>5 月玫瑰盛開</strong>。"}
+        ]},
+      {id:"d6-cable",emoji:"🚡",name:"天上山纜車",meta:"買票、搭乘、山頂",
+        phrases:[
+          {en:"Two adults and two children, please.",zh:"兩大兩小，謝謝。",tip:"<strong>1,000 日圓，持周遊券免費</strong>。"},
+          {en:"I have the 2-day pass.",zh:"我有 2 日券。",tip:"周遊券涵蓋纜車。"},
+          {en:"How long is the ride?",zh:"纜車幾分鐘？",tip:"<strong>上下山約 3 分鐘</strong>。"},
+          {en:"How long is the queue?",zh:"要排多久？",tip:"queue 念「Q」= 排隊。"},
+          {en:"I'm scared of heights.",zh:"我懼高。",tip:"懼高的人提醒一下。也可以說 I'm afraid of heights."},
+          {en:"Is the cable car safe for kids?",zh:"小孩搭纜車安全嗎？",tip:"絕對安全，但小孩可能會怕。"},
+          {en:"Where is the best photo spot at the top?",zh:"山頂哪裡拍照最好？",tip:"<strong>天上山公園俯瞰河口湖+富士山</strong>。"},
+          {en:"How long can we stay up there?",zh:"我們可以在山頂待多久？",tip:"自由停留，最後一班纜車前要下山。"},
+          {en:"What time is the last cable car?",zh:"最後一班纜車幾點？",tip:"通常 16:30 或 17:00。"},
+          {en:"Is there food up there?",zh:"山頂有食物嗎？",tip:"通常有小賣店。"},
+          {en:"Where are the wishing bells?",zh:"願望鐘在哪？",tip:"天上山有兔子神社+愛心鐘。"}
+        ]},
+      {id:"d6-dinner",emoji:"🍽",name:"飯店晚餐 + 夜溫泉",meta:"自助餐、夜泡湯",
+        phrases:[
+          {en:"What time does dinner start?",zh:"晚餐幾點開始？",tip:"<strong>Chef's Recipe 自助餐</strong>。"},
+          {en:"Could we get a window seat?",zh:"可以坐窗邊嗎？",tip:"看富士山。"},
+          {en:"What's the local specialty?",zh:"當地特色菜是什麼？",tip:"local specialty = 當地特色。山梨郷土料理多。"},
+          {en:"Could I have more wine, please?",zh:"可以再給我紅酒嗎？",tip:"成人晚餐喝酒可問。"},
+          {en:"Could we get more juice for the kids?",zh:"可以再給小孩果汁嗎？",tip:"小孩飲料通常無限。"},
+          {en:"Is the night onsen still open?",zh:"夜溫泉還開嗎？",tip:"確認最後入浴時間。"},
+          {en:"Could we have a wake-up call at 6?",zh:"可以 6 點叫我們起床嗎？",tip:"<strong>Day 7 早起拍五重塔</strong>。"}
+        ]}
+    ]
+  },
+
+  /* ====================== Day 7 ====================== */
+  {id:7,date:"5/22(五)",emoji:"🏯",title:"新倉山 + 花園神社",cls:"d7",
+    desc:"UBER → 五重塔 → ほうとう不動 → 新宿購物 → 花園神社例大祭",
+    subscenes:[
+      {id:"d7-uber",emoji:"🚖",name:"UBER 叫車",meta:"早晨叫車到新倉山",
+        phrases:[
+          {en:"Hello, are you my Uber driver?",zh:"你好，你是我的 Uber 司機嗎？",tip:"App 上會顯示車牌號碼，先確認。"},
+          {en:"Are you here for Lin?",zh:"是來接林先生/小姐的嗎？",tip:"確認名字。"},
+          {en:"We're going to Arakurayama Sengen Park.",zh:"我們要去新倉山淺間公園。",tip:"App 已輸入地址，講出來確認比較保險。"},
+          {en:"Could you put it in the trunk?",zh:"可以放後車廂嗎？",tip:"trunk = 後車廂。"},
+          {en:"Is there room for four people?",zh:"四個人坐得下嗎？",tip:"如果車太小要請 UBER 換車。"},
+          {en:"Could you turn down the AC?",zh:"可以把冷氣調小嗎？",tip:"AC = 冷氣。"},
+          {en:"Is it far?",zh:"很遠嗎？",tip:"<strong>飯店→新倉山約 8 分鐘</strong>。"},
+          {en:"Could you stop here, please?",zh:"可以停在這裡嗎？",tip:"接近終點時用。"},
+          {en:"Could you wait a moment?",zh:"可以等一下嗎？",tip:"如果要拿東西。"},
+          {en:"Thank you, have a nice day!",zh:"謝謝，祝你愉快！",tip:"下車前說一句。"},
+          {en:"Could I get a receipt?",zh:"可以給我收據嗎？",tip:"UBER 通常電子收據自動發。"}
+        ]},
+      {id:"d7-arakura",emoji:"🌸",name:"新倉山淺間公園",meta:"398 階梯、五重塔、拍照",
+        phrases:[
+          {en:"How many steps are there?",zh:"有幾個階梯？",tip:"<strong>398 階</strong>！steps = 階梯。"},
+          {en:"How long does it take to the top?",zh:"到山頂要多久？",tip:"約 10-15 分鐘。"},
+          {en:"Is there a rest area?",zh:"有休息區嗎？",tip:"半山腰通常有椅子。"},
+          {en:"Where is the five-story pagoda?",zh:"五重塔在哪？",tip:"five-story pagoda = 五重塔。"},
+          {en:"Where is the best photo spot?",zh:"最佳拍照點在哪？",tip:"<strong>咲くや姫展望デッキ</strong>。photo spot = 拍照點。"},
+          {en:"Is there an elevator?",zh:"有電梯嗎？",tip:"沒有，但問問也好，老人家可能需要。"},
+          {en:"Could you take a photo for us?",zh:"可以幫我們拍張照嗎？",tip:"<strong>五重塔+櫻花+富士山</strong>三元素。"},
+          {en:"Could you make sure the pagoda is in the photo?",zh:"請確認有拍到五重塔。",tip:"重要構圖元素。"},
+          {en:"Could you take one with Mt. Fuji?",zh:"可以拍到富士山嗎？",tip:"請對方注意背景。"},
+          {en:"Where can we sit and rest?",zh:"哪裡可以坐下休息？",tip:"398 階梯爬完小孩會累。"},
+          {en:"Are there bathrooms here?",zh:"這裡有洗手間嗎？",tip:"上山前先用。"},
+          {en:"How do we get to Shimoyoshida Station?",zh:"下吉田站怎麼走？",tip:"<strong>步行下山約 1 km 到下吉田站</strong>。"}
+        ]},
+      {id:"d7-houtou",emoji:"🍜",name:"ほうとう不動 駅前店",meta:"山梨郷土料理",
+        phrases:[
+          {en:"A table for four, please.",zh:"四人桌，謝謝。",tip:"11:00 開店，13:00 前用餐完。"},
+          {en:"How long is the wait?",zh:"要等多久？",tip:"駅前店 110 個座位，週五午餐可能要等。"},
+          {en:"Could we sit together?",zh:"我們可以坐一起嗎？",tip:"四人想坐一起先說。"},
+          {en:"What is hoto?",zh:"什麼是餺飥？",tip:"問店員介紹是禮貌的開場。<strong>hoto = 山梨郷土麵食</strong>。"},
+          {en:"What does it taste like?",zh:"味道怎麼樣？",tip:"想知道味道時問。"},
+          {en:"Is hoto spicy?",zh:"餺飥辣嗎？",tip:"小孩怕辣先問。<strong>不辣，是味噌湯底</strong>。"},
+          {en:"Two hoto noodles, please.",zh:"兩份餺飥麵，謝謝。",tip:"4 人可分享 2-3 份，份量大。"},
+          {en:"Could we share one?",zh:"可以共用一份嗎？",tip:"hoto 份量大可分食。"},
+          {en:"What's in this?",zh:"這裡面有什麼？",tip:"想知道內容物時問。"},
+          {en:"Is there pork in this?",zh:"這裡面有豬肉嗎？",tip:"避免特定食材時問。"},
+          {en:"Could we have water, please?",zh:"可以給我們水嗎？",tip:"日本郷土料理偏鹹，多喝水。"},
+          {en:"Could I have a smaller bowl?",zh:"可以給我小碗嗎？",tip:"小孩用。"},
+          {en:"Is the kuromitsu tofu sushi good?",zh:"黑糖豆皮壽司好吃嗎？",tip:"<strong>店家招牌</strong>。kuromitsu = 黑糖。"}
+        ]},
+      {id:"d7-shinjuku-bus",emoji:"🚌",name:"高速巴士回新宿",meta:"巴士站、上車",
+        phrases:[
+          {en:"Where is the bus stop to Shinjuku?",zh:"去新宿的巴士站在哪？",tip:"<strong>富士急ハイランド bus stop</strong>。"},
+          {en:"I have a reservation for the 1:38 bus.",zh:"我預約 13:38 的巴士。",tip:"<strong>13:38 富士急→ 15:15 新宿 BUSTA</strong>。"},
+          {en:"Is this the right stop?",zh:"是這站嗎？",tip:"上車前確認。"},
+          {en:"How long is the ride?",zh:"車程多久？",tip:"<strong>約 1 小時 45 分</strong>。"},
+          {en:"Where do we get off in Shinjuku?",zh:"新宿在哪下車？",tip:"BUSTA 新宿 4F。"}
+        ]},
+      {id:"d7-shopping",emoji:"🛍️",name:"新宿購物 + 退稅",meta:"伊勢丹、Bic Camera",
+        phrases:[
+          {en:"Excuse me, where is the children's section?",zh:"不好意思，童裝區在哪？",tip:"百貨公司分樓層。"},
+          {en:"Do you have this in a smaller size?",zh:"這個有小一點的嗎？",tip:"<strong>smaller / bigger</strong> 大小。"},
+          {en:"Do you have this in another color?",zh:"這個有別的顏色嗎？",tip:"another color = 別的顏色。"},
+          {en:"Could I try this on?",zh:"我可以試穿嗎？",tip:"try on = 試穿。"},
+          {en:"Where is the fitting room?",zh:"試衣間在哪？",tip:"fitting room = 試衣間。"},
+          {en:"It doesn't fit.",zh:"這個不合身。",tip:"穿了不合適時用。"},
+          {en:"It's too tight.",zh:"太緊了。",tip:"tight = 緊。loose = 鬆。"},
+          {en:"Do you have it in size M?",zh:"有 M 號嗎？",tip:"日本尺碼跟台灣略有差異。"},
+          {en:"How much is this?",zh:"這個多少錢？",tip:"基本句。"},
+          {en:"Is this on sale?",zh:"這個有特價嗎？",tip:"on sale = 特價。"},
+          {en:"Can I get a discount if I buy two?",zh:"買兩個有折扣嗎？",tip:"百貨公司通常不給折扣，但 Bic Camera 可問。"},
+          {en:"Do you take credit cards?",zh:"可以刷卡嗎？",tip:"大型百貨都收。"},
+          {en:"Could I have a bag, please?",zh:"可以給我袋子嗎？",tip:"日本百貨袋子要錢，但通常 5-10 日圓。"},
+          {en:"Could you wrap this as a gift?",zh:"可以幫我包成禮物嗎？",tip:"<strong>日本店家很會包裝</strong>。"},
+          {en:"I'd like to claim tax-free, please.",zh:"我要辦免稅。",tip:"<strong>買滿 5,500 日圓可退 10%</strong>。記得帶<strong>護照</strong>。"},
+          {en:"Where is the tax-free counter?",zh:"免稅櫃台在哪？",tip:"通常在頂樓或 1F。"}
+        ]},
+      {id:"d7-festival",emoji:"🏮",name:"花園神社例大祭",meta:"夜店、走失、撈金魚",
+        phrases:[
+          {en:"How much is this?",zh:"這個多少錢？",tip:"章魚燒 500、雞肉串 300-500/串、大阪燒 500-700。"},
+          {en:"One takoyaki, please.",zh:"一份章魚燒。",tip:"takoyaki 是日文，店員都聽得懂。也可講 octopus balls。"},
+          {en:"Two yakitori, please.",zh:"兩串雞肉串。",tip:"yakitori 念「亞-key-多-哩」。"},
+          {en:"How spicy is the okonomiyaki?",zh:"大阪燒會辣嗎？",tip:"小孩怕辣先問。"},
+          {en:"Could I have one without onions?",zh:"可以做不放洋蔥的嗎？",tip:"挑食時用。"},
+          {en:"How do you eat this?",zh:"這要怎麼吃？",tip:"祭典食物吃法不同時問。"},
+          {en:"Is this hot?",zh:"這個燙嗎？",tip:"剛做好的食物會燙到嘴。"},
+          {en:"How much for the goldfish scoop?",zh:"撈金魚多少錢？",tip:"<strong>金魚すくい 300-500 日圓</strong>。"},
+          {en:"Can I take the goldfish home?",zh:"金魚可以帶回家嗎？",tip:"日本撈到可以帶走，但你們是觀光客<strong>不建議</strong>。"},
+          {en:"How much for the apple candy?",zh:"蘋果糖多少錢？",tip:"<strong>りんご飴 500 日圓</strong>，拍照可愛。"},
+          {en:"One cotton candy, please.",zh:"一份棉花糖。",tip:"cotton candy = 棉花糖。"},
+          {en:"Excuse me, where is the main gate?",zh:"不好意思，正門在哪？",tip:"<strong>走失點：花園神社正門大鳥居前</strong>。"},
+          {en:"Excuse me, I can't find my parents.",zh:"不好意思，我找不到爸媽了。",tip:"找警察或店員。<strong>慎防扒手</strong>。"},
+          {en:"My name is Lin Xiao Ming, my parents are at the main gate.",zh:"我叫林小明，爸媽在正門。",tip:"<strong>把名字換成自己的</strong>。"},
+          {en:"Watch your wallet!",zh:"小心你的錢包！",tip:"祭典扒手多。也可說 Watch your bag."}
+        ]}
+    ]
+  },
+
+  /* ====================== Day 8 ====================== */
+  {id:8,date:"5/23(六)",emoji:"🏯",title:"佐原 + 成田",cls:"d8",
+    desc:"京成本線 → 佐原老街 → 新勝寺 → AEON。重點：拖大行李、遊船、求籤、繪馬、AEON 採買",
+    subscenes:[
+      {id:"d8-train",emoji:"🚆",name:"京成本線快特",meta:"日暮里 → 京成成田",
+        phrases:[
+          {en:"Excuse me, is this the train to Narita?",zh:"不好意思，這是去成田的車嗎？",tip:"<strong>2 番月台</strong>，9 站無轉乘，59 分鐘。"},
+          {en:"Is this the limited express?",zh:"這是快特嗎？",tip:"<strong>limited express = 快特</strong>。京成本線快特是直達車。"},
+          {en:"Where is platform 2?",zh:"2 號月台在哪？",tip:"日暮里站 2 番月台。"},
+          {en:"Could you help me with my bag?",zh:"可以幫我搬一下行李嗎？",tip:"今天<strong>拖大行李</strong>，請人幫忙無妨。"},
+          {en:"Where can I put my luggage?",zh:"行李放哪裡？",tip:"車廂門邊或座位上方。"},
+          {en:"Is this seat taken?",zh:"這個位子有人坐嗎？",tip:"快特車自由席先上先坐。"},
+          {en:"Are these seats together?",zh:"這幾個位子是一起的嗎？",tip:"四人想坐一起問。"},
+          {en:"How long until Narita?",zh:"到成田要多久？",tip:"59 分鐘。"},
+          {en:"Is the next stop Narita?",zh:"下一站是成田嗎？",tip:"快到下車前確認。"},
+          {en:"Excuse me, I need to get off.",zh:"不好意思，我要下車。",tip:"擠車門時用。"}
+        ]},
+      {id:"d8-checkin",emoji:"🏨",name:"成田威可飯店寄放",meta:"先寄行李、下午入住",
+        phrases:[
+          {en:"We have a reservation for tonight.",zh:"我們有今晚的訂房。",tip:"<strong>下午 15:00 才能正式入住</strong>。"},
+          {en:"We'd like to check in later.",zh:"我們想晚一點 check-in。",tip:"上午先寄放行李。"},
+          {en:"Could we leave our bags here until 3 PM?",zh:"可以把行李寄到下午三點嗎？",tip:"飯店通常願意幫忙寄放。"},
+          {en:"How many bags can we leave?",zh:"可以寄幾件？",tip:"通常無限制。"},
+          {en:"Is there a fee for storing luggage?",zh:"寄放行李要錢嗎？",tip:"通常住宿者免費。"},
+          {en:"Where is the JR Narita Station?",zh:"JR 成田站在哪？",tip:"<strong>京成成田旁邊</strong>。"},
+          {en:"Could you call us a taxi to JR Station?",zh:"可以幫我們叫到 JR 站的計程車嗎？",tip:"或自己步行 10 分鐘。"},
+          {en:"What time should we come back?",zh:"我們幾點回來？",tip:"確認 check-in 時間。"}
+        ]},
+      {id:"d8-sawara",emoji:"🚣",name:"佐原老街 + 鰻魚",meta:"鰻魚、遊船、伊能忠敬",
+        phrases:[
+          {en:"Could we have a table for four?",zh:"四人桌，謝謝。",tip:"<strong>千葉屋、長谷川、小堀屋蕎麥</strong>都是名店。"},
+          {en:"How long is the wait?",zh:"要等多久？",tip:"佐原鰻魚名店週末會排隊。"},
+          {en:"What's the special today?",zh:"今天的特餐是什麼？",tip:"鰻魚店常有日替丼。"},
+          {en:"Two unagi sets and two children's meals, please.",zh:"兩份鰻魚套餐、兩份兒童餐。",tip:"<strong>unagi = 鰻魚</strong>，店員都聽得懂。佐原必吃。"},
+          {en:"How much is the unagi don?",zh:"鰻魚丼多少錢？",tip:"佐原鰻魚 2,500-3,000 日圓。"},
+          {en:"Is this freshwater or saltwater eel?",zh:"這是淡水還是海水鰻？",tip:"freshwater 淡水、saltwater 海水。鰻魚 = freshwater eel。"},
+          {en:"Could you make it less sweet?",zh:"可以做不要太甜嗎？",tip:"鰻魚醬汁偏甜，小孩不適應可問。"},
+          {en:"Could we have rice instead?",zh:"可以換成白飯嗎？",tip:"小孩不吃時用。"},
+          {en:"Two adults and two children for the boat, please.",zh:"兩大兩小遊船票。",tip:"<strong>小野川遊船 30 分鐘 1,300 日圓</strong>。"},
+          {en:"Where can we get on the boat?",zh:"哪裡上船？",tip:"<strong>樋橋附近</strong>。"},
+          {en:"How long is the boat ride?",zh:"遊船多久？",tip:"30 分鐘。"},
+          {en:"Where is Ino Tadataka's old house?",zh:"伊能忠敬舊宅在哪？",tip:"<strong>江戶測量家故居（免費）</strong>。"},
+          {en:"Where is the Mitsubishi Hall?",zh:"三菱館在哪？",tip:"<strong>1914 年大正紅磚銀行（免費）</strong>。"},
+          {en:"Could you take our photo with the canal?",zh:"可以幫我們拍小野川合照嗎？",tip:"江戶水鄉經典構圖。"}
+        ]},
+      {id:"d8-temple",emoji:"⛩️",name:"成田新勝寺",meta:"參拜、求籤、繪馬、御朱印",
+        phrases:[
+          {en:"Excuse me, which way to Naritasan Temple?",zh:"不好意思，新勝寺往哪邊？",tip:"<strong>JR 成田站走 10 分鐘表參道</strong>。Naritasan 念「na-ri-ta-san」。"},
+          {en:"How old is this temple?",zh:"這個寺廟多老？",tip:"<strong>1080 年古剎</strong>。"},
+          {en:"How do we pray here?",zh:"這裡怎麼參拜？",tip:"<strong>2 拜 2 拍手 1 拜</strong>，可以問神社人員。"},
+          {en:"Where do we wash our hands?",zh:"洗手的地方在哪？",tip:"<strong>手水舍</strong>，參拜前要洗手。"},
+          {en:"How do we use the temizu?",zh:"手水怎麼用？",tip:"<strong>左手→右手→漱口→洗勺柄</strong>，順序很重要。"},
+          {en:"Where can I draw an omikuji?",zh:"哪裡可以抽籤？",tip:"<strong>100 日圓投幣 → 搖筒 → 對應抽屜拿籤</strong>。"},
+          {en:"Could you tell me what this fortune means?",zh:"可以告訴我這個籤是什麼意思嗎？",tip:"抽到看不懂時問廟方人員。"},
+          {en:"Where can I tie a bad fortune?",zh:"凶籤要綁在哪？",tip:"<strong>抽到凶要綁在繩子上</strong>，留在寺裡別帶走。"},
+          {en:"How much is the ema?",zh:"繪馬多少錢？",tip:"<strong>ema = 繪馬</strong>，木牌寫願望。500-1000 日圓。"},
+          {en:"How do I write a wish?",zh:"怎麼寫願望？",tip:"買繪馬→寫願望→掛在繪馬掛架。"},
+          {en:"How much is the goshuin?",zh:"御朱印多少錢？",tip:"<strong>goshuin = 御朱印</strong>，500 日圓。需有御朱印帳。"},
+          {en:"Where can I buy a goshuincho?",zh:"哪裡買御朱印帳？",tip:"goshuincho = 御朱印帳。寺廟內有售 1,500-2,500 日圓。"},
+          {en:"How much is this charm?",zh:"這個御守多少錢？",tip:"charm / amulet = 御守。"},
+          {en:"What is this charm for?",zh:"這個御守是什麼用？",tip:"御守功效不同：交通安全、學業成就、健康。"},
+          {en:"Could you take our photo?",zh:"可以幫我們拍照嗎？",tip:"主殿前拍照。"},
+          {en:"Is photography allowed?",zh:"可以拍照嗎？",tip:"主殿內通常不行，戶外可以。"},
+          {en:"What's the best souvenir from this temple?",zh:"這間寺廟最棒的紀念品是什麼？",tip:"問商店店員。"}
+        ]},
+      {id:"d8-aeon",emoji:"🛒",name:"AEON 成田採買",meta:"伴手禮、藥妝、零食",
+        phrases:[
+          {en:"Excuse me, where is the snack section?",zh:"不好意思，零食區在哪？",tip:"snack = 零食。也可問 candy（糖果）。"},
+          {en:"Where is the souvenir section?",zh:"伴手禮區在哪？",tip:"AEON 通常在 1F 或入口處。"},
+          {en:"Do you have Shiroi Koibito?",zh:"有白色戀人嗎？",tip:"<strong>白色戀人正確說法是 Shiroi Koibito</strong>，店員聽得懂。"},
+          {en:"Do you have Tokyo Banana?",zh:"有東京芭娜娜嗎？",tip:"Tokyo Banana 也是日文發音。"},
+          {en:"Where are the Royce chocolates?",zh:"Royce 巧克力在哪？",tip:"日本伴手禮常客。"},
+          {en:"Where are the matcha sweets?",zh:"抹茶點心在哪？",tip:"matcha = 抹茶。"},
+          {en:"Is this on sale?",zh:"這個有特價嗎？",tip:"on sale = 特價。"},
+          {en:"Buy one get one free?",zh:"買一送一嗎？",tip:"日本超市常有促銷。"},
+          {en:"Could I have a bigger bag, please?",zh:"可以給我大一點的袋子嗎？",tip:"AEON 大袋通常要錢，小袋可能免費。"},
+          {en:"Could I have an extra bag for the cold items?",zh:"可以給我冰品的保冷袋嗎？",tip:"買冰品時。"},
+          {en:"Where is the tax-free counter?",zh:"免稅櫃台在哪？",tip:"AEON 通常在 1F 服務台。"},
+          {en:"I'd like to claim tax-free.",zh:"我要辦免稅。",tip:"<strong>買滿 5,500 日圓退 10%</strong>，帶護照。"},
+          {en:"Where is the pharmacy section?",zh:"藥妝區在哪？",tip:"AEON 內常有大型藥妝。"},
+          {en:"Where can I find diapers?",zh:"尿布在哪？",tip:"日本品牌尿布品質好，是熱門伴手禮。"},
+          {en:"Can I leave my luggage here?",zh:"可以把行李寄這裡嗎？",tip:"AEON 服務台可寄物。"}
+        ]}
+    ]
+  },
+
+  /* ====================== Day 9 ====================== */
+  {id:9,date:"5/24(日)",emoji:"✈️",title:"回程日",cls:"d9",
+    desc:"成田威可 → T2 → 08:55 起飛 → 11:35 桃園。重點：飯店退房、機場 check-in、登機、最後採買",
+    subscenes:[
+      {id:"d9-checkout",emoji:"🏨",name:"飯店退房",meta:"早起、計程車、結帳",
+        phrases:[
+          {en:"We'd like to check out, please.",zh:"我們要退房，謝謝。",tip:"<strong>建議 06:55 抵達 T2</strong>（起飛前 2 小時）。"},
+          {en:"Here is our key.",zh:"這是房卡。",tip:"卡片或鑰匙還給櫃台。"},
+          {en:"Could I have the receipt?",zh:"可以給我收據嗎？",tip:"報帳時用。"},
+          {en:"Could you call us a taxi to the airport?",zh:"可以幫我們叫到機場的計程車嗎？",tip:"成田威可到 T2 約 10-15 分鐘。"},
+          {en:"How much is the taxi to Terminal 2?",zh:"到第二航廈計程車多少錢？",tip:"通常 1,500-2,000 日圓。"},
+          {en:"Is there a shuttle bus?",zh:"有接駁巴士嗎？",tip:"成田機場附近飯店常有免費接駁。"},
+          {en:"What time is the next shuttle?",zh:"下一班接駁車幾點？",tip:"問清楚班次。"},
+          {en:"Could you keep our bags for an hour?",zh:"可以幫我們寄放行李一小時嗎？",tip:"如果想出去附近最後採買。"},
+          {en:"Is there a charge?",zh:"要錢嗎？",tip:"確認費用。"}
+        ]},
+      {id:"d9-airport-checkin",emoji:"🛫",name:"機場 Check-in + 託運",meta:"報到、託運、安檢",
+        phrases:[
+          {en:"I'd like to check in for my flight to Taipei.",zh:"我要辦理飛台北的報到。",tip:"<strong>08:55 起飛 NRT → TPE</strong>。"},
+          {en:"Here are our passports.",zh:"這是我們的護照。",tip:"四個人護照一起遞。"},
+          {en:"Two checked bags, please.",zh:"兩件託運行李，謝謝。",tip:"checked bag = 託運行李，carry-on = 隨身。"},
+          {en:"Is this overweight?",zh:"這個超重嗎？",tip:"overweight = 超重。日航經濟艙通常 23 kg/件。"},
+          {en:"How much is the overweight fee?",zh:"超重費多少？",tip:"超重要付費。"},
+          {en:"Could we move some items to the carry-on?",zh:"我們可以拿一些東西出來放隨身嗎？",tip:"超重時拿幾件出來。"},
+          {en:"Could we sit together?",zh:"我們可以坐一起嗎？",tip:"四人想坐一起劃位時說。"},
+          {en:"Could I have a window seat?",zh:"可以給我靠窗嗎？",tip:"window seat 靠窗、aisle seat 走道。"},
+          {en:"Is the flight on time?",zh:"班機準時嗎？",tip:"確認是否誤點。"},
+          {en:"What's the gate number?",zh:"登機門幾號？",tip:"看登機證上的 Gate。"},
+          {en:"What time is boarding?",zh:"登機時間？",tip:"通常起飛前 30-40 分鐘。"}
+        ]},
+      {id:"d9-immigration",emoji:"🛂",name:"出境海關 + 安檢",meta:"出關、安檢、退稅",
+        phrases:[
+          {en:"Where is the security check?",zh:"安檢在哪？",tip:"security check = 安檢。"},
+          {en:"Where is immigration?",zh:"出境海關在哪？",tip:"immigration = 出入境。"},
+          {en:"Where is the tax-free refund counter?",zh:"退稅櫃台在哪？",tip:"如有大件退稅商品要去確認。"},
+          {en:"Do I need to take this out of my bag?",zh:"這個要拿出來嗎？",tip:"安檢時筆電、液體要拿出來。"},
+          {en:"Could you help me with my bag?",zh:"可以幫我搬包包嗎？",tip:"小孩多時請工作人員幫忙。"},
+          {en:"Excuse me, is this water allowed?",zh:"不好意思，這瓶水可以帶嗎？",tip:"<strong>安檢前的水不能過</strong>，過了海關買的可以。"},
+          {en:"Where can I throw this away?",zh:"垃圾桶在哪？",tip:"安檢前丟掉超量液體。"}
+        ]},
+      {id:"d9-duty-free",emoji:"🛍️",name:"免稅店 + 登機",meta:"最後採買、登機門",
+        phrases:[
+          {en:"Where is the duty-free shop?",zh:"免稅商店在哪？",tip:"duty-free = 免稅。最後伴手禮機會。"},
+          {en:"Where are the chocolates?",zh:"巧克力在哪？",tip:"Royce、Godiva 都有。"},
+          {en:"Where is the alcohol section?",zh:"酒類在哪？",tip:"威士忌、清酒。"},
+          {en:"Could I have a tax-free receipt?",zh:"可以給我免稅收據嗎？",tip:"出境免稅商品已經免稅。"},
+          {en:"Where is gate 56?",zh:"56 號登機門在哪？",tip:"看登機證上的 Gate 號碼。"},
+          {en:"How long does it take to walk to the gate?",zh:"走到登機門要多久？",tip:"成田 T2 登機門距離不一。"},
+          {en:"Is there a kids' play area?",zh:"有兒童遊戲區嗎？",tip:"成田機場有，等飛機時用。"},
+          {en:"What time does boarding start?",zh:"幾點開始登機？",tip:"起飛前約 30-40 分鐘。"},
+          {en:"Excuse me, I think I'm lost.",zh:"不好意思，我好像迷路了。",tip:"找穿制服的工作人員。"},
+          {en:"Where is the family restroom?",zh:"親子洗手間在哪？",tip:"family restroom = 親子廁所。"},
+          {en:"Could I get water for my child?",zh:"可以幫小孩裝水嗎？",tip:"飲水機 water fountain。"},
+          {en:"Where is gate 56? We're boarding.",zh:"56 號門在哪？我們要登機了。",tip:"快遲到時用。"},
+          {en:"Goodbye, Tokyo!",zh:"再見，東京！",tip:"離開時對小孩說一句。"}
+        ]}
+    ]
+  }
+];
+
+/* ========== 廣播解碼題庫（針對行程客製化） ========== */
+const RADIO=[
+  // 飛機相關 (5)
+  {context:"✈️ JL8664 機艙起飛前廣播",
+    audio:"Welcome aboard Japan Airlines flight 8664 to Tokyo Narita. Please fasten your seatbelt, make sure your tray table is up, and turn off all electronic devices.",
+    script:"Welcome aboard [Japan Airlines flight 8664] to [Tokyo Narita]. Please [fasten your seatbelt], make sure your tray table is up, and turn off all electronic devices.",
+    zh:"歡迎搭乘日本航空 8664 班機飛往東京成田。請繫好安全帶、收起餐桌、關閉所有電子產品。",
+    question:"關於這次班機，廣播說了什麼？",
+    keywords:["日航 8664","飛東京成田","繫安全帶","華航班機","降落了","可以滑手機"],
+    correct:["日航 8664","飛東京成田","繫安全帶"]},
+  {context:"✈️ 機艙亂流廣播",
+    audio:"Attention please. We are experiencing some turbulence. Please return to your seat and keep your seatbelt fastened until further notice.",
+    script:"Attention please. We are experiencing some [turbulence]. Please [return to your seat] and [keep your seatbelt fastened] until further notice.",
+    zh:"請注意，目前遭遇亂流，請回到座位並繫好安全帶，直到進一步通知。",
+    question:"現在發生什麼事？",
+    keywords:["遇到亂流","回座位","繫安全帶","降落了","到目的地","可以走動"],
+    correct:["遇到亂流","回座位","繫安全帶"]},
+  {context:"✈️ 機艙餐點廣播",
+    audio:"We will now be serving lunch. Today's choices are chicken with rice or fish with pasta. Please remain seated.",
+    script:"We will now be [serving lunch]. Today's choices are [chicken with rice] or [fish with pasta]. Please remain seated.",
+    zh:"我們即將供應午餐。今天的選擇是雞肉飯或魚肉義大利麵。請留在座位上。",
+    question:"午餐有哪些選擇？",
+    keywords:["雞肉飯","魚肉義大利麵","即將供應午餐","牛肉麵","下午茶","正在降落"],
+    correct:["雞肉飯","魚肉義大利麵","即將供應午餐"]},
+  {context:"✈️ 機艙降落前廣播",
+    audio:"We will be landing at Narita Airport in approximately 20 minutes. The local time is 5:15 PM and the temperature is 19 degrees Celsius.",
+    script:"We will be [landing] at [Narita Airport] in approximately [20 minutes]. The local time is [5:15 PM] and the temperature is 19 degrees Celsius.",
+    zh:"我們將於約 20 分鐘後降落成田機場。當地時間下午 5:15，氣溫 19 度。",
+    question:"關於降落，廣播說了什麼？",
+    keywords:["即將降落","成田機場","20 分鐘後","下午 5:15","羽田機場","已經降落"],
+    correct:["即將降落","成田機場","20 分鐘後","下午 5:15"]},
+  {context:"✈️ 海關入境提醒廣播",
+    audio:"All passengers, please have your passport and customs declaration form ready before approaching immigration.",
+    script:"All passengers, please have your [passport] and [customs declaration form] ready before approaching [immigration].",
+    zh:"各位旅客，過海關前請準備好護照和海關申報單。",
+    question:"過海關前要準備什麼？",
+    keywords:["護照","海關申報單","在出境海關","登機證","行李憑證","在寄物櫃"],
+    correct:["護照","海關申報單","在出境海關"]},
+  // 火車地鐵相關 (6)
+  {context:"🚄 Skyliner 車內廣播",
+    audio:"The next station is Nippori. Passengers transferring to the JR Yamanote Line, please change here.",
+    script:"The next station is [Nippori]. Passengers transferring to the [JR Yamanote Line], please change here.",
+    zh:"下一站日暮里。要轉搭 JR 山手線的旅客請在此換車。",
+    question:"廣播在通知什麼？",
+    keywords:["下一站日暮里","山手線轉車","下一站上野","下一站東京","新幹線轉車","終點站"],
+    correct:["下一站日暮里","山手線轉車"]},
+  {context:"🚇 JR 山手線廣播（淺草轉車）",
+    audio:"The next station is Ueno. Please change here for the Ginza Line to Asakusa.",
+    script:"The next station is [Ueno]. Please change here for the [Ginza Line] to [Asakusa].",
+    zh:"下一站上野。請在此換搭銀座線去淺草。",
+    question:"在上野要怎麼去淺草？",
+    keywords:["下一站上野","換銀座線","去淺草","下一站新宿","換東西線","下一站日暮里"],
+    correct:["下一站上野","換銀座線","去淺草"]},
+  {context:"🚇 山手線開門廣播",
+    audio:"The next station is Shinjuku. The doors on the right side will open. Please mind the gap between the train and the platform.",
+    script:"The next station is [Shinjuku]. The doors on the [right side] will open. Please [mind the gap] between the train and the platform.",
+    zh:"下一站新宿。右側車門即將開啟，請小心月台間隙。",
+    question:"這段在說什麼？",
+    keywords:["下一站新宿","右側開門","小心間隙","左側開門","下一站東京","車門故障"],
+    correct:["下一站新宿","右側開門","小心間隙"]},
+  {context:"🚆 京成本線快特廣播",
+    audio:"This is the limited express to Narita Airport. The next stop is Narita. The doors on the left side will open.",
+    script:"This is the [limited express] to [Narita Airport]. The next stop is [Narita]. The doors on the [left side] will open.",
+    zh:"這是往成田機場的快特列車。下一站成田，左側車門即將開啟。",
+    question:"關於這班車，廣播說了什麼？",
+    keywords:["快特列車","往成田機場","下一站成田","左側開門","普通車","往新宿"],
+    correct:["快特列車","往成田機場","下一站成田","左側開門"]},
+  {context:"🚆 富士急行線廣播",
+    audio:"The next station is Kawaguchiko, the final stop. Please remember to take all your belongings with you.",
+    script:"The next station is [Kawaguchiko], the [final stop]. Please remember to [take all your belongings] with you.",
+    zh:"下一站河口湖，本班次終點站。請記得帶走您所有的物品。",
+    question:"這段在說什麼？",
+    keywords:["下一站河口湖","終點站","記得帶東西","下一站新宿","中途站","車輛故障"],
+    correct:["下一站河口湖","終點站","記得帶東西"]},
+  {context:"🚇 電車誤點廣播",
+    audio:"We apologize for the delay. The train is delayed by about 10 minutes due to signal trouble. We are sorry for the inconvenience.",
+    script:"We apologize for the [delay]. The train is delayed by about [10 minutes] due to [signal trouble]. We are sorry for the inconvenience.",
+    zh:"很抱歉誤點，因為信號故障延遲約 10 分鐘，造成不便深感抱歉。",
+    question:"發生什麼狀況？",
+    keywords:["誤點","延遲 10 分鐘","信號故障","車輛故障","到站了","停車中"],
+    correct:["誤點","延遲 10 分鐘","信號故障"]},
+  // 巴士相關 (3)
+  {context:"🚌 高速巴士到龍宮城廣播",
+    audio:"We will be arriving at Ryugujo in about 10 minutes. Please prepare to pay with your IC card when you get off.",
+    script:"We will be arriving at [Ryugujo] in about [10 minutes]. Please prepare to [pay with your IC card] when you get off.",
+    zh:"約 10 分鐘後抵達龍宮城。下車時請用 IC 卡支付。",
+    question:"廣播在通知什麼？",
+    keywords:["即將到龍宮城","10 分鐘後","用 IC 卡付款","已經到了","現金付款","東京到了"],
+    correct:["即將到龍宮城","10 分鐘後","用 IC 卡付款"]},
+  {context:"🚌 周遊巴士紅線到大石公園",
+    audio:"The next stop is Oishi Park. The right side door will open. Please press the button if you wish to get off.",
+    script:"The next stop is [Oishi Park]. The [right side door] will open. Please [press the button] if you wish to get off.",
+    zh:"下一站大石公園，右側車門開啟。要下車請按鈕。",
+    question:"廣播在通知什麼？",
+    keywords:["下一站大石公園","右側開門","下車按鈕","下一站音樂盒","左側開門","終點站"],
+    correct:["下一站大石公園","右側開門","下車按鈕"]},
+  {context:"🚌 高速巴士休息站廣播",
+    audio:"We will now stop at the rest area for 15 minutes. Please make sure to return to the bus by 11:30. Don't forget your seat number.",
+    script:"We will now stop at the [rest area] for [15 minutes]. Please make sure to [return to the bus by 11:30]. Don't forget your seat number.",
+    zh:"現在停靠休息站 15 分鐘。請務必在 11:30 前返回巴士。別忘了您的座位號碼。",
+    question:"關於休息，廣播說了什麼？",
+    keywords:["休息站","15 分鐘","11:30 前回車","30 分鐘","直接出發","終點站"],
+    correct:["休息站","15 分鐘","11:30 前回車"]},
+  // 場所相關 (4)
+  {context:"🛍️ 百貨公司打烊廣播",
+    audio:"Attention shoppers. The store will close in 15 minutes. Please bring your purchases to the nearest cashier.",
+    script:"Attention shoppers. The store will [close] in [15 minutes]. Please bring your purchases to the [nearest cashier].",
+    zh:"各位顧客，本店將於 15 分鐘後打烊，請將商品帶到最近的收銀台結帳。",
+    question:"廣播在通知什麼？",
+    keywords:["即將打烊","15 分鐘後","到收銀台結帳","營業中","半價優惠","開門了"],
+    correct:["即將打烊","15 分鐘後","到收銀台結帳"]},
+  {context:"🏨 飯店火警廣播（緊急）",
+    audio:"Attention all guests. This is an emergency. Please evacuate the building immediately using the stairs. Do not use the elevator.",
+    script:"Attention all guests. This is an [emergency]. Please [evacuate] the building immediately using the [stairs]. Do [not use the elevator].",
+    zh:"各位住客請注意，這是緊急狀況，請立即從樓梯離開大樓，不要搭電梯。",
+    question:"應該怎麼做？",
+    keywords:["緊急狀況","走樓梯","不要搭電梯","回房間","搭電梯","等通知"],
+    correct:["緊急狀況","走樓梯","不要搭電梯"]},
+  {context:"🦀 龍宮城自助餐結束廣播",
+    audio:"Dear guests, dinner service will end in 10 minutes. Please finish your meals. Thank you for dining with us.",
+    script:"Dear guests, [dinner service will end] in [10 minutes]. Please [finish your meals]. Thank you for dining with us.",
+    zh:"各位客人，晚餐將於 10 分鐘後結束，請吃完您的餐點，感謝您的光臨。",
+    question:"廣播在通知什麼？",
+    keywords:["晚餐結束","10 分鐘後","吃完餐點","開始供餐","續用 1 小時","早餐時間"],
+    correct:["晚餐結束","10 分鐘後","吃完餐點"]},
+  {context:"⛩️ 神社祭典提醒廣播",
+    audio:"Attention visitors. Due to the festival, please watch your belongings and stay close to your family. Children, please hold your parents' hand.",
+    script:"Attention visitors. Due to the festival, please [watch your belongings] and [stay close to your family]. Children, please [hold your parents' hand].",
+    zh:"各位訪客請注意，因為祭典關係，請看好您的物品並與家人保持靠近。小朋友請牽好爸媽的手。",
+    question:"祭典時要注意什麼？",
+    keywords:["看好物品","靠近家人","牽爸媽的手","可以分散走","跑來跑去","隨便買東西"],
+    correct:["看好物品","靠近家人","牽爸媽的手"]},
+  // 機場走失與登機 (2)
+  {context:"✈️ 成田機場走失兒童廣播",
+    audio:"We have a lost child at the information desk near Gate 56. The child is wearing a red jacket. Parents, please come to the information desk.",
+    script:"We have a [lost child] at the [information desk] near [Gate 56]. The child is wearing a [red jacket]. Parents, please come to the information desk.",
+    zh:"在 56 號登機門附近的服務台有一位走失的孩子，穿著紅色外套，請家長前往服務台。",
+    question:"廣播在找誰？",
+    keywords:["走失兒童","服務台","紅色外套","行李遺失","班機延誤","藍色外套"],
+    correct:["走失兒童","服務台","紅色外套"]},
+  {context:"✈️ 成田機場登機廣播",
+    audio:"Final boarding call for Japan Airlines flight 802 to Taipei. All remaining passengers, please proceed to Gate 56 immediately.",
+    script:"Final boarding call for [Japan Airlines flight 802] to [Taipei]. All remaining passengers, please proceed to [Gate 56] immediately.",
+    zh:"日本航空 802 班機飛台北最後登機廣播，請尚未登機的旅客立刻前往 56 號登機門。",
+    question:"這段廣播在說什麼？",
+    keywords:["最後登機","飛台北","56 號登機門","班機延誤","可以慢慢來","東京班機"],
+    correct:["最後登機","飛台北","56 號登機門"]}
+];
+
+/* ========== 詞彙閃卡（行程相關） ========== */
+const VOCAB=[
+  // 機場/飛機 (10)
+  {emoji:"🛂",en:"passport",zh:"護照",ctx:"海關、Check-in、退稅都要用",cat:"機場"},
+  {emoji:"🎫",en:"boarding pass",zh:"登機證",ctx:"安檢、登機都要看",cat:"機場"},
+  {emoji:"🛄",en:"baggage / luggage",zh:"行李",ctx:"checked bag 託運、carry-on 隨身",cat:"機場"},
+  {emoji:"🚪",en:"gate",zh:"登機門",ctx:"看登機證上的 Gate 號碼",cat:"機場"},
+  {emoji:"💺",en:"seat",zh:"座位",ctx:"window seat 靠窗、aisle seat 走道",cat:"機場"},
+  {emoji:"🛫",en:"take off",zh:"起飛",ctx:"JL8664 12:45 起飛",cat:"機場"},
+  {emoji:"🛬",en:"land",zh:"降落",ctx:"17:15 降落 NRT",cat:"機場"},
+  {emoji:"📋",en:"declare",zh:"申報",ctx:"海關問 Anything to declare?",cat:"機場"},
+  {emoji:"🛃",en:"customs",zh:"海關",ctx:"customs declaration form 海關申報單",cat:"機場"},
+  {emoji:"⏰",en:"on time / delayed",zh:"準時 / 誤點",ctx:"問班機狀況",cat:"機場"},
+  // 住宿 (8)
+  {emoji:"🪑",en:"reservation",zh:"預訂",ctx:"飯店、餐廳、巴士都會用",cat:"住宿"},
+  {emoji:"🏨",en:"check in / check out",zh:"報到 / 退房",ctx:"飯店、機場都會用",cat:"住宿"},
+  {emoji:"🛗",en:"elevator",zh:"電梯",ctx:"美式 elevator，英式 lift",cat:"住宿"},
+  {emoji:"🚻",en:"restroom / bathroom",zh:"洗手間",ctx:"飛機上常用 lavatory",cat:"住宿"},
+  {emoji:"🛏️",en:"towel",zh:"毛巾",ctx:"四人房常只給兩條，要再要",cat:"住宿"},
+  {emoji:"🌐",en:"Wi-Fi password",zh:"Wi-Fi 密碼",ctx:"Check-in 通常會給",cat:"住宿"},
+  {emoji:"🧺",en:"laundry",zh:"洗衣",ctx:"MYSTAYS 有投幣式洗衣機",cat:"住宿"},
+  {emoji:"♨️",en:"hot spring / onsen",zh:"溫泉",ctx:"龍宮城、MYSTAYS 富士山展望",cat:"住宿"},
+  // 交通 (8)
+  {emoji:"🚉",en:"platform",zh:"月台",ctx:"Skyliner、京成本線都會問",cat:"交通"},
+  {emoji:"🔄",en:"transfer / change",zh:"轉乘",ctx:"日暮里轉山手線",cat:"交通"},
+  {emoji:"🚪",en:"exit",zh:"出口",ctx:"日暮里西口、淺草 1 號出口",cat:"交通"},
+  {emoji:"🚌",en:"highway bus",zh:"高速巴士",ctx:"龍宮城、芝櫻祭、新宿",cat:"交通"},
+  {emoji:"🚄",en:"limited express",zh:"快特",ctx:"京成本線快特直達成田",cat:"交通"},
+  {emoji:"🚖",en:"taxi",zh:"計程車",ctx:"請飯店叫車最保險",cat:"交通"},
+  {emoji:"🚡",en:"cable car",zh:"纜車",ctx:"天上山纜車",cat:"交通"},
+  {emoji:"🚢",en:"sightseeing boat",zh:"觀光船",ctx:"河口湖 Ensoleille、佐原小野川",cat:"交通"},
+  // 購物/餐廳 (12)
+  {emoji:"💴",en:"cash",zh:"現金",ctx:"日本小店常只收現金",cat:"購物"},
+  {emoji:"💳",en:"credit card",zh:"信用卡",ctx:"問 Do you take credit cards?",cat:"購物"},
+  {emoji:"🧾",en:"tax-free",zh:"免稅",ctx:"買滿 5,500 日圓退 10%",cat:"購物"},
+  {emoji:"🎟️",en:"ticket",zh:"票",ctx:"動物園、晴空塔、纜車都要",cat:"購物"},
+  {emoji:"💰",en:"How much...?",zh:"...多少錢？",ctx:"買東西指著問",cat:"購物"},
+  {emoji:"🎁",en:"souvenir",zh:"伴手禮",ctx:"AEON 採買、Solamachi",cat:"購物"},
+  {emoji:"🛍️",en:"discount / on sale",zh:"折扣 / 特價",ctx:"阿美橫町、超市",cat:"購物"},
+  {emoji:"🍽️",en:"menu",zh:"菜單",ctx:"Could we see the menu?",cat:"餐廳"},
+  {emoji:"🌶️",en:"spicy",zh:"辣",ctx:"No spicy, please.",cat:"餐廳"},
+  {emoji:"🥩",en:"raw / cooked",zh:"生 / 熟",ctx:"小孩不敢吃生魚先問",cat:"餐廳"},
+  {emoji:"🙋",en:"recommend",zh:"推薦",ctx:"What do you recommend?",cat:"餐廳"},
+  {emoji:"👨‍👩‍👧‍👦",en:"adult / child",zh:"大人 / 小孩",ctx:"買票時最常用",cat:"餐廳"},
+  // 緊急/救命 (8)
+  {emoji:"😵",en:"lost",zh:"迷路 / 遺失",ctx:"I'm lost / I lost my bag",cat:"緊急"},
+  {emoji:"🆘",en:"help",zh:"幫忙 / 救命",ctx:"Could you help me? / Help!",cat:"緊急"},
+  {emoji:"🤒",en:"not feeling well",zh:"不舒服",ctx:"飛機上、玩太累時用",cat:"緊急"},
+  {emoji:"🤧",en:"fever / cough",zh:"發燒 / 咳嗽",ctx:"藥妝店求救常用",cat:"緊急"},
+  {emoji:"🩹",en:"band-aid",zh:"OK 繃",ctx:"日本叫絆創膏",cat:"緊急"},
+  {emoji:"💊",en:"medicine",zh:"藥",ctx:"children's medicine 兒童藥",cat:"緊急"},
+  {emoji:"📞",en:"call my parents",zh:"打給爸媽",ctx:"走失時請人幫忙打電話",cat:"緊急"},
+  {emoji:"🚓",en:"police / koban",zh:"警察 / 派出所",ctx:"日本路口常有交番",cat:"緊急"},
+  // 觀光（4）
+  {emoji:"📸",en:"take a photo",zh:"拍照",ctx:"請別人拍：Could you take a photo?",cat:"觀光"},
+  {emoji:"🌸",en:"cherry blossom",zh:"櫻花",ctx:"芝櫻 = shibazakura",cat:"觀光"},
+  {emoji:"⛰️",en:"Mt. Fuji",zh:"富士山",ctx:"Mount Fuji 念 Mount-fu-ji",cat:"觀光"},
+  {emoji:"🏯",en:"shrine / temple",zh:"神社 / 寺廟",ctx:"shrine 神社、temple 寺廟",cat:"觀光"}
+];
+
+/* ========== 日文情境（聽懂日文店員） ========== */
+const JAPANESE=[
+  // 超商/超市 (8)
+  {scenario:"🏪 超商結帳",jp:"袋はご利用ですか？",romaji:"Fukuro wa go-riyou desu ka?",zh:"請問需要袋子嗎？",
+    action:"<strong>不要袋子</strong>：搖頭+「<strong>けっこうです</strong>」(kekkou desu) 或 No, thank you。袋子要錢（3-5 日圓）。"},
+  {scenario:"🏪 超商結帳",jp:"温めますか？",romaji:"Atatamemasu ka?",zh:"要加熱嗎？",
+    action:"<strong>要加熱</strong>：「<strong>はい、お願いします</strong>」(hai, onegaishimasu)。<strong>不要</strong>：「いいえ」(iie)。便利商店便當必問。"},
+  {scenario:"🏪 超商結帳",jp:"お箸はいくつご利用ですか？",romaji:"O-hashi wa ikutsu go-riyou desu ka?",zh:"要幾雙筷子？",
+    action:"<strong>4 雙</strong>：「<strong>四つお願いします</strong>」(yottsu onegaishimasu) 或比 4 手指。"},
+  {scenario:"🏪 超商結帳",jp:"レシートはご利用ですか？",romaji:"Reshito wa go-riyou desu ka?",zh:"需要收據嗎？",
+    action:"<strong>要</strong>：「はい」<strong>不要</strong>：「いいえ、けっこうです」。"},
+  {scenario:"🏪 超商結帳",jp:"スプーンお付けしますか？",romaji:"Supun o-tsuke shimasu ka?",zh:"要附湯匙嗎？",
+    action:"買甜點、布丁時會問。<strong>要</strong>：「お願いします」。"},
+  {scenario:"🏪 超商結帳",jp:"ポイントカードはお持ちですか？",romaji:"Pointo kaado wa o-mochi desu ka?",zh:"有集點卡嗎？",
+    action:"<strong>沒有</strong>：搖頭+「ありません」(arimasen) 或 No 即可。"},
+  {scenario:"🏪 超商結帳",jp:"ご一緒のお会計ですか？",romaji:"Go-issho no o-kaikei desu ka?",zh:"一起結帳嗎？",
+    action:"和家人結帳時被問。<strong>一起</strong>：「<strong>はい、一緒で</strong>」(hai, issho de)。"},
+  {scenario:"🏪 超市結帳",jp:"お会計、〜円になります",romaji:"O-kaikei, ...en ni narimasu",zh:"總共...日圓",
+    action:"看收銀機螢幕最快。<strong>1500 = 千五百</strong>(sen go-hyaku)、<strong>3000 = 三千</strong>(san-zen)。"},
+  // 餐廳 (10)
+  {scenario:"🍱 便當/熟食店",jp:"こちらでお召し上がりですか？",romaji:"Kochira de o-meshi-agari desu ka?",zh:"內用嗎？",
+    action:"<strong>內用</strong>：點頭+「はい」。<strong>外帶</strong>：「<strong>持ち帰り</strong>」(mochi-kaeri)。"},
+  {scenario:"🍜 拉麵店",jp:"何名様ですか？",romaji:"Nan-mei-sama desu ka?",zh:"請問幾位？",
+    action:"<strong>4 位</strong>：「<strong>四人</strong>(yo-nin)」+ 比 4 手指最快。"},
+  {scenario:"🍜 拉麵店",jp:"カウンター席でよろしいですか？",romaji:"Kauntaa-seki de yoroshii desu ka?",zh:"吧台位可以嗎？",
+    action:"<strong>可以</strong>：「<strong>はい、お願いします</strong>」。<strong>想要桌子</strong>：「<strong>テーブル席で</strong>」(teburu-seki de)。"},
+  {scenario:"🍜 拉麵店",jp:"麺の硬さはいかがしますか？",romaji:"Men no katasa wa ikaga shimasu ka?",zh:"麵的軟硬度如何？",
+    action:"<strong>普通</strong>：「<strong>普通</strong>」(futsuu)、<strong>硬</strong>：「<strong>硬め</strong>」(katame)、<strong>軟</strong>：「<strong>柔らかめ</strong>」(yawarakame)。"},
+  {scenario:"🍜 拉麵店",jp:"以上でよろしいですか？",romaji:"Ijou de yoroshii desu ka?",zh:"這樣就好嗎？",
+    action:"店員確認點餐結束。<strong>OK</strong>：「<strong>はい</strong>」。<strong>還要加</strong>：「もう一つ...」(mou hitotsu...)。"},
+  {scenario:"🍣 壽司店",jp:"わさび抜きにしますか？",romaji:"Wasabi-nuki ni shimasu ka?",zh:"不要芥末嗎？",
+    action:"<strong>不要</strong>：「<strong>はい、抜きで</strong>」(hai, nuki de)。<strong>要</strong>：「いいえ、入れてください」。"},
+  {scenario:"🍱 餐廳",jp:"お飲み物はいかがですか？",romaji:"O-nomimono wa ikaga desu ka?",zh:"要喝什麼？",
+    action:"<strong>水</strong>：「<strong>お水で</strong>」(o-mizu de)、<strong>茶</strong>：「お茶で」、<strong>果汁</strong>：「ジュースで」。"},
+  {scenario:"🍱 餐廳",jp:"取り皿お持ちしましょうか？",romaji:"Tori-zara o-mochi shimashou ka?",zh:"要拿分食盤嗎？",
+    action:"分小孩吃時會問。<strong>要</strong>：「<strong>お願いします</strong>」。"},
+  {scenario:"🦀 自助餐",jp:"お代わりはいかがですか？",romaji:"O-kawari wa ikaga desu ka?",zh:"要再來一份嗎？",
+    action:"<strong>要</strong>：點頭+「お願いします」。<strong>不要</strong>：「もう結構です」。"},
+  {scenario:"🍣 結帳",jp:"お会計はご一緒でよろしいですか？",romaji:"O-kaikei wa go-issho de yoroshii desu ka?",zh:"一起結帳嗎？",
+    action:"<strong>一起</strong>：「<strong>はい、一緒で</strong>」。<strong>分開</strong>：「別々で」(betsubetsu de)。"},
+  // 結帳付款 (5)
+  {scenario:"💴 收銀台",jp:"お支払い方法は？",romaji:"O-shiharai houhou wa?",zh:"請問付款方式？",
+    action:"<strong>現金</strong>：「現金 (genkin)」<strong>刷卡</strong>：「カード (kaado)」<strong>IC 卡</strong>：「Suica」「PASMO」。"},
+  {scenario:"💴 收銀台",jp:"〜円のお返しです",romaji:"...en no o-kaeshi desu",zh:"找您...日圓",
+    action:"找錢時店員會這樣說。聽金額看清楚是否正確。"},
+  {scenario:"💳 刷卡",jp:"一括払いでよろしいですか？",romaji:"Ikkatsu-barai de yoroshii desu ka?",zh:"一次付清可以嗎？",
+    action:"刷卡時會問是否一次付清。<strong>是</strong>：「はい、一括で」。觀光客通常都選一次付清。"},
+  {scenario:"💳 刷卡",jp:"暗証番号をお願いします",romaji:"Anshou-bangou o-onegai shimasu",zh:"請輸入密碼",
+    action:"輸入信用卡 PIN 碼。台灣的卡通常不用 PIN 直接簽名。"},
+  {scenario:"🧾 退稅",jp:"パスポートをお願いします",romaji:"Pasupooto o-onegai shimasu",zh:"請出示護照",
+    action:"<strong>退稅必出示護照</strong>。「はい、どうぞ」(hai, douzo) 遞給店員。"},
+  // 飯店/櫃台 (4)
+  {scenario:"🏨 飯店電話",jp:"フロントです",romaji:"Furonto desu",zh:"這裡是櫃台",
+    action:"飯店打電話到房間時會這樣自我介紹。<strong>front = 櫃台</strong>。"},
+  {scenario:"🏨 飯店",jp:"お部屋の鍵をお預かりします",romaji:"O-heya no kagi o o-azukari shimasu",zh:"請寄放房間鑰匙",
+    action:"出門時飯店請你寄放鑰匙。把卡片或鑰匙遞給櫃台。"},
+  {scenario:"🏨 飯店",jp:"朝食は何時にしますか？",romaji:"Choushoku wa nan-ji ni shimasu ka?",zh:"早餐幾點要？",
+    action:"溫泉旅館會預約早餐時間。<strong>7 點</strong>：「<strong>7 時で</strong>」(shichi-ji de)、<strong>8 點</strong>：「8 時で」。"},
+  {scenario:"🏨 飯店",jp:"お忘れ物はございませんか？",romaji:"O-wasure-mono wa gozaimasen ka?",zh:"沒忘東西嗎？",
+    action:"退房時被問。<strong>沒有</strong>：「<strong>はい、ありません</strong>」(hai, arimasen)。"},
+  // 電車/巴士 (5)
+  {scenario:"🚉 電車到站",jp:"次は〜、〜です",romaji:"Tsugi wa..., ... desu",zh:"下一站是...",
+    action:"<strong>聽地名</strong>就好。新宿 (shinjuku)、上野 (ueno)、淺草 (asakusa)、東京 (toukyou)、日暮里 (nippori)。"},
+  {scenario:"🚉 電車離站",jp:"ドアが閉まります",romaji:"Doa ga shimarimasu",zh:"車門即將關閉",
+    action:"<strong>不要硬擠</strong>！下一班車很快就來。"},
+  {scenario:"🚉 電車轉乘",jp:"〜線はお乗り換えです",romaji:"...sen wa o-norikae desu",zh:"...線請換車",
+    action:"日暮里聽到「<strong>山手線はお乗り換えです</strong>」表示要換山手線。"},
+  {scenario:"🚌 巴士",jp:"次は〜停留所です",romaji:"Tsugi wa ... teiryuujo desu",zh:"下一站是...",
+    action:"<strong>河口湖周遊巴士</strong>會這樣廣播。下車前按鈴：<strong>「降ります」(orimasu)</strong>。"},
+  {scenario:"🚖 計程車",jp:"目的地はどちらですか？",romaji:"Mokutekichi wa dochira desu ka?",zh:"目的地是哪裡？",
+    action:"<strong>給司機看地址</strong>（手機 Google Map 截圖）最保險。"},
+  // 神社/觀光 (5)
+  {scenario:"⛩️ 神社參拜",jp:"二礼二拍手一礼",romaji:"Ni-rei ni-hakushu ichi-rei",zh:"二拜二拍手一拜",
+    action:"<strong>新勝寺、淺草寺</strong>都這樣參拜：①投錢 ②搖鈴 ③<strong>2 鞠躬</strong> ④<strong>2 拍手</strong> ⑤<strong>1 鞠躬</strong>。"},
+  {scenario:"⛩️ 御守販售",jp:"お守りはどちらにされますか？",romaji:"O-mamori wa dochira ni saremasu ka?",zh:"要哪一個御守？",
+    action:"指著要的講「<strong>これ</strong>」(kore = 這個) 或「これとこれ」(這個和這個)。"},
+  {scenario:"🎎 商店",jp:"お土産はお決まりですか？",romaji:"O-miyage wa o-kimari desu ka?",zh:"伴手禮決定了嗎？",
+    action:"還在看：「<strong>まだ見ています</strong>」(mada mite imasu = 還在看)。決定了：「これにします」(kore ni shimasu)。"},
+  {scenario:"📸 觀光景點",jp:"撮影禁止です",romaji:"Satsuei kinshi desu",zh:"禁止拍照",
+    action:"<strong>看到這個牌子或店員說，立刻收起手機</strong>。teamLab 部分區域、神社主殿內常見。"},
+  {scenario:"🎫 售票口",jp:"小学生以下は半額です",romaji:"Shougakusei ika wa hangaku desu",zh:"小學生以下半價",
+    action:"<strong>elementary school 以下半價</strong>。買票時報年齡可享優惠。"},
+  // 店家招呼 (4)
+  {scenario:"🛒 店員招呼",jp:"いらっしゃいませ",romaji:"Irasshaimase",zh:"歡迎光臨",
+    action:"進店每家店員都會講。<strong>不用回應</strong>，點個頭即可。"},
+  {scenario:"🛒 店員結束",jp:"ありがとうございました",romaji:"Arigatou gozaimashita",zh:"非常感謝（過去式）",
+    action:"離開店家時店員會說。<strong>回「ありがとう」(arigatou)</strong> 或點頭即可。"},
+  {scenario:"🛒 店員招呼",jp:"またお越しくださいませ",romaji:"Mata o-koshi kudasaimase",zh:"歡迎再次光臨",
+    action:"離開時店員的話。<strong>點頭微笑</strong>即可。"},
+  {scenario:"🚖 計程車",jp:"ありがとうございます",romaji:"Arigatou gozaimasu",zh:"謝謝您",
+    action:"上計程車、結帳完都會說。<strong>回「ありがとう」</strong> 或點頭。"},
+  // 緊急狀況 (5)
+  {scenario:"🆘 緊急",jp:"大丈夫ですか？",romaji:"Daijoubu desu ka?",zh:"沒事吧？",
+    action:"跌倒、不舒服時旁人會問。<strong>沒事</strong>：「<strong>大丈夫です</strong>」(daijoubu desu) +點頭。<strong>需要幫忙</strong>：「<strong>助けてください</strong>」(tasukete kudasai)。"},
+  {scenario:"🆘 派出所",jp:"どうしましたか？",romaji:"Doushimashita ka?",zh:"怎麼了？",
+    action:"警察會問。<strong>迷路</strong>：「<strong>迷子です</strong>」(maigo desu)。<strong>遺失</strong>：「<strong>〜をなくしました</strong>」(...o nakushimashita)。"},
+  {scenario:"🏥 醫院/藥局",jp:"どこが痛いですか？",romaji:"Doko ga itai desu ka?",zh:"哪裡痛？",
+    action:"<strong>頭痛</strong>：「頭」(atama)、<strong>肚子</strong>：「お腹」(o-naka)、<strong>喉嚨</strong>：「のど」(nodo)。指部位最快。"},
+  {scenario:"🚉 電車",jp:"切符を拝見します",romaji:"Kippu o haiken shimasu",zh:"請出示車票",
+    action:"<strong>查票員會這樣說</strong>。出示 IC 卡或車票。"},
+  {scenario:"📞 飯店",jp:"お子様はおいくつですか？",romaji:"O-kosama wa o-ikutsu desu ka?",zh:"小孩幾歲？",
+    action:"飯店或餐廳問小孩年齡。<strong>5 歲</strong>：「<strong>5 歳です</strong>」(go-sai desu)。"},
+  // 其他常見 (4)
+  {scenario:"🗣️ 聽不懂",jp:"少々お待ちください",romaji:"Shou-shou o-machi kudasai",zh:"請稍等",
+    action:"店員或服務員會說。<strong>等一下</strong>就對了，不用回應。"},
+  {scenario:"🗣️ 聽不懂",jp:"わかりました",romaji:"Wakarimashita",zh:"我明白了",
+    action:"<strong>聽懂時回應</strong>，點頭。或反過來，問你「わかりましたか？」(明白了嗎？)。"},
+  {scenario:"🗣️ 道歉",jp:"すみません",romaji:"Sumimasen",zh:"不好意思",
+    action:"<strong>萬能句</strong>：叫人、讓路、道歉都用。聽到別人說可點頭回應。"},
+  {scenario:"💴 結帳",jp:"レジ袋は有料です",romaji:"Reji-bukuro wa yuuryou desu",zh:"購物袋要錢",
+    action:"<strong>結帳袋通常 3-5 日圓</strong>。可以說「いいえ、けっこうです」拒絕。"}
+];
+
+/* ========== v3 新增資料 ========== */
+const DIALOGUES=[
+  {id:"dlg-customs",emoji:"🛂",title:"成田機場海關完整對話",day:"Day 1",
+    desc:"從遞護照到蓋章離開，完整流程",
+    turns:[
+      {speaker:"officer",label:"海關官員",en:"Passport, please.",zh:"請出示護照。"},
+      {speaker:"you",label:"你",en:"Here you are.",zh:"這是我的護照。"},
+      {speaker:"officer",label:"海關官員",en:"What's the purpose of your visit?",zh:"你來這裡的目的是什麼？"},
+      {speaker:"you",label:"你",en:"I'm here on vacation with my family.",zh:"我和家人來度假。"},
+      {speaker:"officer",label:"海關官員",en:"How long will you stay?",zh:"你會待多久？"},
+      {speaker:"you",label:"你",en:"Nine days. We're leaving on May 24th.",zh:"九天，我們 5/24 離開。"},
+      {speaker:"officer",label:"海關官員",en:"Where are you staying?",zh:"你住哪裡？"},
+      {speaker:"you",label:"你",en:"At a hotel in Tokyo. MYSTAYS Nippori.",zh:"東京的飯店，MYSTAYS 日暮里。"},
+      {speaker:"officer",label:"海關官員",en:"Anything to declare?",zh:"有東西要申報嗎？"},
+      {speaker:"you",label:"你",en:"No, nothing.",zh:"沒有。"},
+      {speaker:"officer",label:"海關官員",en:"Welcome to Japan. Have a nice trip.",zh:"歡迎來日本，旅途愉快。"},
+      {speaker:"you",label:"你",en:"Thank you!",zh:"謝謝！"}
+    ]},
+  {id:"dlg-skyliner",emoji:"🚄",title:"Skyliner 買票完整對話",day:"Day 1",
+    desc:"從購票到上車對號",
+    turns:[
+      {speaker:"you",label:"你",en:"Excuse me, two adults and two children to Nippori, please.",zh:"不好意思，兩大兩小到日暮里。"},
+      {speaker:"staff",label:"售票員",en:"Sure. What time would you like to depart?",zh:"好的，您想幾點出發？"},
+      {speaker:"you",label:"你",en:"The next available train, please.",zh:"下一班，謝謝。"},
+      {speaker:"staff",label:"售票員",en:"That would be the 6:10 PM. The total is 6,450 yen.",zh:"那就是 18:10 的。總共 6,450 日圓。"},
+      {speaker:"you",label:"你",en:"Could I pay by credit card?",zh:"可以刷卡嗎？"},
+      {speaker:"staff",label:"售票員",en:"Yes, of course. Here are your tickets. Platform 1.",zh:"當然，這是您的車票，1 號月台。"},
+      {speaker:"you",label:"你",en:"Where exactly is platform 1?",zh:"1 號月台具體在哪？"},
+      {speaker:"staff",label:"售票員",en:"Down the escalator and turn right. Your seats are 5A, 5B, 5C, 5D.",zh:"下手扶梯右轉。您的座位是 5A, 5B, 5C, 5D。"},
+      {speaker:"you",label:"你",en:"Thank you very much!",zh:"非常感謝！"}
+    ]},
+  {id:"dlg-hotel-checkin",emoji:"🏨",title:"飯店 Check-in 完整對話",day:"Day 1",
+    desc:"從報到到拿房卡",
+    turns:[
+      {speaker:"you",label:"你",en:"Hello, we have a reservation under the name Lin.",zh:"您好，我們有以林姓登記的訂房。"},
+      {speaker:"staff",label:"櫃台",en:"Welcome to MYSTAYS. May I see your passports, please?",zh:"歡迎光臨 MYSTAYS。可以看一下護照嗎？"},
+      {speaker:"you",label:"你",en:"Here you are. Four people, two adults and two children.",zh:"這是護照，四人，兩大兩小。"},
+      {speaker:"staff",label:"櫃台",en:"Thank you. You're booked for one night, in room 805. Is that correct?",zh:"謝謝，您訂了一晚，805 號房，對嗎？"},
+      {speaker:"you",label:"你",en:"Yes, that's right. What time is breakfast?",zh:"對。早餐幾點？"},
+      {speaker:"staff",label:"櫃台",en:"Breakfast is from 7 to 10 AM, on the 2nd floor.",zh:"早餐 7-10 點，2 樓。"},
+      {speaker:"you",label:"你",en:"And the Wi-Fi password?",zh:"Wi-Fi 密碼呢？"},
+      {speaker:"staff",label:"櫃台",en:"Here's a card with the password. Check-out is at 11 AM.",zh:"這張卡片有密碼。退房 11 點。"},
+      {speaker:"you",label:"你",en:"Could we leave our big luggage on the day after tomorrow?",zh:"後天可以寄放大行李嗎？"},
+      {speaker:"staff",label:"櫃台",en:"Of course. Just bring it to the front desk anytime.",zh:"當然，隨時拿到櫃台都可以。"},
+      {speaker:"you",label:"你",en:"Great, thank you!",zh:"太好了，謝謝！"}
+    ]},
+  {id:"dlg-ramen",emoji:"🍜",title:"馬賊拉麵點餐完整對話",day:"Day 1",
+    desc:"從進門到結帳",
+    turns:[
+      {speaker:"staff",label:"店員",en:"Welcome! How many people?",zh:"歡迎光臨！幾位？"},
+      {speaker:"you",label:"你",en:"Four, please.",zh:"四位。"},
+      {speaker:"staff",label:"店員",en:"Please follow me. Here's the menu.",zh:"請跟我來，這是菜單。"},
+      {speaker:"you",label:"你",en:"What do you recommend?",zh:"你推薦什麼？"},
+      {speaker:"staff",label:"店員",en:"Our most popular is the chashu ramen with soft-boiled egg.",zh:"我們最熱門的是叉燒拉麵加半熟蛋。"},
+      {speaker:"you",label:"你",en:"Two of those, please. And two regular ramen, no spicy.",zh:"兩份那個，再兩份原味拉麵，不要辣。"},
+      {speaker:"staff",label:"店員",en:"Anything to drink?",zh:"要喝什麼嗎？"},
+      {speaker:"you",label:"你",en:"Just water, thank you.",zh:"水就好，謝謝。"},
+      {speaker:"staff",label:"店員",en:"Coming right up.",zh:"馬上來。"},
+      {speaker:"you",label:"你 (吃完後)",en:"It was delicious! Could we have the bill, please?",zh:"很好吃！麻煩買單。"},
+      {speaker:"staff",label:"店員",en:"Sure. Please pay at the counter near the entrance.",zh:"好的，請到門口櫃台結帳。"}
+    ]},
+  {id:"dlg-zoo",emoji:"🐧",title:"上野動物園購票對話",day:"Day 2",
+    desc:"從購票到問動物位置",
+    turns:[
+      {speaker:"you",label:"你",en:"Two adults and two children, please.",zh:"兩大兩小。"},
+      {speaker:"staff",label:"售票員",en:"That's 1,800 yen total. How would you like to pay?",zh:"總共 1,800 日圓。怎麼付款？"},
+      {speaker:"you",label:"你",en:"Cash, please. Here's 2,000 yen.",zh:"現金，這是 2,000 日圓。"},
+      {speaker:"staff",label:"售票員",en:"Here's your change and a map.",zh:"這是您的找零和地圖。"},
+      {speaker:"you",label:"你",en:"Where can I see the polar bear?",zh:"北極熊在哪裡？"},
+      {speaker:"staff",label:"售票員",en:"In the East Garden, near the entrance. Just follow the signs.",zh:"東園入口附近，跟著指標走。"},
+      {speaker:"you",label:"你",en:"And the shoebill?",zh:"鯨頭鸛呢？"},
+      {speaker:"staff",label:"售票員",en:"That's in the West Garden. Take the bridge.",zh:"在西園，過橋。"},
+      {speaker:"you",label:"你",en:"Thank you so much!",zh:"非常感謝！"}
+    ]},
+  {id:"dlg-pharmacy",emoji:"💊",title:"藥妝店求救對話（小孩發燒）",day:"Day 2",
+    desc:"從說明症狀到買藥",
+    turns:[
+      {speaker:"you",label:"你",en:"Excuse me, my child has a fever.",zh:"不好意思，我小孩發燒。"},
+      {speaker:"staff",label:"店員",en:"How old is your child?",zh:"小孩幾歲？"},
+      {speaker:"you",label:"你",en:"He's five years old.",zh:"他五歲。"},
+      {speaker:"staff",label:"店員",en:"Does he have any other symptoms?",zh:"還有其他症狀嗎？"},
+      {speaker:"you",label:"你",en:"He's coughing too. And a little stomachache.",zh:"也咳嗽，還有點肚子痛。"},
+      {speaker:"staff",label:"店員",en:"This medicine is good for kids his age. Give it twice a day after meals.",zh:"這個藥適合他這個年紀。一天兩次，飯後吃。"},
+      {speaker:"you",label:"你",en:"Is it safe?",zh:"安全嗎？"},
+      {speaker:"staff",label:"店員",en:"Yes, very safe. Many parents buy this.",zh:"是的，很安全，很多家長都買。"},
+      {speaker:"you",label:"你",en:"I'll take it. And do you have band-aids?",zh:"我要這個。還有 OK 繃嗎？"},
+      {speaker:"staff",label:"店員",en:"Yes, aisle 3.",zh:"有，第 3 排。"},
+      {speaker:"you",label:"你",en:"Thank you. Could I claim tax-free?",zh:"謝謝，可以辦免稅嗎？"},
+      {speaker:"staff",label:"店員",en:"Of course. Please show your passport.",zh:"當然，請出示護照。"}
+    ]},
+  {id:"dlg-onsen",emoji:"♨️",title:"龍宮城溫泉入館對話",day:"Day 3",
+    desc:"從報到到問規則",
+    turns:[
+      {speaker:"you",label:"你",en:"Hello, we have a reservation for tonight.",zh:"您好，我們有今晚的訂房。"},
+      {speaker:"staff",label:"櫃台",en:"Welcome! Could I have your name and passports?",zh:"歡迎光臨！請給我姓名和護照。"},
+      {speaker:"you",label:"你",en:"Lin family, four people. Here are the passports.",zh:"林家四口，這是護照。"},
+      {speaker:"staff",label:"櫃台",en:"Thank you. Check-in starts at 3 PM. Would you like to leave your bags?",zh:"謝謝。3 點 check-in。要寄放行李嗎？"},
+      {speaker:"you",label:"你",en:"Yes please. Can we go to the onsen now?",zh:"好的。現在可以去泡溫泉嗎？"},
+      {speaker:"staff",label:"櫃台",en:"The onsen opens at 11 AM. The locker rooms are on the 1st floor.",zh:"溫泉 11 點開，更衣室在 1 樓。"},
+      {speaker:"you",label:"你",en:"Are children allowed in the gold bath?",zh:"小孩可以泡黃金風呂嗎？"},
+      {speaker:"staff",label:"櫃台",en:"Yes, kids over 4 are welcome.",zh:"可以，4 歲以上歡迎。"},
+      {speaker:"you",label:"你",en:"What time is dinner?",zh:"晚餐幾點？"},
+      {speaker:"staff",label:"櫃台",en:"Dinner is from 6 to 8:30 PM. Your time slot is 6 PM, 90 minutes all-you-can-eat.",zh:"晚餐 18:00-20:30。您的時段是 18:00，90 分鐘吃到飽。"},
+      {speaker:"you",label:"你",en:"Sounds good, thank you!",zh:"好的，謝謝！"}
+    ]},
+  {id:"dlg-teamlab",emoji:"🎨",title:"teamLab 入場對話",day:"Day 4",
+    desc:"從入場到找出口",
+    turns:[
+      {speaker:"you",label:"你",en:"Hi, I have a reservation for 2:30 PM. The name is Lin.",zh:"您好，我預約 14:30，姓林。"},
+      {speaker:"staff",label:"工作人員",en:"Could you show me your QR code?",zh:"可以給我看 QR code 嗎？"},
+      {speaker:"you",label:"你",en:"Sure, here it is.",zh:"好，請看。"},
+      {speaker:"staff",label:"工作人員",en:"Confirmed. Please leave large bags in the locker over there.",zh:"確認了。請把大包包寄放在那邊的寄物櫃。"},
+      {speaker:"you",label:"你",en:"Is photography allowed?",zh:"可以拍照嗎？"},
+      {speaker:"staff",label:"工作人員",en:"Yes, but no flash. Some areas may be marked otherwise.",zh:"可以，但不要閃光燈。有些區域會另外標示。"},
+      {speaker:"you",label:"你",en:"How long does the visit usually take?",zh:"通常逛多久？"},
+      {speaker:"staff",label:"工作人員",en:"About 2 hours. Here's a map. The exit is on the same floor.",zh:"約 2 小時。這是地圖，出口在同一樓層。"},
+      {speaker:"you",label:"你",en:"Thank you!",zh:"謝謝！"},
+      {speaker:"you",label:"你 (2 小時後)",en:"Excuse me, where is the exit?",zh:"不好意思，出口在哪？"},
+      {speaker:"staff",label:"工作人員",en:"Follow the green arrows. It's just around the corner.",zh:"跟著綠色箭頭走，在轉角。"}
+    ]},
+  {id:"dlg-shibazakura",emoji:"🌸",title:"芝櫻祭購票對話",day:"Day 5",
+    desc:"從購票到拍照求助",
+    turns:[
+      {speaker:"you",label:"你",en:"Two adults and two children, please.",zh:"兩大兩小。"},
+      {speaker:"staff",label:"售票員",en:"That's 3,000 yen total.",zh:"總共 3,000 日圓。"},
+      {speaker:"you",label:"你",en:"I have e-tickets on my phone. Here.",zh:"我手機上有電子票，請看。"},
+      {speaker:"staff",label:"售票員",en:"Great, scanning... All set. Enjoy!",zh:"好，掃一下...完成，請進。"},
+      {speaker:"you",label:"你 (進場後)",en:"Excuse me, where is the best spot to see Mt. Fuji?",zh:"不好意思，看富士山最棒的點在哪？"},
+      {speaker:"visitor",label:"遊客",en:"Up that hill. There's a viewing platform.",zh:"上那個山丘，有觀景平台。"},
+      {speaker:"you",label:"你",en:"Thank you! Could you take a photo of us?",zh:"謝謝！可以幫我們拍張照嗎？"},
+      {speaker:"visitor",label:"遊客",en:"Sure! Say cheese!",zh:"好！說 Cheese！"},
+      {speaker:"you",label:"你",en:"Thank you so much! One more with the mountain?",zh:"非常感謝！可以再拍一張有富士山的嗎？"},
+      {speaker:"visitor",label:"遊客",en:"Of course! Got it.",zh:"當然！拍好了。"}
+    ]},
+  {id:"dlg-uber",emoji:"🚖",title:"UBER 叫車對話",day:"Day 7",
+    desc:"從上車到下車",
+    turns:[
+      {speaker:"driver",label:"司機",en:"Hello, are you Lin?",zh:"您好，是林先生/小姐嗎？"},
+      {speaker:"you",label:"你",en:"Yes, that's right.",zh:"是的。"},
+      {speaker:"driver",label:"司機",en:"Going to Arakurayama Sengen Park, correct?",zh:"去新倉山淺間公園對嗎？"},
+      {speaker:"you",label:"你",en:"Yes, please. Could you put the bags in the trunk?",zh:"是的，可以幫我們放後車廂嗎？"},
+      {speaker:"driver",label:"司機",en:"Of course. All set?",zh:"當然，都好了嗎？"},
+      {speaker:"you",label:"你",en:"Yes. How long will it take?",zh:"好了。要多久？"},
+      {speaker:"driver",label:"司機",en:"About 8 minutes. Traffic is light.",zh:"約 8 分鐘，車不多。"},
+      {speaker:"you",label:"你",en:"Could you turn down the AC a bit?",zh:"可以把冷氣調小一點嗎？"},
+      {speaker:"driver",label:"司機",en:"Sure thing.",zh:"沒問題。"},
+      {speaker:"driver",label:"司機 (到達後)",en:"Here we are.",zh:"到了。"},
+      {speaker:"you",label:"你",en:"Thank you! Have a nice day!",zh:"謝謝！祝你愉快！"}
+    ]},
+  {id:"dlg-temple",emoji:"⛩️",title:"新勝寺求籤+繪馬對話",day:"Day 8",
+    desc:"從問參拜到買御守",
+    turns:[
+      {speaker:"you",label:"你",en:"Excuse me, how do we pray here?",zh:"不好意思，這裡怎麼參拜？"},
+      {speaker:"staff",label:"廟方人員",en:"First, wash your hands at the temizu. Then put 5 yen in the offering box.",zh:"先在手水舍洗手，然後在賽錢箱投 5 日圓。"},
+      {speaker:"you",label:"你",en:"And then?",zh:"然後呢？"},
+      {speaker:"staff",label:"廟方人員",en:"Bow twice, clap twice, and bow once more.",zh:"二鞠躬、二拍手、再一鞠躬。"},
+      {speaker:"you",label:"你",en:"Thank you. Where can I draw an omikuji?",zh:"謝謝。哪裡可以抽籤？"},
+      {speaker:"staff",label:"廟方人員",en:"Just over there. 100 yen each.",zh:"就在那邊，每次 100 日圓。"},
+      {speaker:"you",label:"你",en:"How much is the ema?",zh:"繪馬多少錢？"},
+      {speaker:"staff",label:"廟方人員",en:"500 yen. Write your wish and hang it on the rack.",zh:"500 日圓，寫上願望掛在架子上。"},
+      {speaker:"you",label:"你",en:"And the charm for safe travel?",zh:"交通安全的御守呢？"},
+      {speaker:"staff",label:"廟方人員",en:"That's 800 yen. Very popular.",zh:"800 日圓，很受歡迎。"},
+      {speaker:"you",label:"你",en:"I'll take two charms and one ema. Thank you.",zh:"我要兩個御守和一個繪馬，謝謝。"}
+    ]},
+  {id:"dlg-airport",emoji:"✈️",title:"成田機場 Check-in 對話",day:"Day 9",
+    desc:"從報到到拿登機證",
+    turns:[
+      {speaker:"staff",label:"地勤",en:"Good morning. Where are you flying?",zh:"早安，請問飛哪裡？"},
+      {speaker:"you",label:"你",en:"Taipei. Japan Airlines flight 802.",zh:"台北，日航 802 班機。"},
+      {speaker:"staff",label:"地勤",en:"Passports, please.",zh:"請出示護照。"},
+      {speaker:"you",label:"你",en:"Here are four passports.",zh:"這是四本護照。"},
+      {speaker:"staff",label:"地勤",en:"How many checked bags?",zh:"幾件託運行李？"},
+      {speaker:"you",label:"你",en:"Two checked bags.",zh:"兩件託運。"},
+      {speaker:"staff",label:"地勤",en:"Please put them on the scale.",zh:"請放上磅秤。"},
+      {speaker:"you",label:"你",en:"Are they too heavy?",zh:"太重了嗎？"},
+      {speaker:"staff",label:"地勤",en:"They're fine. Could you sit together as a family?",zh:"可以。要坐在一起嗎？"},
+      {speaker:"you",label:"你",en:"Yes, please. And one window seat for the kids.",zh:"好的，小孩要靠窗。"},
+      {speaker:"staff",label:"地勤",en:"Done. Boarding starts at 8:25 AM at Gate 56.",zh:"好了。8:25 在 56 號門開始登機。"},
+      {speaker:"you",label:"你",en:"Where is gate 56?",zh:"56 號門在哪？"},
+      {speaker:"staff",label:"地勤",en:"After security, follow signs to the left. About a 10-minute walk.",zh:"過安檢後跟著指標往左，走約 10 分鐘。"},
+      {speaker:"you",label:"你",en:"Thank you!",zh:"謝謝！"}
+    ]}
+];
+
+const MENU_WORDS=[
+  // 烹調方式 (8)
+  {jp:"焼き",romaji:"yaki",zh:"烤",cat:"做法",ex:"焼き鳥(yakitori)= 烤雞肉串、焼肉(yakiniku)= 燒肉"},
+  {jp:"揚げ",romaji:"age",zh:"炸",cat:"做法",ex:"唐揚げ(karaage)= 炸雞、串揚げ(kushiage)= 串炸"},
+  {jp:"煮",romaji:"ni",zh:"燉煮",cat:"做法",ex:"煮魚(nizakana)= 燉魚、肉じゃが(nikujaga)= 馬鈴薯燉肉"},
+  {jp:"蒸し",romaji:"mushi",zh:"蒸",cat:"做法",ex:"茶碗蒸し(chawanmushi)= 茶碗蒸"},
+  {jp:"刺身",romaji:"sashimi",zh:"生魚片",cat:"做法",ex:"小孩不吃要避開"},
+  {jp:"天ぷら",romaji:"tempura",zh:"天婦羅",cat:"做法",ex:"裹粉油炸的蔬菜或海鮮"},
+  {jp:"鉄板",romaji:"teppan",zh:"鐵板",cat:"做法",ex:"鉄板焼き(teppanyaki)= 鐵板燒"},
+  {jp:"炭火",romaji:"sumibi",zh:"炭烤",cat:"做法",ex:"用炭火烤製，香氣足"},
+  // 主食 (10)
+  {jp:"丼",romaji:"don",zh:"丼飯",cat:"主食",ex:"親子丼(oyakodon)、牛丼(gyudon)、海鮮丼"},
+  {jp:"定食",romaji:"teishoku",zh:"定食套餐",cat:"主食",ex:"主菜+白飯+味噌湯+小菜"},
+  {jp:"そば",romaji:"soba",zh:"蕎麥麵",cat:"主食",ex:"日暮里伊勢屋有名"},
+  {jp:"うどん",romaji:"udon",zh:"烏龍麵",cat:"主食",ex:"粗麵，小孩好吃"},
+  {jp:"ラーメン",romaji:"ramen",zh:"拉麵",cat:"主食",ex:"馬賊招牌"},
+  {jp:"ほうとう",romaji:"hoto",zh:"餺飥",cat:"主食",ex:"山梨郷土料理（D7 中餐）"},
+  {jp:"寿司",romaji:"sushi",zh:"壽司",cat:"主食",ex:"握り(nigiri)= 握壽司"},
+  {jp:"カレー",romaji:"karee",zh:"咖哩",cat:"主食",ex:"日式咖哩飯，小孩愛"},
+  {jp:"おにぎり",romaji:"onigiri",zh:"飯糰",cat:"主食",ex:"芝櫻祭限定富士山飯糰"},
+  {jp:"パン",romaji:"pan",zh:"麵包",cat:"主食",ex:"超商常見"},
+  // 食材 (12)
+  {jp:"鶏",romaji:"tori",zh:"雞",cat:"食材",ex:"鶏肉(toriniku)= 雞肉"},
+  {jp:"豚",romaji:"buta",zh:"豬",cat:"食材",ex:"豚肉(butaniku)= 豬肉、豚カツ(tonkatsu)= 炸豬排"},
+  {jp:"牛",romaji:"gyu",zh:"牛",cat:"食材",ex:"牛肉(gyuniku)、牛タン(gyutan)= 牛舌（Negishi）"},
+  {jp:"魚",romaji:"sakana",zh:"魚",cat:"食材",ex:"鮭(sake)= 鮭魚、まぐろ(maguro)= 鮪魚"},
+  {jp:"海老",romaji:"ebi",zh:"蝦",cat:"食材",ex:"海老天(ebiten)= 炸蝦"},
+  {jp:"蟹",romaji:"kani",zh:"螃蟹",cat:"食材",ex:"龍宮城蟹腳吃到飽"},
+  {jp:"鰻",romaji:"unagi",zh:"鰻魚",cat:"食材",ex:"佐原必吃鰻丼"},
+  {jp:"卵",romaji:"tamago",zh:"蛋",cat:"食材",ex:"温泉卵(onsen tamago)= 溫泉蛋"},
+  {jp:"野菜",romaji:"yasai",zh:"蔬菜",cat:"食材",ex:"野菜炒め(yasai itame)= 炒蔬菜"},
+  {jp:"豆腐",romaji:"toufu",zh:"豆腐",cat:"食材",ex:"麻婆豆腐(maaboo toufu)"},
+  {jp:"のり",romaji:"nori",zh:"海苔",cat:"食材",ex:"飯糰外皮"},
+  {jp:"わさび",romaji:"wasabi",zh:"芥末",cat:"食材",ex:"小孩不吃要說「わさび抜き」(wasabi-nuki)"}
+];
+
+const NUMBER_PANEL=[
+  {num:"1",jp:"いち",romaji:"ichi"},
+  {num:"2",jp:"に",romaji:"ni"},
+  {num:"3",jp:"さん",romaji:"san"},
+  {num:"4",jp:"よん／し",romaji:"yon / shi"},
+  {num:"5",jp:"ご",romaji:"go"},
+  {num:"6",jp:"ろく",romaji:"roku"},
+  {num:"7",jp:"なな／しち",romaji:"nana / shichi"},
+  {num:"8",jp:"はち",romaji:"hachi"},
+  {num:"9",jp:"きゅう",romaji:"kyu"},
+  {num:"10",jp:"じゅう",romaji:"juu"},
+  {num:"100",jp:"ひゃく",romaji:"hyaku"},
+  {num:"1000",jp:"せん",romaji:"sen"},
+  {num:"10000",jp:"いちまん",romaji:"ichi-man"},
+  {num:"500",jp:"ごひゃく",romaji:"go-hyaku"},
+  {num:"1500",jp:"せんごひゃく",romaji:"sen go-hyaku"},
+  {num:"3000",jp:"さんぜん",romaji:"san-zen"},
+  {num:"5500",jp:"ごせんごひゃく",romaji:"go-sen go-hyaku"}
+];
+
+const PRICE_QUIZ=[
+  {audio:"500 円です",jp:"500 円",zh:"500 日圓",options:["50 円","500 円","5000 円"],correct:"500 円"},
+  {audio:"1500 円になります",jp:"1500 円",zh:"1500 日圓",options:["150 円","1500 円","15000 円"],correct:"1500 円"},
+  {audio:"2800 円です",jp:"2800 円",zh:"2800 日圓",options:["280 円","2800 円","8000 円"],correct:"2800 円"},
+  {audio:"3500 円になります",jp:"3500 円",zh:"3500 日圓（周遊券價）",options:["3500 円","35000 円","350 円"],correct:"3500 円"},
+  {audio:"980 円です",jp:"980 円",zh:"980 日圓",options:["98 円","980 円","9800 円"],correct:"980 円"},
+  {audio:"6450 円になります",jp:"6450 円",zh:"6450 日圓（Skyliner 4 人）",options:["6450 円","645 円","64500 円"],correct:"6450 円"},
+  {audio:"1200 円です",jp:"1200 円",zh:"1200 日圓（馬賊拉麵）",options:["120 円","1200 円","12000 円"],correct:"1200 円"},
+  {audio:"800 円になります",jp:"800 円",zh:"800 日圓（御守）",options:["80 円","800 円","8000 円"],correct:"800 円"},
+  {audio:"5500 円になります",jp:"5500 円",zh:"5500 日圓（退稅門檻）",options:["550 円","5500 円","55000 円"],correct:"5500 円"},
+  {audio:"4800 円です",jp:"4800 円",zh:"4800 日圓",options:["480 円","4800 円","48000 円"],correct:"4800 円"}
+];
+
+
+/* ========== 狀態 ========== */
+let state={
+  currentDay:null,
+  currentSubscene:null,
+  currentMode:"learn",
+  currentQuizIdx:0,
+  quizPool:[],
+  currentRadioIdx:0,
+  radioPicked:[],
+  radioChecked:false,
+  currentVocabIdx:0,
+  speed:0.85,
+  stars:parseInt(localStorage.getItem("stars_v3")||"0"),
+  progress:JSON.parse(localStorage.getItem("subProg_v3")||"{}"),
+  emergency:JSON.parse(localStorage.getItem("emergency_v3")||"{}")
+};
+
+/* ========== TTS ========== */
+let preferredVoice=null;
+let jpVoice=null;
+function loadVoices(){
+  const vs=speechSynthesis.getVoices();
+  if(vs.length){
+    preferredVoice=vs.find(v=>v.lang==="en-US"&&v.name.includes("Samantha"))
+                  ||vs.find(v=>v.lang==="en-US"&&/female|Karen|Moira/i.test(v.name))
+                  ||vs.find(v=>v.lang.startsWith("en-US"))
+                  ||vs.find(v=>v.lang.startsWith("en"));
+    jpVoice=vs.find(v=>v.lang.startsWith("ja"));
+  }
+}
+if("speechSynthesis"in window){
+  loadVoices();
+  speechSynthesis.onvoiceschanged=loadVoices;
+}
+function speak(text,rate,lang){
+  if(!("speechSynthesis"in window))return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=lang||"en-US";
+  u.rate=rate||state.speed;
+  u.pitch=1.05;
+  if(lang==="ja-JP"&&jpVoice)u.voice=jpVoice;
+  else if(preferredVoice&&!lang)u.voice=preferredVoice;
+  speechSynthesis.speak(u);
+}
+
+/* ========== 首頁 ========== */
+function renderHome(){
+  const grid=document.getElementById("dayGrid");
+  grid.innerHTML="";
+  DAYS.forEach(d=>{
+    const totalSubs=d.subscenes.length;
+    const doneSubs=d.subscenes.filter(s=>state.progress[s.id]&&state.progress[s.id]>=s.phrases.length).length;
+    const card=document.createElement("div");
+    card.className="day-card "+d.cls;
+    card.innerHTML=`
+      ${doneSubs>0?`<div class="progress-mini">${doneSubs}/${totalSubs}</div>`:""}
+      <div>
+        <div class="day-num">DAY ${d.id}</div>
+        <div class="day-emoji">${d.emoji}</div>
+      </div>
+      <div>
+        <div class="day-title">${d.title}</div>
+        <div class="day-date">${d.date}</div>
+      </div>`;
+    card.onclick=()=>openDay(d.id);
+    grid.appendChild(card);
+  });
+  updateStars();
+  if(!window.matchMedia("(display-mode: standalone)").matches&&!window.navigator.standalone){
+    document.getElementById("installHint").classList.add("show");
+  }
+}
+
+function updateStars(){
+  document.getElementById("starCount").textContent=state.stars;
+  const sd=document.getElementById("starDisplay");
+  sd.innerHTML="";
+  const showStars=Math.min(state.stars,5);
+  for(let i=0;i<showStars;i++){
+    const s=document.createElement("span");
+    s.className="star";
+    s.textContent="⭐";
+    sd.appendChild(s);
+  }
+}
+
+/* ========== Day 列表 ========== */
+function openDay(id){
+  state.currentDay=id;
+  const d=DAYS.find(x=>x.id===id);
+  document.getElementById("dayTitle").textContent=`${d.emoji} Day ${d.id}：${d.title}`;
+  document.getElementById("dayDesc").textContent=d.date+"｜"+d.desc;
+  const list=document.getElementById("subsceneList");
+  list.innerHTML="";
+  d.subscenes.forEach(s=>{
+    const prog=state.progress[s.id]||0;
+    const total=s.phrases.length;
+    const card=document.createElement("div");
+    card.className="subscene-card";
+    card.innerHTML=`
+      <div class="subscene-emoji">${s.emoji}</div>
+      <div class="subscene-info">
+        <div class="subscene-name">${s.name}</div>
+        <div class="subscene-meta">${s.meta} · ${total} 句</div>
+      </div>
+      ${prog>0?`<div class="subscene-progress">${prog}/${total}</div>`:""}
+      <div class="subscene-arrow">›</div>`;
+    card.onclick=()=>openSubscene(s.id);
+    list.appendChild(card);
+  });
+  showView("viewDay");
+}
+
+/* ========== 子情境學習 ========== */
+function openSubscene(sid){
+  state.currentSubscene=sid;
+  state.currentMode="learn";
+  state.currentQuizIdx=0;
+  const d=DAYS.find(x=>x.id===state.currentDay);
+  const s=d.subscenes.find(x=>x.id===sid);
+  document.getElementById("learnTitle").innerHTML=s.emoji+" "+s.name;
+  document.getElementById("learnDesc").textContent=`Day ${d.id} · ${s.meta}`;
+  document.getElementById("learnBack").onclick=()=>{showView("viewDay")};
+  setMode("learn");
+  showView("viewLearn");
+}
+
+function setMode(m){
+  state.currentMode=m;
+  document.querySelectorAll(".mode-btn").forEach(b=>b.classList.toggle("active",b.dataset.mode===m));
+  if(m==="learn")renderLearn();
+  else{
+    const s=getCurrentSubscene();
+    state.quizPool=[...s.phrases].sort(()=>Math.random()-0.5);
+    state.currentQuizIdx=0;
+    renderQuiz();
+  }
+}
+
+function getCurrentSubscene(){
+  const d=DAYS.find(x=>x.id===state.currentDay);
+  return d.subscenes.find(x=>x.id===state.currentSubscene);
+}
+
+function renderLearn(){
+  const s=getCurrentSubscene();
+  const c=document.getElementById("learnContent");
+  c.innerHTML="";
+  s.phrases.forEach((p,i)=>{
+    const card=document.createElement("div");
+    card.className="phrase-card";
+    card.innerHTML=`
+      <div class="phrase-tag">#${i+1}</div>
+      <div class="phrase-en">${p.en}</div>
+      <div class="phrase-zh">${p.zh}</div>
+      <div class="phrase-tip">💡 ${p.tip}</div>
+      <div class="phrase-actions">
+        <button class="play-btn slow">🐢 慢慢念</button>
+        <button class="play-btn fast">▶ 正常念</button>
+      </div>`;
+    const [slow,fast]=card.querySelectorAll(".play-btn");
+    slow.onclick=()=>{speak(p.en,0.65);markProgress(s.id,i)};
+    fast.onclick=()=>{speak(p.en,0.95);markProgress(s.id,i)};
+    c.appendChild(card);
+  });
+}
+
+function markProgress(sid,idx){
+  if(!state.progress[sid])state.progress[sid]=0;
+  const total=getCurrentSubscene().phrases.length;
+  if(state.progress[sid]<total){
+    state.progress[sid]=Math.min(total,state.progress[sid]+1);
+    localStorage.setItem("subProg_v3",JSON.stringify(state.progress));
+  }
+}
+
+/* ========== 聽力測驗 ========== */
+function renderQuiz(){
+  const s=getCurrentSubscene();
+  const c=document.getElementById("learnContent");
+  if(state.currentQuizIdx>=state.quizPool.length){
+    c.innerHTML=`
+      <div class="quiz-card">
+        <div style="font-size:60px;margin-bottom:10px">🎉</div>
+        <div style="font-size:20px;font-weight:900;margin-bottom:8px">全部完成！</div>
+        <div style="color:var(--ink-soft);font-size:13px;margin-bottom:18px">這個情境你都聽懂了！</div>
+        <button class="play-btn fast" onclick="setMode('quiz')" style="max-width:200px;margin:0 auto">🔁 再玩一次</button>
+      </div>`;
+    return;
+  }
+  const item=state.quizPool[state.currentQuizIdx];
+  const others=s.phrases.filter(p=>p.zh!==item.zh).sort(()=>Math.random()-0.5).slice(0,3);
+  const opts=[item,...others].sort(()=>Math.random()-0.5);
+  c.innerHTML=`
+    <div class="quiz-progress">第 ${state.currentQuizIdx+1} / ${state.quizPool.length} 題</div>
+    <div class="quiz-card">
+      <div class="quiz-prompt">🎧 點按鈕聽英文，選正確的中文意思</div>
+      <button class="quiz-bigplay" id="qbp">▶</button><br>
+      <button class="quiz-replay" id="qrp">🐢 慢一點再聽一次</button>
+      <div class="quiz-options" id="qopts"></div>
+      <div class="quiz-feedback" id="qfb"></div>
+    </div>`;
+  document.getElementById("qbp").onclick=()=>speak(item.en,0.85);
+  document.getElementById("qrp").onclick=()=>speak(item.en,0.6);
+  setTimeout(()=>speak(item.en,0.85),300);
+  const optsEl=document.getElementById("qopts");
+  opts.forEach(o=>{
+    const b=document.createElement("button");
+    b.className="quiz-option";
+    b.textContent=o.zh;
+    b.onclick=()=>checkQuiz(b,o,item);
+    optsEl.appendChild(b);
+  });
+}
+
+function checkQuiz(btn,opt,correct){
+  document.querySelectorAll(".quiz-option").forEach(b=>b.disabled=true);
+  const fb=document.getElementById("qfb");
+  if(opt.zh===correct.zh){
+    btn.classList.add("correct");
+    fb.className="quiz-feedback show right";
+    fb.innerHTML=`✅ 答對了！<br><span style="font-size:13px;font-weight:500">${correct.en}</span>`;
+    state.stars++;
+    localStorage.setItem("stars_v3",state.stars);
+    updateStars();
+  }else{
+    btn.classList.add("wrong");
+    fb.className="quiz-feedback show miss";
+    fb.innerHTML=`❌ 再試試！<br><span style="font-size:13px;font-weight:500">正確答案：${correct.zh}</span>`;
+    document.querySelectorAll(".quiz-option").forEach(b=>{
+      if(b.textContent===correct.zh)b.classList.add("correct");
+    });
+  }
+  setTimeout(()=>{state.currentQuizIdx++;renderQuiz()},1800);
+}
+
+/* ========== 廣播解碼 ========== */
+function openRadio(){
+  state.currentRadioIdx=0;
+  showView("viewRadio");
+  renderRadio();
+}
+function renderRadio(){
+  const item=RADIO[state.currentRadioIdx];
+  state.radioPicked=[];
+  state.radioChecked=false;
+  document.getElementById("radioProgress").textContent=`第 ${state.currentRadioIdx+1} / ${RADIO.length} 題`;
+  const c=document.getElementById("radioContent");
+  c.innerHTML=`
+    <div class="radio-card">
+      <div class="radio-led"></div>
+      <div class="radio-label">📡 ${item.context}</div>
+      <div class="radio-q">❓ ${item.question}</div>
+      <div class="radio-keywords" id="kwBox"></div>
+      <div class="radio-actions">
+        <button id="rPlay" class="primary">▶ 聽廣播</button>
+        <button id="rSlow">🐢 慢速</button>
+        <button id="rCheck">✓ 對答案</button>
+      </div>
+      <div class="radio-script" id="rScript"></div>
+      <div class="radio-zh" id="rZh">📝 ${item.zh}</div>
+    </div>`;
+  const kwBox=document.getElementById("kwBox");
+  const shuffled=[...item.keywords].sort(()=>Math.random()-0.5);
+  shuffled.forEach(k=>{
+    const chip=document.createElement("button");
+    chip.className="kw-chip";
+    chip.textContent=k;
+    chip.onclick=()=>toggleKw(chip,k);
+    kwBox.appendChild(chip);
+  });
+  document.getElementById("rPlay").onclick=()=>speak(item.audio,0.9);
+  document.getElementById("rSlow").onclick=()=>speak(item.audio,0.65);
+  document.getElementById("rCheck").onclick=checkRadio;
+  document.getElementById("radioPrev").disabled=state.currentRadioIdx===0;
+  document.getElementById("radioNext").textContent=state.currentRadioIdx===RADIO.length-1?"完成 🎉":"下一題 →";
+  setTimeout(()=>speak(item.audio,0.9),400);
+}
+function toggleKw(chip,kw){
+  if(state.radioChecked)return;
+  if(state.radioPicked.includes(kw)){
+    state.radioPicked=state.radioPicked.filter(x=>x!==kw);
+    chip.classList.remove("picked");
+  }else{
+    state.radioPicked.push(kw);
+    chip.classList.add("picked");
+  }
+}
+function checkRadio(){
+  if(state.radioChecked)return;
+  state.radioChecked=true;
+  const item=RADIO[state.currentRadioIdx];
+  const chips=document.querySelectorAll("#kwBox .kw-chip");
+  let allCorrect=true;
+  chips.forEach(c=>{
+    const kw=c.textContent;
+    const isAns=item.correct.includes(kw);
+    const picked=state.radioPicked.includes(kw);
+    if(isAns&&picked)c.classList.add("kw-correct");
+    else if(!isAns&&picked){c.classList.add("kw-wrong");allCorrect=false}
+    else if(isAns&&!picked){c.classList.add("kw-correct");allCorrect=false}
+  });
+  const html=item.script.replace(/\[([^\]]+)\]/g,'<span class="keyword">$1</span>');
+  const sc=document.getElementById("rScript");
+  sc.innerHTML=html;
+  sc.classList.add("shown");
+  document.getElementById("rZh").classList.add("shown");
+  if(allCorrect){
+    state.stars+=2;
+    localStorage.setItem("stars_v3",state.stars);
+    updateStars();
+  }
+}
+function nextRadio(){
+  if(state.currentRadioIdx>=RADIO.length-1){goHome();return}
+  state.currentRadioIdx++;
+  renderRadio();
+}
+function prevRadio(){
+  if(state.currentRadioIdx===0)return;
+  state.currentRadioIdx--;
+  renderRadio();
+}
+
+/* ========== 詞彙閃卡 ========== */
+function openVocab(){
+  state.currentVocabIdx=0;
+  showView("viewVocab");
+  renderVocab();
+}
+function renderVocab(){
+  const v=VOCAB[state.currentVocabIdx];
+  document.getElementById("vocabCounter").textContent=`第 ${state.currentVocabIdx+1} / ${VOCAB.length} 個`;
+  document.getElementById("vocabContent").innerHTML=`
+    <div class="vocab-card">
+      <div class="vocab-emoji">${v.emoji}</div>
+      <div class="vocab-en">${v.en}</div>
+      <div class="vocab-zh">${v.zh}</div>
+      <div class="vocab-context">💡 ${v.ctx}</div>
+    </div>`;
+  setTimeout(()=>speak(v.en,0.85),300);
+}
+function playVocab(){speak(VOCAB[state.currentVocabIdx].en,0.85)}
+function nextVocab(){
+  state.currentVocabIdx=(state.currentVocabIdx+1)%VOCAB.length;
+  renderVocab();
+}
+function prevVocab(){
+  state.currentVocabIdx=(state.currentVocabIdx-1+VOCAB.length)%VOCAB.length;
+  renderVocab();
+}
+
+/* ========== 日文情境 ========== */
+function openJapanese(){
+  showView("viewJapanese");
+  const c=document.getElementById("japaneseContent");
+  c.innerHTML="";
+  JAPANESE.forEach((j,i)=>{
+    const card=document.createElement("div");
+    card.className="jp-card";
+    card.innerHTML=`
+      <div class="jp-tag">#${i+1}</div>
+      <div class="jp-scenario">${j.scenario}</div>
+      <div class="jp-jp">${j.jp}</div>
+      <div class="jp-romaji">${j.romaji}</div>
+      <div class="jp-zh">📝 ${j.zh}</div>
+      <div class="jp-action">💡 ${j.action}</div>
+      <div style="display:flex;gap:6px;margin-top:8px">
+        <button class="play-btn slow" style="background:var(--plum);color:white">🐢 慢慢念</button>
+        <button class="play-btn fast" style="background:var(--plum);color:white;opacity:0.85">▶ 正常念</button>
+      </div>`;
+    const [slow,fast]=card.querySelectorAll(".play-btn");
+    slow.onclick=()=>speak(j.jp,0.6,"ja-JP");
+    fast.onclick=()=>speak(j.jp,0.9,"ja-JP");
+    c.appendChild(card);
+  });
+}
+
+/* ========== 緊急身分卡 ========== */
+const EMERGENCY_FIELDS=[
+  {key:"nameEn",label:"小孩姓名（拼音／English）",ph:"例：Lin Xiao Ming",type:"text"},
+  {key:"phone1",label:"爸爸手機（含 +886）",ph:"例：+886 912 345 678",type:"tel"},
+  {key:"phone2",label:"媽媽手機（含 +886）",ph:"例：+886 923 456 789",type:"tel"},
+  {key:"hotel",label:"今晚住宿（飯店英文名+地址）",ph:"例：MYSTAYS Nippori, 5-5-1 Higashi-Nippori, Arakawa-ku, Tokyo",type:"text"}
+];
+function openEmergency(){
+  showView("viewEmergency");
+  const f=document.getElementById("emergencyForm");
+  f.innerHTML="";
+  EMERGENCY_FIELDS.forEach(fd=>{
+    const div=document.createElement("div");
+    div.style.marginBottom="10px";
+    div.innerHTML=`
+      <label style="font-size:11px;font-weight:700;color:var(--ink-soft);display:block;margin-bottom:4px">${fd.label}</label>
+      <input class="emergency-input" type="${fd.type}" id="ef-${fd.key}" placeholder="${fd.ph}" value="${(state.emergency[fd.key]||"").replace(/"/g,'&quot;')}">`;
+    f.appendChild(div);
+  });
+}
+function saveEmergency(){
+  EMERGENCY_FIELDS.forEach(fd=>{
+    state.emergency[fd.key]=document.getElementById("ef-"+fd.key).value;
+  });
+  localStorage.setItem("emergency_v3",JSON.stringify(state.emergency));
+  alert("✅ 已儲存。緊急時按下方紅色按鈕即可出示給警察看。");
+}
+function showEmergencyCard(){
+  const e=state.emergency;
+  if(!e.nameEn&&!e.phone1){
+    alert("請先填寫上方資訊並儲存！");
+    return;
+  }
+  document.getElementById("efName").textContent=e.nameEn||"—";
+  document.getElementById("efNameEn").textContent="";
+  document.getElementById("efPhone1").textContent=e.phone1||"—";
+  document.getElementById("efPhone2").textContent=e.phone2||"";
+  document.getElementById("efHotel").textContent=e.hotel||"—";
+  document.getElementById("emergencyFullscreen").classList.add("shown");
+}
+function hideEmergencyCard(){
+  document.getElementById("emergencyFullscreen").classList.remove("shown");
+}
+
+/* ========== View 切換 ========== */
+function showView(id){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+}
+function goHome(){
+  speechSynthesis.cancel();
+  showView("viewHome");
+  renderHome();
+}
+
+/* ========== 速度滑桿 ========== */
+document.getElementById("speedSlider").addEventListener("input",e=>{
+  state.speed=parseFloat(e.target.value);
+  document.getElementById("speedVal").textContent=state.speed.toFixed(2)+"x";
+});
+
+/* ========== 啟動 ========== */
+renderHome();
+
+/* ========== Service Worker ========== */
+if("serviceWorker"in navigator){
+  const swCode=`
+    self.addEventListener("install",e=>{self.skipWaiting()});
+    self.addEventListener("activate",e=>{e.waitUntil(self.clients.claim())});
+    self.addEventListener("fetch",e=>{
+      e.respondWith(
+        caches.open("travel-en-v2").then(c=>
+          c.match(e.request).then(r=>r||fetch(e.request).then(resp=>{
+            if(e.request.method==="GET"&&resp.ok){c.put(e.request,resp.clone())}
+            return resp;
+          }).catch(()=>c.match("/")))
+        )
+      );
+    });`;
+  const blob=new Blob([swCode],{type:"text/javascript"});
+  const url=URL.createObjectURL(blob);
+  navigator.serviceWorker.register(url).catch(()=>{});
+}
+
+/* ========== v3 新增：對話劇場 ========== */
+function openDialogues(){
+  showView("viewDialogues");
+  const list=document.getElementById("dialogueList");
+  list.innerHTML="";
+  DIALOGUES.forEach((d,idx)=>{
+    const card=document.createElement("div");
+    card.className="dialogue-card";
+    card.innerHTML=`
+      <div class="dc-emoji">${d.emoji||"💬"}</div>
+      <div class="dc-title">${d.title}</div>
+      <div class="dc-meta">Day ${d.day||"?"} · ${d.turns.length} 個回合${d.desc?" · "+d.desc:""}</div>
+    `;
+    card.onclick=()=>openDialogueDetail(idx);
+    list.appendChild(card);
+  });
+}
+function openDialogueDetail(idx){
+  showView("viewDialogueDetail");
+  const d=DIALOGUES[idx];
+  document.getElementById("dialogueTitle").textContent=`${d.emoji||"💬"} ${d.title}`;
+  document.getElementById("dialogueMeta").textContent=`Day ${d.day||"?"} · 共 ${d.turns.length} 個回合 · 點 🔊 聽英文發音`;
+  const c=document.getElementById("dialogueContent");
+  c.innerHTML="";
+  d.turns.forEach((t,i)=>{
+    const card=document.createElement("div");
+    const isYou=t.speaker==="you"||t.speaker==="me";
+    card.className=`turn-card ${isYou?"t-you":"t-other"}`;
+    const roleLabel=isYou?"你 YOU":(t.label||t.speaker||"OTHER");
+    card.innerHTML=`
+      <div class="turn-role">${roleLabel}</div>
+      <div class="turn-en">${t.en}</div>
+      <div class="turn-zh">${t.zh}</div>
+      ${t.tip?`<div class="turn-tip">💡 ${t.tip}</div>`:""}
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="play-btn" onclick="speak('${t.en.replace(/'/g,"\\'")}',0.7)">🔊 慢</button>
+        <button class="play-btn" onclick="speak('${t.en.replace(/'/g,"\\'")}',0.95)">🔊 正常</button>
+      </div>
+    `;
+    c.appendChild(card);
+  });
+}
+
+/* ========== v3 新增：日文菜單辨識 ========== */
+function openMenu(){
+  showView("viewMenu");
+  const c=document.getElementById("menuContent");
+  c.innerHTML="";
+  MENU_WORDS.forEach(w=>{
+    const card=document.createElement("div");
+    card.className="menu-card";
+    card.innerHTML=`
+      <div class="menu-jp">${w.jp}</div>
+      <div class="menu-romaji">${w.romaji||""}</div>
+      <div class="menu-zh">${w.zh}</div>
+      ${w.cat?`<div style="font-size:10px;background:var(--ink);color:white;display:inline-block;padding:2px 8px;border-radius:6px;margin-bottom:6px">${w.cat}</div>`:""}
+      ${w.ex?`<div class="menu-eg">例：${w.ex}</div>`:""}
+    `;
+    card.onclick=()=>speak(w.jp,0.85,"ja-JP");
+    c.appendChild(card);
+  });
+}
+
+/* ========== v3 新增：價錢聽力 ========== */
+let priceIdx=0,pricePicked={};
+function openPrice(){
+  priceIdx=0;pricePicked={};
+  showView("viewPrice");
+  renderPrice();
+}
+function renderPrice(){
+  const item=PRICE_QUIZ[priceIdx];
+  document.getElementById("priceProgress").textContent=`第 ${priceIdx+1} / ${PRICE_QUIZ.length} 題`;
+  const c=document.getElementById("priceContent");
+  const picked=pricePicked[priceIdx];
+  c.innerHTML=`
+    <div class="price-card">
+      <div style="font-size:14px;color:var(--ink-soft);margin-bottom:8px">店員說：</div>
+      <button class="price-listen-btn" onclick="speak('${item.audio.replace(/'/g,"\\'")}',0.85,'ja-JP')">🔊 播放日文金額</button>
+      <div style="font-size:12px;color:var(--ink-soft);margin-bottom:10px">日文：<strong>${item.jp||item.audio}</strong></div>
+      <div class="price-options">
+        ${item.options.map(opt=>{
+          let cls="price-opt";
+          if(picked!==undefined){
+            if(opt===item.correct)cls+=" correct";
+            else if(opt===picked)cls+=" wrong";
+          }
+          return `<button class="${cls}" onclick="pricePick('${opt.replace(/'/g,"\\'")}')">${opt}</button>`;
+        }).join("")}
+      </div>
+      ${picked!==undefined?`<div style="margin-top:12px;padding:10px;background:#FFF9E6;border-radius:8px;font-size:13px">${picked===item.correct?"✅ 答對了！":"❌ 正解："+item.correct}<br><span style="color:var(--ink-soft);font-size:12px">中文：${item.zh||""}</span></div>`:""}
+    </div>
+  `;
+}
+function pricePick(opt){
+  if(pricePicked[priceIdx]!==undefined)return;
+  pricePicked[priceIdx]=opt;
+  if(opt===PRICE_QUIZ[priceIdx].correct){
+    state.stars=(state.stars||0)+1;saveState();
+  }
+  renderPrice();
+}
+function priceNav(dir){
+  const next=priceIdx+dir;
+  if(next<0||next>=PRICE_QUIZ.length)return;
+  priceIdx=next;
+  renderPrice();
+}
+
+/* ========== v3 新增：數字大字盤 ========== */
+function openNumber(){
+  showView("viewNumber");
+  const c=document.getElementById("numberContent");
+  c.innerHTML="";
+  NUMBER_PANEL.forEach(n=>{
+    const card=document.createElement("div");
+    card.className="number-card";
+    card.innerHTML=`
+      <div class="number-big">${n.num}</div>
+      <div class="number-info">
+        <div class="number-jp">${n.jp}</div>
+        <div class="number-romaji">${n.romaji||""}</div>
+      </div>
+      <button class="number-listen" onclick="speak('${n.jp.replace(/'/g,"\\'")}',0.85,\'ja-JP\')">🔊 聽</button>
+    `;
+    c.appendChild(card);
+  });
+}
+
+/* ========== v3 end ========== */
+
+</script>
+</body>
+</html>
